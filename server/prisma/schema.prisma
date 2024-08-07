@@ -1,0 +1,180 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  user_id       Int      @id @default(autoincrement())
+  username      String   @unique
+  password      String
+  email         String   @unique
+  phone_number  String
+  role          Role
+  patient       Patient?
+  doctor        Doctor?
+  clinic        Clinic?
+  diagnosticCenter DiagnosticCenter?
+  messagesSent  Message[] @relation("MessageSender")
+  messagesReceived Message[] @relation("MessageReceiver")
+  notifications Notification[]
+}
+
+model Patient {
+  patient_id       Int           @id @default(autoincrement())
+  first_name       String
+  last_name        String
+  date_of_birth    DateTime
+  gender           Gender
+  address          String
+  emergency_contact String
+  user_id          Int           @unique
+  user             User          @relation(fields: [user_id], references: [user_id])
+  familyMembers    FamilyMember[]
+  appointments     Appointment[]
+  medicalRecords   MedicalRecord[]
+  diagnosticTests  DiagnosticTest[]
+}
+
+model FamilyMember {
+  family_member_id Int           @id @default(autoincrement())
+  patient_id       Int
+  first_name       String
+  last_name        String
+  date_of_birth    DateTime
+  gender           Gender
+  relationship     String
+  patient          Patient       @relation(fields: [patient_id], references: [patient_id])
+  appointments     Appointment[]
+  medicalRecords   MedicalRecord[]
+  diagnosticTests  DiagnosticTest[]
+}
+
+model Doctor {
+  doctor_id       Int           @id @default(autoincrement())
+  first_name      String
+  last_name       String
+  specialization  String
+  license_number  String
+  clinic_id       Int
+  user_id         Int           @unique
+  user            User          @relation(fields: [user_id], references: [user_id])
+  clinic          Clinic        @relation(fields: [clinic_id], references: [clinic_id])
+  appointments    Appointment[]
+  medicalRecords  MedicalRecord[]
+}
+
+model Clinic {
+  clinic_id       Int           @id @default(autoincrement())
+  clinic_name     String
+  address         String
+  contact_number  String
+  user_id         Int           @unique
+  user            User          @relation(fields: [user_id], references: [user_id])
+  doctors         Doctor[]
+  appointments    Appointment[]
+  medicalRecords  MedicalRecord[]
+}
+
+model DiagnosticCenter {
+  center_id       Int           @id @default(autoincrement())
+  center_name     String
+  address         String
+  contact_number  String
+  user_id         Int           @unique
+  user            User          @relation(fields: [user_id], references: [user_id])
+  diagnosticTests DiagnosticTest[]
+}
+
+model Appointment {
+  appointment_id  Int           @id @default(autoincrement())
+  patient_id      Int
+  family_member_id Int?
+  doctor_id       Int
+  clinic_id       Int
+  appointment_date DateTime
+  status          AppointmentStatus
+  notes           String?
+  patient         Patient        @relation(fields: [patient_id], references: [patient_id])
+  familyMember    FamilyMember?  @relation(fields: [family_member_id], references: [family_member_id])
+  doctor          Doctor         @relation(fields: [doctor_id], references: [doctor_id])
+  clinic          Clinic         @relation(fields: [clinic_id], references: [clinic_id])
+}
+
+model MedicalRecord {
+  record_id       Int           @id @default(autoincrement())
+  patient_id      Int
+  family_member_id Int?
+  doctor_id       Int
+  clinic_id       Int
+  diagnosis       String
+  treatment       String
+  prescription    String
+  record_date     DateTime
+  patient         Patient        @relation(fields: [patient_id], references: [patient_id])
+  familyMember    FamilyMember?  @relation(fields: [family_member_id], references: [family_member_id])
+  doctor          Doctor         @relation(fields: [doctor_id], references: [doctor_id])
+  clinic          Clinic         @relation(fields: [clinic_id], references: [clinic_id])
+}
+
+model DiagnosticTest {
+  test_id         Int           @id @default(autoincrement())
+  patient_id      Int
+  family_member_id Int?
+  center_id       Int
+  test_name       String
+  test_date       DateTime
+  results         String
+  patient         Patient        @relation(fields: [patient_id], references: [patient_id])
+  familyMember    FamilyMember?  @relation(fields: [family_member_id], references: [family_member_id])
+  diagnosticCenter DiagnosticCenter @relation(fields: [center_id], references: [center_id])
+}
+
+model Message {
+  message_id      Int           @id @default(autoincrement())
+  sender_id       Int
+  receiver_id     Int
+  content         String
+  timestamp       DateTime
+  sender          User           @relation("MessageSender", fields: [sender_id], references: [user_id])
+  receiver        User           @relation("MessageReceiver", fields: [receiver_id], references: [user_id])
+}
+
+model Notification {
+  notification_id Int           @id @default(autoincrement())
+  user_id         Int
+  message         String
+  is_read         Boolean        @default(false)
+  timestamp       DateTime
+  user            User           @relation(fields: [user_id], references: [user_id])
+}
+
+enum Role {
+  PATIENT
+  DOCTOR
+  CLINIC
+  DIAGNOSTIC_CENTER
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
