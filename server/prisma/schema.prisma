@@ -157,6 +157,7 @@ model Notification {
   is_read         Boolean        @default(false)
   timestamp       DateTime
   user            User           @relation(fields: [user_id], references: [user_id])
+
 }
 
 enum Role {
@@ -176,5 +177,24 @@ enum AppointmentStatus {
   SCHEDULED
   COMPLETED
   CANCELLED
+}
+
+
+
+model User {
+  user_id       Int      @id @default(autoincrement())
+  username      String   @unique
+  password      String
+  email         String   @unique
+  phone_number  String
+  role          Role
+  patient       Patient?
+  doctor        Doctor?
+  clinic        Clinic?
+  diagnosticCenter DiagnosticCenter?
+  messagesSent  Message[] @relation("MessageSender")
+  messagesReceived Message[] @relation("MessageReceiver")
+  notifications Notification[]
+  posts         EmbeddedPost[]
 }
 
