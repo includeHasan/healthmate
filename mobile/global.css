@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Light Theme */
+:root {
+    --color-primary: #0565F9;           /* brightBlue */
+    --color-background: #EDEEEF;        /* lightGray */
+    --color-surface: #FEFEFE;           /* nearWhite */
+    --color-text-primary: #423F3D;      /* darkGray */
+    --color-text-secondary: #B2B9C3;    /* mediumGray */
+  }
+  
+  /* Dark Theme */
+  .dark {
+    --color-primary: #3A7BF1;           /* dark-brightBlue */
+    --color-background: #2D2D2D;        /* dark-lightGray */
+    --color-surface: #1A1A1A;           /* dark-nearWhite */
+    --color-text-primary: #1F1F1F;      /* dark-darkGray */
+    --color-text-secondary: #555555;    /* dark-mediumGray */
+  }

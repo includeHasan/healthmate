@@ -1,33 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* Light Theme */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --color-primary: #0565F9;           /* brightBlue */
+  --color-background: #EDEEEF;        /* lightGray */
+  --color-surface: #FEFEFE;           /* nearWhite */
+  --color-text-primary: #423F3D;      /* darkGray */
+  --color-text-secondary: #B2B9C3;    /* mediumGray */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Dark Theme */
+.dark {
+  --color-primary: #3A7BF1;           /* dark-brightBlue */
+  --color-background: #2D2D2D;        /* dark-lightGray */
+  --color-surface: #1A1A1A;           /* dark-nearWhite */
+  --color-text-primary: #1F1F1F;      /* dark-darkGray */
+  --color-text-secondary: #555555;    /* dark-mediumGray */
 }
