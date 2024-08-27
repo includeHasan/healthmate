@@ -13,143 +13,200 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  user_id       Int      @id @default(autoincrement())
-  username      String   @unique
-  password      String
-  email         String   @unique
-  phone_number  String
-  role          Role
-  patient       Patient?
-  doctor        Doctor?
-  clinic        Clinic?
-  diagnosticCenter DiagnosticCenter?
-  messagesSent  Message[] @relation("MessageSender")
-  messagesReceived Message[] @relation("MessageReceiver")
-  notifications Notification[]
-}
-
-model Patient {
-  patient_id       Int           @id @default(autoincrement())
-  first_name       String
-  last_name        String
-  date_of_birth    DateTime
-  gender           Gender
-  address          String
-  emergency_contact String
-  user_id          Int           @unique
-  user             User          @relation(fields: [user_id], references: [user_id])
-  familyMembers    FamilyMember[]
-  appointments     Appointment[]
-  medicalRecords   MedicalRecord[]
-  diagnosticTests  DiagnosticTest[]
-}
-
-model FamilyMember {
-  family_member_id Int           @id @default(autoincrement())
-  patient_id       Int
-  first_name       String
-  last_name        String
-  date_of_birth    DateTime
-  gender           Gender
-  relationship     String
-  patient          Patient       @relation(fields: [patient_id], references: [patient_id])
-  appointments     Appointment[]
-  medicalRecords   MedicalRecord[]
-  diagnosticTests  DiagnosticTest[]
+  user_id          String             @id @default(uuid())
+  user_name        String             @db.VarChar(30)
+  email            String             @db.VarChar(40)
+  password         String             @db.VarChar(100)
+  phone_no         BigInt
+  user_type        String             @db.VarChar(30)
+  DiagnosticCentre DiagnosticCentre[]
+  Doctor           Doctor[]
+  Patient          Patient[]
+  Notifications    Notifications[]
 }
 
 model Doctor {
-  doctor_id       Int           @id @default(autoincrement())
-  first_name      String
-  last_name       String
-  specialization  String
-  license_number  String
-  clinic_id       Int
-  user_id         Int           @unique
-  user            User          @relation(fields: [user_id], references: [user_id])
-  clinic          Clinic        @relation(fields: [clinic_id], references: [clinic_id])
-  appointments    Appointment[]
-  medicalRecords  MedicalRecord[]
+  doctor_id           String                @id @default(uuid())
+  user_id             String
+  speciality          String                @db.VarChar(100)
+  experience_yrs      Int
+  fname               String                @db.VarChar(30)
+  lname               String                @db.VarChar(30)
+  license_no          BigInt
+  document_url        String                @db.VarChar(100)
+  profile_pic         String                @db.VarChar(100)
+  User                User                  @relation(fields: [user_id], references: [user_id])
+  DoctorTimeTable     DoctorTimeTable[]
+  DoctorWorkLocation  DoctorWorkLocation[]
+  ReferredToDoctor    DoctorReference[]     @relation("ReferredToDoctor")
+  ReferringDoctor     DoctorReference[]     @relation("ReferringDoctor")
+  PatientHistory      PatientHistory[]
+  PaymentTransactions PaymentTransactions[]
 }
 
-model Clinic {
-  clinic_id       Int           @id @default(autoincrement())
-  clinic_name     String
-  address         String
-  contact_number  String
-  user_id         Int           @unique
-  user            User          @relation(fields: [user_id], references: [user_id])
-  doctors         Doctor[]
-  appointments    Appointment[]
-  medicalRecords  MedicalRecord[]
+model Patient {
+  patient_id          String                @id @default(uuid())
+  patient_fname       String                @db.VarChar(30)
+  patient_lname       String                @db.VarChar(30)
+  user_id             String
+  dob                 DateTime
+  age                 Int
+  weight              Int
+  height              Int
+  gender              String                @db.VarChar(10)
+  city                String                @db.VarChar(30)
+  state               String                @db.VarChar(30)
+  other_phone_no      BigInt
+  User                User                  @relation(fields: [user_id], references: [user_id])
+  Allergies           Allergies[]
+  Medications         Medications[]
+  PatientHistory      PatientHistory[]
+  PaymentTransactions PaymentTransactions[]
+  SurgicalHistory     SurgicalHistory[]
+  DoctorReference     DoctorReference[]
+  AppointmentSchedule AppointmentSchedule[]
 }
 
-model DiagnosticCenter {
-  center_id       Int           @id @default(autoincrement())
-  center_name     String
-  address         String
-  contact_number  String
-  user_id         Int           @unique
-  user            User          @relation(fields: [user_id], references: [user_id])
-  diagnosticTests DiagnosticTest[]
+model AppointmentSchedule {
+  appointment_schedule_id String             @id @default(uuid())
+  doctor_availability_id  String
+  patient_id              String
+  appointment_date        DateTime
+  start_time              DateTime
+  end_time                DateTime
+  mode                    Mode
+  work_location_id        String
+  status                  Status
+  DoctorAvailability      DoctorAvailability @relation(fields: [doctor_availability_id], references: [doctor_availability_id])
+  Patient                 Patient            @relation(fields: [patient_id], references: [patient_id])
+  DoctorWorkLocation      DoctorWorkLocation @relation(fields: [work_location_id], references: [doctor_work_location_id])
+  Review                  Review[]
 }
 
-model Appointment {
-  appointment_id  Int           @id @default(autoincrement())
-  patient_id      Int
-  family_member_id Int?
-  doctor_id       Int
-  clinic_id       Int
+model Allergies {
+  allergies_id        String  @id @default(uuid())
+  patient_id          String
+  allergy_name        String  @db.VarChar(100)
+  allergy_description String  @db.Text
+  Patient             Patient @relation(fields: [patient_id], references: [patient_id])
+}
+
+model DiagnosticCentre {
+  diagnostic_centre_id String @id @default(uuid())
+  name                 String @db.VarChar(40)
+  city                 String @db.VarChar(30)
+  state                String @db.VarChar(30)
+  contact_no           BigInt
+  email                String @db.VarChar(30)
+  user_id              String
+  User                 User   @relation(fields: [user_id], references: [user_id])
+}
+
+model DoctorWorkLocation {
+  doctor_work_location_id String                @id @default(uuid())
+  doctor_id               String
+  location_type           LocationType
+  location_name           String                @db.VarChar(30)
+  city                    String                @db.VarChar(30)
+  state                   String                @db.VarChar(30)
+  Doctor                  Doctor                @relation(fields: [doctor_id], references: [doctor_id])
+  DoctorTimeTable         DoctorTimeTable[]
+  AppointmentSchedule     AppointmentSchedule[]
+}
+
+model DoctorTimeTable {
+  doctor_time_table_id    String               @id @default(uuid())
+  doctor_id               String
+  doctor_work_location_id String
+  day                     Day
+  start_time              DateTime
+  end_time                DateTime
+  date                    DateTime
+  Doctor                  Doctor               @relation(fields: [doctor_id], references: [doctor_id])
+  DoctorWorkLocation      DoctorWorkLocation   @relation(fields: [doctor_work_location_id], references: [doctor_work_location_id])
+  DoctorAvailability      DoctorAvailability[]
+}
+
+model DoctorAvailability {
+  doctor_availability_id String                @id @default(uuid())
+  doctor_time_table_id   String
+  date                   DateTime
+  start_time             DateTime
+  end_time               DateTime
+  is_available           Availability          @default(yes)
+  DoctorTimeTable        DoctorTimeTable       @relation(fields: [doctor_time_table_id], references: [doctor_time_table_id])
+  AppointmentSchedule    AppointmentSchedule[]
+}
+
+model DoctorReference {
+  reference_id          String   @id @default(uuid())
+  patient_id            String
+  doctor_id             String
+  referred_to_doctor_id String
+  reference_date_time   DateTime
+  Patient               Patient  @relation(fields: [patient_id], references: [patient_id])
+  Doctor                Doctor   @relation("ReferringDoctor", fields: [doctor_id], references: [doctor_id])
+  ReferredToDoctor      Doctor   @relation("ReferredToDoctor", fields: [referred_to_doctor_id], references: [doctor_id])
+}
+
+model Medications {
+  medications_id       String  @id @default(uuid())
+  patient_id           String
+  medication_name      String  @db.VarChar(255)
+  medication_dosage    String  @db.VarChar(255)
+  medication_frequency String  @db.VarChar(255)
+  Patient              Patient @relation(fields: [patient_id], references: [patient_id])
+}
+
+model Notifications {
+  notification_id   String           @id @default(uuid())
+  user_id           String
+  message           String           @db.VarChar(50)
+  notification_type NotificationType
+  read_status       Boolean          @default(false)
+  User              User             @relation(fields: [user_id], references: [user_id])
+}
+
+model PatientHistory {
+  history_id       String   @id @default(uuid())
+  patient_id       String
+  doctor_id        String
   appointment_date DateTime
-  status          AppointmentStatus
-  notes           String?
-  patient         Patient        @relation(fields: [patient_id], references: [patient_id])
-  familyMember    FamilyMember?  @relation(fields: [family_member_id], references: [family_member_id])
-  doctor          Doctor         @relation(fields: [doctor_id], references: [doctor_id])
-  clinic          Clinic         @relation(fields: [clinic_id], references: [clinic_id])
+  chief_complaint  String   @db.VarChar(40)
+  Patient          Patient  @relation(fields: [patient_id], references: [patient_id])
+  Doctor           Doctor   @relation(fields: [doctor_id], references: [doctor_id])
 }
 
-model MedicalRecord {
-  record_id       Int           @id @default(autoincrement())
-  patient_id      Int
-  family_member_id Int?
-  doctor_id       Int
-  clinic_id       Int
-  diagnosis       String
-  treatment       String
-  prescription    String
-  record_date     DateTime
-  patient         Patient        @relation(fields: [patient_id], references: [patient_id])
-  familyMember    FamilyMember?  @relation(fields: [family_member_id], references: [family_member_id])
-  doctor          Doctor         @relation(fields: [doctor_id], references: [doctor_id])
-  clinic          Clinic         @relation(fields: [clinic_id], references: [clinic_id])
+model PaymentTransactions {
+  transaction_id String   @id @default(uuid())
+  patient_id     String
+  doctor_id      String
+  payment_date   DateTime
+  payment_amount Decimal  @db.Decimal(10, 2)
+  payment_method String   @db.VarChar(50)
+  Patient        Patient  @relation(fields: [patient_id], references: [patient_id])
+  Doctor         Doctor   @relation(fields: [doctor_id], references: [doctor_id])
 }
 
-model DiagnosticTest {
-  test_id         Int           @id @default(autoincrement())
-  patient_id      Int
-  family_member_id Int?
-  center_id       Int
-  test_name       String
-  test_date       DateTime
-  results         String
-  patient         Patient        @relation(fields: [patient_id], references: [patient_id])
-  familyMember    FamilyMember?  @relation(fields: [family_member_id], references: [family_member_id])
-  diagnosticCenter DiagnosticCenter @relation(fields: [center_id], references: [center_id])
+model Review {
+  review_id               String              @id @default(uuid())
+  appointment_schedule_id String
+  reviewer_type           ReviewerType
+  rating                  String
+  review_text             String              @db.VarChar(100)
+  AppointmentSchedule     AppointmentSchedule @relation(fields: [appointment_schedule_id], references: [appointment_schedule_id])
 }
 
-model Message {
-  message_id      Int           @id @default(autoincrement())
-  sender_id       Int
-  receiver_id     Int
-  content         String
-  timestamp       DateTime
-  sender          User           @relation("MessageSender", fields: [sender_id], references: [user_id])
-  receiver        User           @relation("MessageReceiver", fields: [receiver_id], references: [user_id])
+model SurgicalHistory {
+  surgical_history_id          String  @id @default(uuid())
+  patient_id                   String
+  surgical_history_type        String  @db.VarChar(255)
+  surgical_history_description String  @db.Text
+  Patient                      Patient @relation(fields: [patient_id], references: [patient_id])
 }
 
+<<<<<<< HEAD
 model Notification {
   notification_id Int           @id @default(autoincrement())
   user_id         Int
@@ -158,27 +215,38 @@ model Notification {
   timestamp       DateTime
   user            User           @relation(fields: [user_id], references: [user_id])
 
+=======
+// Enums
+enum Mode {
+  in_person
+  video
+  phone
+>>>>>>> cb1da888c6a9ad272474f1bf2ee23f47b55a66b7
 }
 
-enum Role {
-  PATIENT
-  DOCTOR
-  CLINIC
-  DIAGNOSTIC_CENTER
+enum Status {
+  pending
+  booked
+  cancelled
+  completed
 }
 
-enum Gender {
-  MALE
-  FEMALE
-  OTHER
+enum Availability {
+  yes
+  no
 }
 
-enum AppointmentStatus {
-  SCHEDULED
-  COMPLETED
-  CANCELLED
+enum Day {
+  monday
+  tuesday
+  wednesday
+  thursday
+  friday
+  saturday
+  sunday
 }
 
+<<<<<<< HEAD
 
 
 model User {
@@ -198,3 +266,29 @@ model User {
   posts         EmbeddedPost[]
 }
 
+=======
+enum LocationType {
+  hospital
+  clinic
+}
+
+enum NotificationType {
+  appointment
+  reminder
+  update
+  referral
+}
+
+enum ReviewerType {
+  patient
+  doctor
+}
+
+model EmbeddedPost {
+  id        String                     @id @default(uuid())
+  content   String                     @db.Text
+  embedding Unsupported("vector(384)") // Placeholder for unsupported type
+  createdAt DateTime                   @default(now())
+  updatedAt DateTime                   @updatedAt
+}
+>>>>>>> cb1da888c6a9ad272474f1bf2ee23f47b55a66b7
