@@ -8,7 +8,7 @@
       "web": {
         "bundler": "metro",
         "output": "static",
-        "favicon": "./assets/favicon.png"
+        "favicon": "./assets/own/splashScreen.png"
       },
       "plugins": [
       "expo-router"
@@ -23,14 +23,14 @@
       },
     
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/own/healthcare.png",
     
      "userInterfaceStyle": "light",
     
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/own/hmsshd.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#1649ff"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -40,8 +40,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/own/healthcare.png",
+        "backgroundColor": "#1649ff"
       }
     }
   }
