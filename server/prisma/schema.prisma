@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -18,12 +12,12 @@ model User {
   user_name        String             @db.VarChar(30)
   email            String             @db.VarChar(40)
   password         String             @db.VarChar(100)
-  phone_no         BigInt
+  phone_no         String
   user_type        String             @db.VarChar(30)
   DiagnosticCentre DiagnosticCentre[]
   Doctor           Doctor[]
   Patient          Patient[]
-  Notifications    Notifications[]
+  Notifications    Notification[]     
 }
 
 model Doctor {
@@ -159,12 +153,13 @@ model Medications {
   Patient              Patient @relation(fields: [patient_id], references: [patient_id])
 }
 
-model Notifications {
-  notification_id   String           @id @default(uuid())
-  user_id           String
+model Notification {
+  notification_id   String           @id @default(uuid()) // Changed to match other id types
+  user_id           String           // Changed to match User model's id type
   message           String           @db.VarChar(50)
   notification_type NotificationType
   read_status       Boolean          @default(false)
+  timestamp         DateTime
   User              User             @relation(fields: [user_id], references: [user_id])
 }
 
@@ -206,24 +201,6 @@ model SurgicalHistory {
   Patient                      Patient @relation(fields: [patient_id], references: [patient_id])
 }
 
-<<<<<<< HEAD
-model Notification {
-  notification_id Int           @id @default(autoincrement())
-  user_id         Int
-  message         String
-  is_read         Boolean        @default(false)
-  timestamp       DateTime
-  user            User           @relation(fields: [user_id], references: [user_id])
-
-=======
-// Enums
-enum Mode {
-  in_person
-  video
-  phone
->>>>>>> cb1da888c6a9ad272474f1bf2ee23f47b55a66b7
-}
-
 enum Status {
   pending
   booked
@@ -246,27 +223,6 @@ enum Day {
   sunday
 }
 
-<<<<<<< HEAD
-
-
-model User {
-  user_id       Int      @id @default(autoincrement())
-  username      String   @unique
-  password      String
-  email         String   @unique
-  phone_number  String
-  role          Role
-  patient       Patient?
-  doctor        Doctor?
-  clinic        Clinic?
-  diagnosticCenter DiagnosticCenter?
-  messagesSent  Message[] @relation("MessageSender")
-  messagesReceived Message[] @relation("MessageReceiver")
-  notifications Notification[]
-  posts         EmbeddedPost[]
-}
-
-=======
 enum LocationType {
   hospital
   clinic
@@ -291,4 +247,17 @@ model EmbeddedPost {
   createdAt DateTime                   @default(now())
   updatedAt DateTime                   @updatedAt
 }
->>>>>>> cb1da888c6a9ad272474f1bf2ee23f47b55a66b7
+
+enum Mode {
+  ONLINE
+  OFFLINE
+  HYBRID
+}
+
+model embeddedPost {
+  id        String   @id @default(uuid())
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
