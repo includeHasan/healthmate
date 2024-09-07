@@ -115,7 +115,7 @@ let forgetPassword = async (req, res) => {
     const otp = generateOtp();
     const otpExpiry = Date.now() + 2 * 60 * 1000; // 2 minutes expiry
 
-    // Send OTP via email
+    
     await sendOtp(email, otp);
 
     // Store OTP and expiry in session

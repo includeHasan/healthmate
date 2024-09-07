@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var userRouter = require('./routes/user.route');
+var doctorRouter = require('./routes/docter.route');
 var dotenv = require('dotenv');
 
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 
 app.use('/user', userRouter);
+app.use('/doctor', doctorRouter);
 
 
 // catch 404 and forward to error handler
