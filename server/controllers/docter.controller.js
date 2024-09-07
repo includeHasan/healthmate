@@ -1,42 +1,49 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-const {uploadToS3} = require('../middlewares/multer')
+const {fetchHeader,decodeToken} = require('../utils/auth')
+const {uploadProfilePicture,uploadDocument} = require('../middlewares/multer.middleware')
 const createDoctor = async (req, res) => {
     try {
-        const { name, email, phoneNo, password, specialization } = req.body;
+        console.log("Creating new doctor...");
+        const { firstName, lastName, licenseNo, speciality, experienceYrs } = req.body;
+        const token = fetchHeader(req);
+        const decoded = decodeToken(token);
+        const userId = decoded.id;
 
-        // Upload files (profilePic and multiple documents)
         let profilePicUrl = '';
         let documentUrls = [];
 
-        // Upload profilePic
+        
         if (req.files && req.files.profilePic) {
-            profilePicUrl = await uploadToS3(req.files.profilePic[0]);
+            profilePicUrl = await uploadProfilePicture(req.files.profilePic[0], userId);
         }
 
-        // Upload multiple documents
+      
         if (req.files && req.files.document) {
             for (let i = 0; i < req.files.document.length; i++) {
-                const documentUrl = await uploadToS3(req.files.document[i]);
+                const documentUrl = await uploadDocument(req.files.document[i], userId);
                 documentUrls.push(documentUrl);
             }
         }
 
-        // Create the doctor in the database with profilePic and document URLs
+       
         const doctor = await prisma.doctor.create({
             data: {
-                name,
-                email,
-                phoneNo,
-                password,
-                specialization,
-                profilePic: profilePicUrl,        // Store profilePic URL
-                documentUrls: documentUrls        // Store document URLs (array)
+                userId,
+                firstName,
+                lastName,
+                licenseNo,
+                speciality,
+                experienceYrs: parseInt(experienceYrs),
+                profilePic: profilePicUrl,
+                documentUrl: documentUrls
             }
         });
 
+        console.log("Doctor created successfully:", doctor);
         res.status(200).json({ success: true, message: "Doctor created successfully", doctor });
     } catch (error) {
+        console.error("Error creating doctor:", error);
         res.status(500).json({ success: false, error: error.message });
     }
 };

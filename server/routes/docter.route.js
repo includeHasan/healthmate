@@ -1,12 +1,11 @@
 const express = require('express');
-const { createDoctor } = require('../controllers/doctorController');
-const upload = require('../middleware/multerConfig');
+const { createDoctor } = require('../controllers/docter.controller');
+const {upload }= require('../middlewares/multer.middleware');
 const router = express.Router();
 
 
-router.post('/create', upload.fields([
+router.post('/createDocter', upload.fields([
     { name: 'profilePic', maxCount: 1 },
     { name: 'document', maxCount: 10 }   
-]), createDoctor);
-
+]), createDoctor)
 module.exports = router;

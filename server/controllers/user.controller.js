@@ -38,7 +38,7 @@ let loginUser = async (req, res) => {
     res.status(200).json({success:true,user})
 }
 catch (error) {
-  console.log("yaha error hai" + error)
+  console.log("error" + error)
   res.status(500).json({success:false,error:error})
 }
 }
@@ -80,7 +80,10 @@ let createUser = async (req, res) => {
 
 let getUser = async (req, res) => {
   try {
-    const token = req.headers.authorization.split(' ')[1];
+    const parseHeader = String(req.headers.authorization);
+    console.log(parseHeader)
+    const token = parseHeader.split(' ')[1];
+
     const decoded = decodeToken(token);
     const userId = decoded.id;
 

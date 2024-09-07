@@ -26,8 +26,8 @@ model Doctor {
   firstName          String                @map("fname") @db.VarChar(30)
   lastName           String                @map("lname") @db.VarChar(30)
   licenseNo          String                @map("license_no") @db.VarChar(30)
-  documentUrl        String[]                @map("document_url") @db.VarChar(100)
-  profilePic         String                @map("profile_pic") @db.VarChar(100)
+  documentUrl        String[]              
+  profilePic         String                @map("profile_pic") @db.VarChar(400)
   user               User                  @relation(fields: [userId], references: [id])
   timeTables         DoctorTimeTable[]
   workLocations      DoctorWorkLocation[]
@@ -36,7 +36,6 @@ model Doctor {
   patientHistories   PatientHistory[]
   paymentTransactions PaymentTransactions[]
 }
-
 model Patient {
   id                  String                @id @default(uuid())
   firstName           String                @map("patient_fname") @db.VarChar(30)
@@ -228,6 +227,7 @@ enum NotificationType {
 enum ReviewerType {
   patient
   doctor
+  admin
 }
 
 enum Mode {
