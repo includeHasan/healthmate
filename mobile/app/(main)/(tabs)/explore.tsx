@@ -1,15 +1,22 @@
 import { Stack } from 'expo-router';
 
 import { Container } from 'components/Container';
-import { ScreenContent } from 'components/ScreenContent';
+import {View,Text,TextInput}
 
-export default function Home() {
+
+const explore=()=> {
   return (
     <>
-      <Stack.Screen options={{ title: 'explore' }} />
+    
       <Container>
-        <ScreenContent path="app/(drawer)/(tabs)/explore.tsx" title="explore" />
+       <View>
+          <TextInput
+          
+          />
+       </View>
+      
       </Container>
     </>
   );
 }
+export default explore

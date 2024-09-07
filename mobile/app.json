@@ -8,7 +8,7 @@
       "web": {
         "bundler": "metro",
         "output": "static",
-        "favicon": "./assets/own/splashScreen.png"
+        "favicon": "./assets/own/hmsshd.png"
       },
       "plugins": [
       "expo-router"

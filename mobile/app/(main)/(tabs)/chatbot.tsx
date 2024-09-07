@@ -43,7 +43,7 @@ const Chatbot = () => {
     if (inputText.trim()) {
       setMessages([...messages, { id: Date.now(), text: inputText, sender: 'user' }])
       setInputText('')
-      // Here you would typically call your chatbot API and add its response
+      
     }
   }
 
@@ -54,13 +54,14 @@ const Chatbot = () => {
         className="flex-1"
       >
         <View className="flex-1 bg-white rounded-3xl">
-          <Text className='text-3xl font-bold text-primary text-center py-4 border-b border-gray-200'>Chatbot</Text>
+          <Text className='text-3xl font-bold text-primary text-center py-4 border-b border-gray-200'>Ai Chatbot</Text>
           <FlatList
             data={messages}
             renderItem={renderMessage}
+
             keyExtractor={item => item.id.toString()}
             className="flex-1 px-4 pt-4"
-            inverted
+            
           />
           <View className="flex-row items-center p-4 border-t border-gray-200">
             <TextInput
