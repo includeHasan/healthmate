@@ -3,10 +3,12 @@ var express = require('express');
 var cors = require('cors')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var rateLimit = require('express-rate-limit');
 var userRouter = require('./routes/user.route');
 var doctorRouter = require('./routes/docter.route');
 var dotenv = require('dotenv');
+var patientRouter = require('./routes/patient.route');
+var doctersRouter = require('./routes/docters.route');
 
 dotenv.config();
 
@@ -19,9 +21,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors())
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: "Too many requests from this IP, please try again in an hour!"
+});
+
+app.use(limiter);
 
 app.use('/user', userRouter);
 app.use('/docter', doctorRouter);
+app.use('/patient', patientRouter);
+app.use('/docters', doctersRouter);
+
+app.get('/', (req, res) => {
+  res.send('server is running');
+})
 
 
 // catch 404 and forward to error handler

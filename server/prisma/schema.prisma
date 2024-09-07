@@ -21,7 +21,7 @@ model User {
 model Doctor {
   id                 String                @id @default(uuid())
   userId             String                @map("user_id")
-  speciality         String                @db.VarChar(100)
+  speciality         String[]                
   experienceYrs      Int                   @map("experience_yrs")
   firstName          String                @map("fname") @db.VarChar(30)
   lastName           String                @map("lname") @db.VarChar(30)
@@ -92,6 +92,9 @@ model DoctorWorkLocation {
   locationName  String                @map("location_name") @db.VarChar(30)
   city          String                @db.VarChar(30)
   state         String                @db.VarChar(30)
+  pincode       String                @db.VarChar(30)
+  country       String                @db.VarChar(30)
+  coordinates   String                @map("coordinates") @db.VarChar(100)
   doctor        Doctor                @relation(fields: [doctorId], references: [id])
   timeTables    DoctorTimeTable[]
   appointments  AppointmentSchedule[]
