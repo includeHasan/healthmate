@@ -38,7 +38,7 @@ let loginUser = async (req, res) => {
     res.status(200).json({success:true,user})
 }
 catch (error) {
-  console.log("yaha error hai" + error)
+  console.log("error" + error)
   res.status(500).json({success:false,error:error})
 }
 }
