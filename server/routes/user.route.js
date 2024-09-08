@@ -1,6 +1,6 @@
 var express = require('express');
 const { verifyToken } = require('../middlewares/verify.middleware');
-const { allUsers, createUser, loginUser,getUser, forgetPassword, verifyOtp, verifyOtpAndChangePassword } = require('../controllers/user.controller');
+const { allUsers, createUser, loginUser,getUser, forgetPassword, verifyOtpAndChangePassword,logout } = require('../controllers/user.controller');
 var router = express.Router();
 
 router.get('/',allUsers)
@@ -13,9 +13,9 @@ router.get('/getUser',verifyToken,getUser)
 
 router.post('/forgetPassword',forgetPassword)
 
-router.post('/verifyOtp',verifyOtp)
-
 router.put('/verifyOtpAndChangePassword',verifyOtpAndChangePassword)
+
+router.get('/logout',logout)
 
 
 

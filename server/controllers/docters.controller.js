@@ -186,4 +186,6 @@ const getDoctorsAvailability = async (req, res) => {
     }
 };
 
+
+
 module.exports = { allDocters, getDocterDetails, searchAndFilterDoctors, nearestDoctors, getDoctorsAvailability };

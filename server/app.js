@@ -9,6 +9,11 @@ var doctorRouter = require('./routes/docter.route');
 var dotenv = require('dotenv');
 var patientRouter = require('./routes/patient.route');
 var doctersRouter = require('./routes/docters.route');
+var session = require('express-session');
+
+
+
+
 
 dotenv.config();
 
@@ -20,6 +25,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors())
+app.use(session({
+  secret: process.env.JWT_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Set secure to true if using HTTPS
+}));
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes

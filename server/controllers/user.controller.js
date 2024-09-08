@@ -1,6 +1,9 @@
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
 const {generateToken,decodeToken,sendTokenToHeader} = require('../utils/auth');
+ const {validateUser} = require('../utils/inputValidator');
+ const {generateOtp,sendOtp} = require('../utils/otp');
+
 var prisma = new PrismaClient();
 
 
@@ -101,29 +104,28 @@ let getUser = async (req, res) => {
     res.status(500).json({ success: false, error: "Internal server error" });
   }
 };
-
 let forgetPassword = async (req, res) => {
   const { email } = req.body;
 
   try {
     const user = await prisma.User.findFirst({
-      where: { email: email }
+      where: { email }
     });
 
     if (!user) {
       return res.status(404).json({ success: false, error: "User not found" });
     }
 
-    // Generate OTP and expiration time
     const otp = generateOtp();
     const otpExpiry = Date.now() + 2 * 60 * 1000; // 2 minutes expiry
 
-    
     await sendOtp(email, otp);
 
-    // Store OTP and expiry in session
+    // Ensure session is initialized and store OTP, expiry, and email
+    req.session = req.session || {};
     req.session.otp = otp;
     req.session.otpExpiry = otpExpiry;
+    req.session.email = email;
 
     res.status(200).json({ success: true, message: "OTP sent to email" });
   } catch (error) {
@@ -132,32 +134,10 @@ let forgetPassword = async (req, res) => {
   }
 };
 
-let verifyOtp = async (req, res) => {
-  const { otp } = req.body;
-
-  try {
-    // Check if OTP matches and hasn't expired
-    if (req.session.otp !== otp) {
-      return res.status(400).json({ success: false, error: "Invalid OTP" });
-    }
-
-    if (Date.now() > req.session.otpExpiry) {
-      return res.status(400).json({ success: false, error: "OTP expired" });
-    }
-
-    // OTP is valid, proceed with password reset or further steps
-    res.status(200).json({ success: true, message: "OTP verified successfully" });
-  } catch (error) {
-    console.error("Error in verifyOtp:", error);
-    res.status(500).json({ success: false, error: "Internal server error" });
-  }
-};
-
 let verifyOtpAndChangePassword = async (req, res) => {
-  const { otp, newPassword } = req.body; // Capture new password in the request body
+  const { otp, newPassword } = req.body;
 
   try {
-    // Check if OTP matches and hasn't expired
     if (req.session.otp !== otp) {
       return res.status(400).json({ success: false, error: "Invalid OTP" });
     }
@@ -166,16 +146,14 @@ let verifyOtpAndChangePassword = async (req, res) => {
       return res.status(400).json({ success: false, error: "OTP expired" });
     }
 
-    // Hash the new password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-    // Update the user's password in the database
     await prisma.User.update({
-      where: { email: req.session.email }, // Assuming email is stored in the session when OTP is generated
+      where: { email: req.session.email },
       data: { password: hashedPassword }
     });
 
-    // Clear the OTP from the session
+    
     req.session.otp = null;
     req.session.otpExpiry = null;
     req.session.email = null;
@@ -188,6 +166,18 @@ let verifyOtpAndChangePassword = async (req, res) => {
 };
 
 
-module.exports = {allUsers,createUser,loginUser,getUser,forgetPassword,verifyOtp,verifyOtpAndChangePassword}
+const logout = async (_, res) => {
+  try {
+    
+    res.removeHeader('Authorization');
+    res.status(200).json({ success: true, message: "Logged out successfully" });
+  } catch (error) {
+    console.error("Error in logout function:", error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+}
+
+
+module.exports = {allUsers,createUser,loginUser,getUser,forgetPassword,verifyOtpAndChangePassword,logout}
 
 

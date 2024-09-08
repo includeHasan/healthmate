@@ -1,83 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 /* Light Theme */
 :root {
-  --color-primary: #0565F9;           /* brightBlue */
-  --color-background: #EDEEEF;        /* lightGray */
-  --color-surface: #FEFEFE;           /* nearWhite */
-  --color-text-primary: #423F3D;      /* darkGray */
-  --color-text-secondary: #B2B9C3;    /* mediumGray */
+	--primary: 215 85% 55%;           /* Primary Blue */
+	--primary-foreground: 0 0% 98%;   /* White */
+	--background: 215 100% 96%;       /* Light Blue Background */
+	--surface: 215 100% 98%;          /* Near White Surface */
+	--text-primary: 230 50% 15%;      /* Dark Blue Text */
+	--text-secondary: 215 20% 45%;    /* Medium Gray Text */
+	--foreground: 230 50% 15%;        /* Dark Blue Text */
+	--card: 215 100% 98%;             /* Light Blue Card */
+	--card-foreground: 230 50% 15%;   /* Dark Blue Card Text */
+	--secondary: 215 75% 88%;         /* Secondary Light Blue */
+	--secondary-foreground: 230 50% 15%; /* Darker Text */
+	--muted: 215 30% 95%;             /* Muted Light Blue */
+	--muted-foreground: 215 20% 45%;  /* Muted Text */
+	--destructive: 0 84.2% 60.2%;     /* Red for Errors */
+	--destructive-foreground: 0 0% 98%;
+	--border: 215 60% 90%;            /* Light Blue Border */
+	--input: 215 60% 90%;             /* Light Blue Input */
+	--ring: 215 50% 40%;              /* Darker Blue Focus */
 }
 
 /* Dark Theme */
 .dark {
-  --color-primary: #3A7BF1;           /* dark-brightBlue */
-  --color-background: #2D2D2D;        /* dark-lightGray */
-  --color-surface: #1A1A1A;           /* dark-nearWhite */
-  --color-text-primary: #1F1F1F;      /* dark-darkGray */
-  --color-text-secondary: #555555;    /* dark-mediumGray */
+	--primary: 215 85% 60%;           /* Bright Blue */
+	--primary-foreground: 0 0% 98%;   /* White */
+	--background: 230 15% 20%;        /* Darker Blue Background */
+	--surface: 230 15% 25%;           /* Darker Blue Surface */
+	--text-primary: 0 0% 98%;         /* White Text */
+	--text-secondary: 215 10% 80%;    /* Muted Text */
+	--foreground: 0 0% 98%;           /* White Text */
+	--card: 230 15% 25%;              /* Darker Blue Card */
+	--card-foreground: 0 0% 98%;      /* White Text in Card */
+	--secondary: 215 70% 30%;         /* Darker Blue */
+	--secondary-foreground: 0 0% 98%; /* White */
+	--muted: 215 20% 30%;             /* Muted Dark Blue */
+	--muted-foreground: 215 10% 80%;  /* Muted Text */
 }
+
+/* Apply Colors */
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem
-  }
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%
-  }
-}
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-background text-foreground;
+	}
+	button {
+		@apply bg-primary text-primary-foreground;
+	}
 }
