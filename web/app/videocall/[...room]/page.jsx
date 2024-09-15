@@ -8,7 +8,7 @@ const Room = ({params}) => {
 
     const roomId = params.room[1]; // will set in session, roomid will be the appointment_sechedule_id from the db 
 
-    const userId = '';   // userid from the db will be the userid coming from the backend
+    const userId = "";   // userid from the db will be the userid coming from the backend
 
     const effectiveTimeInSeconds = 36000;
     
@@ -18,7 +18,7 @@ const Room = ({params}) => {
       // const appId // genrated from zegocloud
       // const serverSecret // genrated from zegocloud
       const token = generateToken04(process.env.APP_ID , userId , process.env.SERVER_SECRET ,effectiveTimeInSeconds , "");
-      const kitToken = ZegoUIKitPrebuilt.generateKitTokenForProduction(appId,token,roomId , userId, userName);
+      const kitToken = ZegoUIKitPrebuilt.generateKitTokenForProduction(process.env.APP_ID,token,roomId , userId, userName);
       const zp = ZegoUIKitPrebuilt.create(kitToken);
 
       // to join the call / room 
