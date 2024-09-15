@@ -6,14 +6,14 @@ export default function RootLayout({ children }) {
       <html lang="en" suppressHydrationWarning>
         <head />
         <body>
-          <ThemeProvider
+          {/* <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-            {children}
-          </ThemeProvider>
+          </ThemeProvider> */}
+          {children}
         </body>
       </html>
     </>
