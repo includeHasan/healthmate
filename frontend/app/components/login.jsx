@@ -1,12 +1,29 @@
 'use client'
 import Image from "next/image";
 import doctor_login from '../../public/doctor_login.png';
+import { useState } from "react";
+import axios from "axios";
 
 export default function LoginPage() {
+  const [email ,setEmail] =useState('');
+  const [password,setPassword] = useState('');
+  const formSubmitHandler = async(e) =>{
+    e.preventDefault();
+    const {data} = await axios.post("http://localhost:5000/user/loginUser"  , {
+      email,password
+    })
+    const {user} = data;
+    if(!user){
+      console.log('error');
+      
+    }
+    console.log(user);
+    
+  }
   return (
     <div className="flex min-h-screen">
       <div className="w-1/2 bg-blue-600 text-white flex flex-col justify-center items-center p-8">
-        <div className="text-3xl font-bold mb-4">HealthHub</div>
+        <div className="text-3xl font-bold mb-4">HealthMate</div>
         <Image src={doctor_login} alt="Doctor Image" className="w-52 h-52 rounded-full object-cover shadow-md"/>
         <h2 className="text-2xl font-semibold mb-2">
           Enhance impact in healthcare
@@ -24,27 +41,32 @@ export default function LoginPage() {
             Login to access your healthcare dashboard. Explore appointments,
             manage tasks and patient records with ease.
           </p>
-          <form className="space-y-4">
+
+          <form className="space-y-4" onSubmit={formSubmitHandler}>
             <div>
-              <label className="block text-gray-700">Email</label>
+              <label className="block text-gray-700" htmlFor="email">Email</label>
               <div className="relative">
                 <input
+                id="email"
                   type="email"
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
-                <i className="fas fa-envelope absolute left-3 top-3 text-gray-400"></i>
               </div>
             </div>
             <div>
-              <label className="block text-gray-700">Password</label>
+              <label className="block text-gray-700" htmlFor="password">Password</label>
               <div className="relative">
                 <input
+                id="password"
                   type="password"
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Enter your password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
                 />
-                <i className="fas fa-eye absolute right-3 top-3 text-gray-400"></i>
               </div>
             </div>
             <div className="flex items-center justify-between">
