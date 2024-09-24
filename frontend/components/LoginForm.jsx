@@ -6,28 +6,24 @@ import axios from "axios";
 
 const LoginForm = () => {
   const router=useRouter()
-  const [email,setEmail] = useState('');
-  const [password,setPassword] = useState();
- const submitLogin=async()=>{
-  console.log(process.env.api)
-  try {
-    let loginData=await axios.post('https://healthmate-backend.vercel.app/user/loginUser',{email,password},{Credential:true})
-    if(loginData.data.message)
-    {
-      router.push('/')
-    }else{
-      console.log("invalid")
+  const [loginState, setLoginState] = useState({ email: '', password: '' });
+  
+  const submitLogin = async () => {
+    try {
+      const response = await axiosInstance.post('https://healthmate-backend.vercel.app/user/loginUser', loginState);
+      if (response.data.message) {
+        router.push('/');
+      } else {
+        console.log('Invalid credentials');
+      }
+    } catch (error) {
+      console.error(error);
     }
-    
-  } catch (error) {
-    
-  }
- }
-
+  };
 
 
     return (
-        <form className="space-y-4" >
+        <div className="space-y-4" >
             <div>
               <label className="block text-gray-700" htmlFor="email">Email</label>
               <div className="relative">
@@ -36,8 +32,8 @@ const LoginForm = () => {
                   type="email"
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={loginState.email}
+                  onChange={(e) => setLoginState(prev => ({...prev , email:e.target.value}))}
                 />
               </div>
             </div>
@@ -49,8 +45,8 @@ const LoginForm = () => {
                   type="password"
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Enter your password"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
+                  value={loginState.password}
+                  onChange={(e) => setLoginState(prev => ({...prev , password:e.target.value}))}
                 />
               </div>
             </div>
@@ -70,7 +66,7 @@ const LoginForm = () => {
             >
               Login
             </button>
-          </form>
+          </div>
     )
 }
 

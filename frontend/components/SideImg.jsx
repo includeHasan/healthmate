@@ -9,8 +9,8 @@ const SideImg = () => {
       <Image
         src={'/doctor_login.png'}
         alt="Doctor Image"
-        className="w-52 h-52 rounded-full object-cover shadow-md"
-        width={3} height={3}
+        className="w-64 h-64 rounded-full object-cover"
+        width={4} height={4}
       />
       <h2 className="text-2xl font-semibold mb-2">
         Enhance impact in healthcare

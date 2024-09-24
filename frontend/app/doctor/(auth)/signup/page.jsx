@@ -1,9 +1,9 @@
 'use client'
-import { SignupForm } from "./SignupForm";
-import ExternalLogin from "./ExternalLogin";
-import SideImg from "./SideImg";
+import { SignupForm } from "@/components/SignupForm"; 
+import ExternalLogin from "@/components/ExternalLogin";
+import SideImg from "@/components/SideImg";
 
-const SignUpPage = () => {
+const SignUp = () => {
   return (
     <div className="flex min-h-screen">
       <SideImg/>
@@ -20,7 +20,7 @@ const SignUpPage = () => {
           <ExternalLogin/>
           <div className="mt-6 text-center">
             <span className="text-gray-700">Already have an account? </span>
-            <a href="#" className="text-blue-600">
+            <a href="/doctor/login" className="text-blue-600">
               Login
             </a>
           </div>
@@ -30,4 +30,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignUp;
