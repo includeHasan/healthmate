@@ -1,15 +1,16 @@
 'use client';
 import Image from "next/image";
 import React from "react";
-import doctor_login from '../../public/doctor_login.png';
+
 const SideImg = () => {
   return (
     <div className="w-1/2 bg-blue-600 text-white flex flex-col justify-center items-center p-8">
       <div className="text-3xl font-bold mb-4">HealthHub</div>
       <Image
-        src={doctor_login}
+        src={'/doctor_login.png'}
         alt="Doctor Image"
         className="w-52 h-52 rounded-full object-cover shadow-md"
+        width={3} height={3}
       />
       <h2 className="text-2xl font-semibold mb-2">
         Enhance impact in healthcare

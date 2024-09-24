@@ -1,8 +1,31 @@
+"use client"
+import { useRouter } from 'next/navigation'
+ 
 import { useState } from "react";
+import axios from "axios";
 
 const LoginForm = () => {
+  const router=useRouter()
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState();
+ const submitLogin=async()=>{
+  console.log(process.env.api)
+  try {
+    let loginData=await axios.post('https://healthmate-backend.vercel.app/user/loginUser',{email,password},{Credential:true})
+    if(loginData.data.message)
+    {
+      router.push('/')
+    }else{
+      console.log("invalid")
+    }
+    
+  } catch (error) {
+    
+  }
+ }
+
+
+
     return (
         <form className="space-y-4" >
             <div>
@@ -43,6 +66,7 @@ const LoginForm = () => {
             <button
               type="submit"
               className="w-full bg-blue-600 text-white py-2 rounded-md"
+              onClick={submitLogin}
             >
               Login
             </button>

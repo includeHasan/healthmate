@@ -1,6 +1,6 @@
 'use client'
 
-import ProfileCard from "@/app/components/profile-header";
+import ProfileCard from "@/components/profile-header";
 
 const PatientProfile = () => {
   return (

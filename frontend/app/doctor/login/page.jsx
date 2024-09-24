@@ -1,8 +1,8 @@
 'use client'
 import axios from "axios";
-import SideImg from "@/app/components/SideImg";
-import LoginForm from "@/app/components/LoginForm";
-import ExternalLogin from "@/app/components/ExternalLogin";
+import SideImg from "@/components/SideImg";
+import LoginForm from "@/components/LoginForm";
+import ExternalLogin from "@/components/ExternalLogin";
 
 export default function Login() {
   return (
