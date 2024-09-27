@@ -11,7 +11,7 @@ const SideImg = () => {
       description: 'Your impact in healthcare just got stronger. Enhance patient care through refined data control, seamless appointments, and impactful task management.',
     },
     {
-      src: '/another_image.png',
+      src: '/splashLogo.png',
       title: 'Improve Patient Engagement',
       description: 'Engage patients with effective communication and streamlined processes.',
     },
