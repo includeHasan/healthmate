@@ -28,12 +28,13 @@ const ImageSlider = () => {
         width={400}
         height={400}
         unoptimized
+        priority
         loader={({ src, width, quality }) => {
-          return `${src}?w=${width}&q=${quality || 75}`;
+          return `${src}?w=${width}&q=${quality || 80}`;
         }}
       />
       <div className="flex justify-center mt-4">
-        {images.map((image, index) => (
+        {images.map((_, index) => (
           <div
             key={index}
             className={`w-2 h-2 rounded-full mx-1 border border-gray-100 ${

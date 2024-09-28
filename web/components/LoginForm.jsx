@@ -8,11 +8,15 @@ const LoginForm = () => {
   const router=useRouter()
   const [loginState, setLoginState] = useState({ email: '', password: '' });
   
-  const submitLogin = async () => {
+  const submitLogin = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axiosInstance.post('https://healthmate-backend.vercel.app/user/loginUser', loginState);
-      if (response.data.message) {
-        router.push('/');
+      const response = await axios.post('http://localhost:5000/user/loginUser', loginState);
+      if (response.data) {
+        console.log('login done ');
+        loginState.email='';
+        loginState.password='';
+        router.replace('/');
       } else {
         console.log('Invalid credentials');
       }

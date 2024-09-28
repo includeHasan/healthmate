@@ -1,19 +1,22 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; 
 import React, { useState } from "react";
 import { FaBars } from "react-icons/fa";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
+  const [loggedin ,setLoggedin] =useState(false);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
-  const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
 
   const handleSignupOptionToggle = () => {
     setIsSignUpOptionOpen(!isSignUpOptionOpen);
   };
+
   return (
     <div>
       <header className="bg-white shadow-md">
@@ -47,45 +50,33 @@ const NavBar = () => {
               CONTACT
             </Link>
           </nav>
-          <div className="flex space-x-4">
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-full sm:hidden lg:inline-block">
+          {!loggedin ? (<div className="flex space-x-4">
+            <button className="bg-blue-600 text-white px-4 py-2 rounded-full sm:hidden md:inline-block lg:inline-block">
               <Link href={"/login"}>Login</Link>
             </button>
             <button
-              className="bg-blue-600 text-white px-4 py-2 rounded-full sm:hidden lg:inline-block"
-              id="dropdownDefaultButton"
-              data-dropdown-toggle="dropdown"
+              className="bg-blue-600 text-white px-4 py-2 rounded-full sm:hidden lg:inline-block md:inline-block"
               onClick={handleSignupOptionToggle}
             >
               Create account
             </button>
             <div
               className={`fixed z-10 w-44 text-base top-16 mt-1 right-6 bg-white rounded divide-y divide-gray-800 shadow-md shadow-gray-700  ${
-                isSignUpOptionOpen ? "opacity-100" : "opacity-0" 
+                isSignUpOptionOpen ? "opacity-100" : "opacity-0"
               }`}
             >
-              <ul className="py-2" aria-labelledby="dropdownDefaultButton">
-                <li>
-                  <Link
-                    href="#"
-                    className="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 "
-                  >
-                    Sign up as Doctor
-                  </Link>
+              <ul className="py-2">
+                <li className={`block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 ${isSignUpOptionOpen? 'cursor-pointer' : "cursor-default" } `} >
+                  <Link href={"/signup?userType=doctor"}>Sign up as Doctor</Link>
                 </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 "
-                  >
-                    Sign up as Patient
-                  </Link>
+                <li className={`block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 ${isSignUpOptionOpen? 'cursor-pointer' : "cursor-default"}` }>
+                <Link href={"/signup?userType=patient"}>Sign up as Patient</Link>
                 </li>
               </ul>
             </div>
-          </div>
+          </div>) : <div> Hello User </div>}
           <button
-            className="md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 place-items-center py-2.5 text-center inline-flex dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 place-items-center py-2.5 text-center inline-flex "
             onClick={handleToggle}
           >
             <FaBars className=" ms-3 text-white" />
@@ -119,20 +110,16 @@ const NavBar = () => {
             </Link>
           </li>
         </ul>
-        <div className="py-2">
+        {!loggedin ? (<div className="py-2">
           <ul>
-            <li>
-              <Link href="#" className="block px-4 py-2 hover:bg-gray-100">
+            <li className="block px-4 py-2 hover:bg-gray-100">
                 Login
-              </Link>
             </li>
-            <li>
-              <Link href="#" className="block px-4 py-2 hover:bg-gray-100">
-                SignUp
-              </Link>
+            <li className="block px-4 py-2 hover:bg-gray-100">
+                Create Account
             </li>
           </ul>
-        </div>
+        </div>) : <div>profile </div>}
       </div>
     </div>
   );
