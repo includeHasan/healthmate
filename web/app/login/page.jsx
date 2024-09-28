@@ -1,8 +1,8 @@
 'use client'
-import axios from "axios";
 import SideImg from "@/components/SideImg";
 import LoginForm from "@/components/LoginForm";
 import ExternalLogin from "@/components/ExternalLogin";
+import Link from "next/link";
 
 export default function Login() {
   return (
@@ -18,9 +18,9 @@ export default function Login() {
           <ExternalLogin/>
           <div className="mt-6 text-center text-gray-600">
             Don't have an account yet?{" "}
-            <a href="/doctor/signup" className="text-blue-600">
+            <Link href="/doctor/signup" className="text-blue-600">
               Signup
-            </a>
+            </Link>
           </div>
         </div>
       </div>

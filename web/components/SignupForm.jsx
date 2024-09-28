@@ -21,7 +21,7 @@ export const SignupForm = () => {
       /^[+]?[0-9]{1,3}?[-.\s]?([0-9]{3})?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/;
     return phoneRegex.test(number);
   };
-  const userType =(window.location.href).split("/")[3];
+  const userType = (window.location.href).split("/")[3];
   const SubmitFormHandler = async (e) => {
     e.preventDefault();
     if (!validatePhoneNumber(formData.phoneNo)) {
@@ -29,7 +29,7 @@ export const SignupForm = () => {
       return;
     }
     try {
-      const response = await api.post("/user/createUser", formData);
+      const response = await api.post("/user/createUser", {formData, userType});
       if (response.data.response) {
         router.push("/");
       } else {
