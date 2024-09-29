@@ -1,8 +1,12 @@
 "use client"
+import axios from 'axios';
 import { useRouter } from 'next/navigation'
  
 import { useState } from "react";
-import axios from "axios";
+
+const api = axios.create({
+  baseURL: "http://localhost:5000",
+});
 
 const LoginForm = () => {
   const router=useRouter()
@@ -10,9 +14,11 @@ const LoginForm = () => {
   
   const submitLogin = async (e) => {
     e.preventDefault();
+    
     try {
-      const response = await axios.post('http://localhost:5000/user/loginUser', loginState);
+      const response = await api.post('/user/loginUser', loginState);
       if (response.data) {
+        console.log(response);
         console.log('login done ');
         loginState.email='';
         loginState.password='';
@@ -33,6 +39,7 @@ const LoginForm = () => {
               <div className="relative">
                 <input
                 id="email"
+                name='email'
                   type="email"
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Enter your email address"
@@ -46,6 +53,7 @@ const LoginForm = () => {
               <div className="relative">
                 <input
                 id="password"
+                name='password'
                   type="password"
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Enter your password"

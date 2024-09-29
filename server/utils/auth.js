@@ -15,7 +15,7 @@ const sendTokenToHeader = (res, token) => {
     res.setHeader('Authorization', `Bearer ${token}`);
 };
 
-const fetchHeader = (req) => {
+const fetchHeader = (req,res) => {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({ success: false, error: "No token provided" });

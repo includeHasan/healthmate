@@ -51,7 +51,7 @@ const createDoctor = async (req, res) => {
 
 const getDoctorDetails = async (req, res) => {  
     try {
-        const token = fetchHeader(req);
+        const token = fetchHeader(req,res);
         const decoded = decodeToken(token);
         const userId = decoded.id;
         const doctor = await prisma.doctor.findUnique({

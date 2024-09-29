@@ -36,7 +36,11 @@ export const SignupForm = () => {
         password: formData.password,
         phoneNo: formData.phoneNo,
         userType,
-      });
+      },{ 
+        withCredentials :true,
+        headers: {
+          'Access-Control-Allow-Credentials': true,
+        },});
       if (response.data.response) {
         console.log(response.data);
         router.replace("/");
