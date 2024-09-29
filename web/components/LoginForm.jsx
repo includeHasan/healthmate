@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from "react";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://healthmate-backend.vercel.app",
 });
 
 const LoginForm = () => {
@@ -16,7 +16,7 @@ const LoginForm = () => {
     e.preventDefault();
     
     try {
-      const response = await api.post('/user/loginUser', loginState);
+      const response = await api.post('/user/loginUser', loginState,{withCredentials:true});
       if (response.data) {
         console.log(response);
         console.log('login done ');
