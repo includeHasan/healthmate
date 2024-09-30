@@ -7,7 +7,7 @@ const createDoctor = async (req, res) => {
     try {
         console.log("Creating new doctor...");
         const { firstName, lastName, licenseNo, speciality, experienceYrs } = req.body;
-        const token = fetchHeader(req);
+        const token = fetchHeader(req,res);
         const decoded = decodeToken(token);
         const userId = decoded.id;
 
@@ -46,6 +46,7 @@ const createDoctor = async (req, res) => {
     } catch (error) {
         console.error("Error creating doctor:", error);
         res.status(500).json({ success: false, error: error.message });
+        return;
     }
 };
 

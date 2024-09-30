@@ -1,7 +1,7 @@
 'use client'
-import SideImg from "@/components/SideImg";
+import SideImg from "@/components/AuthComponents/SideImg";
 import LoginForm from "@/components/LoginForm";
-import ExternalLogin from "@/components/ExternalLogin";
+import ExternalLogin from "@/components/AuthComponents/ExternalLogin";
 import Link from "next/link";
 
 export default function Login() {

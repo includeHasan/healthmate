@@ -1,7 +1,7 @@
 'use client'
-import { SignupForm } from "@/components/SignupForm"; 
-import ExternalLogin from "@/components/ExternalLogin";
-import SideImg from "@/components/SideImg";
+import { SignupForm } from "@/components/AuthComponents/SignupForm"; 
+import ExternalLogin from "@/components/AuthComponents/ExternalLogin";
+import SideImg from "@/components/AuthComponents/SideImg";
 
 const SignUp = () => {
   return (

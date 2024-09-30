@@ -1,8 +1,8 @@
 "use client";
-import Bottom from "@/components/Bottom";
-import ImageSlider from "@/components/ImageSlider";
-import NavBar from "@/components/NavBar";
-import SpecialityHome from "@/components/SpecialityHome";
+import Bottom from "@/components/HomeComponents/Bottom";
+import ImageSlider from "@/components/HomeComponents/ImageSlider";
+import NavBar from "@/components/HomeComponents/NavBar";
+import SpecialityHome from "@/components/HomeComponents/SpecialityHome";
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 

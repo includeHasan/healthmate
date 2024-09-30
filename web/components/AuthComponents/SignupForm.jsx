@@ -4,7 +4,7 @@ import { useSearchParams,useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://healthmate-backend.vercel.app",
 });
 
 export const SignupForm = () => {
@@ -38,9 +38,7 @@ export const SignupForm = () => {
         userType,
       },{ 
         withCredentials :true,
-        headers: {
-          'Access-Control-Allow-Credentials': true,
-        },});
+        });
       if (response.data.response) {
         console.log(response.data);
         router.replace("/");

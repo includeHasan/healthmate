@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react'
-import DoctorCard from './DoctorCard'
+import DoctorCard from './HomeComponents/DoctorCard'
 
 const api = axios.create({
     baseURL: "https://healthmate-backend.vercel.app",
