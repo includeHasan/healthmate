@@ -23,6 +23,7 @@ model Doctor {
   userId             String                @map("user_id")
   speciality         String[]                
   experienceYrs      Int                   @map("experience_yrs")
+  verified           Boolean               @default(false)
   firstName          String                @map("fname") @db.VarChar(30)
   lastName           String                @map("lname") @db.VarChar(30)
   licenseNo          String                @map("license_no") @db.VarChar(30)
