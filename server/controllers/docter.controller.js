@@ -45,7 +45,7 @@ const createDoctor = async (req, res) => {
         res.status(200).json({ success: true, message: "Doctor created successfully", doctor });
     } catch (error) {
         console.error("Error creating doctor:", error);
-        res.status(500).json({ success: false, error: error.message });
+        res.status(400).json({ success: false, error: error.message });
         return;
     }
 };

@@ -46,13 +46,17 @@ const DoctorVerification = () => {
         licenseNo: formData.licenseNo,
         speciality: formData.speciality,
         experienceYrs: formData.experienceYrs,
-        profilePic: profilePic,
+        profilePic: profilePic[0],
         document: document,
       };
       console.log(data);
 
       const response = await api.post("/docter/createDocter", data, {
         withCredentials: true,
+        headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data',
+        }
       });
       console.log(response.data);
     } catch (error) {
@@ -179,7 +183,7 @@ const DoctorVerification = () => {
           <div key={index} className="mb-4">
             <input
               type="file"
-              onChange={(e) => handleDocumentChange(index, e.target.files[0])}
+              onChange={(e) => handleDocumentChange(index, e.target.files)}
               className="block w-full m-2 text-md text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none p-2.5 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 file:shadow-md hover:file:bg-blue-100"
             />
             <button
