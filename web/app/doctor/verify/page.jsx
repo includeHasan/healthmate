@@ -1,11 +1,9 @@
 "use client";
+import { api } from "@/utils/api";
 import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 
-const api = axios.create({
-  baseURL: "http://localhost:5000",
-});
 
 const DoctorVerification = () => {
   const [formData, setFormData] = useState({
