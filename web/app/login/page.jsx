@@ -18,7 +18,7 @@ export default function Login() {
           <LoginForm/>
           <ExternalLogin/>
           <div className="mt-6 text-center text-gray-600">
-            Don't have an account yet?{" "}
+            Dont have an account yet?{" "}
             <Link href="/doctor/signup" className="text-blue-600">
               Signup
             </Link>

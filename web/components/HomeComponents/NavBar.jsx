@@ -20,7 +20,7 @@ const NavBar = () => {
     
     if(document.cookie.match(/token=([^;]*)/))
       setLoggedin(!loggedin);
-  },[])
+  },[loggedin])
 
   return (
     <div>
