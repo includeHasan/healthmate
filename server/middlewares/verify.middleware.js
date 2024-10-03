@@ -1,80 +1,56 @@
 const jwt = require('jsonwebtoken');
-const { decodeToken } = require('../utils/auth');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const { decodeToken, fetchTokenFromCookies } = require('../utils/auth');
 
-const verifyToken = (req, res, next) => {
-    try {
-      const authHeader = req.headers.authorization;
-      if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(401).json({ success: false, error: "No token provided" });
-      }
-  
-      const token = authHeader.split(' ')[1];
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = decoded;
-      next();
-    } catch (error) {
-      return res.status(401).json({ success: false, error: "Invalid token" });
-    }
-  };
+// Verifies the token from cookies and attaches the user details to req.user
+const verifyToken = async (req, res, next) => {
+  try {
+    // Fetch token from cookies
+    const token = fetchTokenFromCookies(req, res);
+    const decoded = decodeToken(token);
 
-  const isDoctor=async (req,res,next)=>{
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ success: false, error: "No token provided" });
-    }
-    const token = authHeader.split(' ')[1];
-    const decoded =decodeToken(token)
+    // Fetch user details based on the decoded ID
     const user = await prisma.user.findUnique({
-      where: {
-        id: decoded.id
-      }
+      where: { id: decoded.id }
     });
 
-    if(user.userType  ==='doctor'){
-        next()
-    }else{
-        return res.status(401).json({ success: false, error: "You are not authorized to access this" });
+    if (!user) {
+      return res.status(401).json({ success: false, error: "Invalid token, user not found" });
     }
-  }
 
-  const isPatient=async (req,res,next)=>{
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ success: false, error: "No token provided" });
-    }
-    const token = authHeader.split(' ')[1];
-    const decoded =decodeToken(token)
-    const user = await prisma.user.findUnique({
-      where: {
-        id: decoded.id
-      }
-    });
-    if(user.userType  ==='patient'){
-        next()
-    }else{
-      return res.status(401).json({ success: false, error: "You are not authorized to access this" });
-    }
+    req.user = user; // Attach user to request
+    next();
+  } catch (error) {
+    return res.status(401).json({ success: false, error: "Invalid token" });
   }
+};
 
-  const isAdmin=async (req,res,next)=>{
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ success: false, error: "No token provided" });
-    }
-    const token = authHeader.split(' ')[1];
-    const decoded =decodeToken(token)
-    const user = await prisma.user.findUnique({
-      where: {
-        id: decoded.id
-      }
-    });
-    if(user.userType  ==='admin'){
-        next()
-    }else{
-      return res.status(401).json({ success: false, error: "You are not authorized to access this" });
-    }
+// Middleware to check if user is a doctor
+const isDoctor = (req, res, next) => {
+  if (req.user.userType === 'doctor') {
+    next();
+  } else {
+    return res.status(403).json({ success: false, error: "You are not authorized to access doctor" });
   }
+};
 
-  module.exports={verifyToken,isDoctor,isPatient,isAdmin}
+// Middleware to check if user is a patient
+const isPatient = (req, res, next) => {
+  if (req.user.userType === 'patient') {
+    next();
+  } else {
+    return res.status(403).json({ success: false, error: "You are not authorized to access patient " });
+  }
+};
+
+// Middleware to check if user is an admin
+const isAdmin = (req, res, next) => {
+  if (req.user.userType === 'admin') {
+    next();
+  } else {
+    return res.status(403).json({ success: false, error: "You are not authorized to access  admin" });
+  }
+};
+
+module.exports = { verifyToken, isDoctor, isPatient, isAdmin };
