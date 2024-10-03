@@ -4,9 +4,7 @@ import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 
-const api = axios.create({
-  baseURL: "http://localhost:5000",
-});
+import { api } from "@/utils/api";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -17,7 +15,7 @@ const LoginForm = () => {
 
     try {
       const response = await api.post("/user/loginUser", loginState, {
-        withCredentials: true,
+       
         headers: {
           "Access-Control-Expose-Headers":
             "Authorization, Content-Type, Date, ETag, Vary",

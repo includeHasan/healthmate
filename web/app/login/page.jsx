@@ -1,6 +1,7 @@
 'use client'
 import SideImg from "@/components/AuthComponents/SideImg";
-import LoginForm from "@/components/LoginForm";
+import LoginForm from "@/components/AuthComponents/LoginForm";
+
 import ExternalLogin from "@/components/AuthComponents/ExternalLogin";
 import Link from "next/link";
 
