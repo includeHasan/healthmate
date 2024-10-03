@@ -1,8 +1,11 @@
 'use client'
+
+import Image from "next/image";
+
 const ProfileCard = () => {
   return (
       <div className="flex items-center p-4 bg-white shadow rounded-lg space-x-4">
-          <img src="https://placehold.co/50x50" alt="" className="w-12 h-12 rounded-full" />
+          <Image src="https://placehold.co/50x50" alt="" className="w-12 h-12 rounded-full" />
           <div className="flex-grow">
               <div className="flex items-center space-x-2">
                   <h2 className="text-lg font-semibold">Rajeev Gandhi</h2>

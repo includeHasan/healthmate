@@ -1,4 +1,5 @@
 
+import Image from "next/image";
 import Footer from "./Footer";
 
 
@@ -34,7 +35,7 @@ import Footer from "./Footer";
             </button>
           </div>
           <div className="flex-1 mt-8 md:mt-0">
-            <img
+            <Image
               src="https://placehold.co/300x300"
               alt="Doctor pointing"
               className="w-full h-auto"

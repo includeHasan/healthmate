@@ -18,17 +18,17 @@ const App = () => {
                 Book Appointment With Trusted Doctors
               </h1>
               <div className="flex items-center mb-6">
-                <img
+                <Image
                   src="/doctor1.jpg"
                   alt="Doctor 1"
                   className="w-10 h-10 rounded-full border-2 border-white -ml-2"
                 />
-                <img
+                <Image
                   src="/doctor2.jpg"
                   alt="Doctor 2"
                   className="w-10 h-10 rounded-full border-2 border-white -ml-2"
                 />
-                <img
+                <Image
                   src="/doctor3.jpg"
                   alt="Doctor 3"
                   className="w-10 h-10 rounded-full border-2 border-white -ml-2"

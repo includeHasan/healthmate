@@ -5,14 +5,15 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { FaCalendarDays } from 'react-icons/fa6';
 import { FaFileMedicalAlt, FaUserAlt } from 'react-icons/fa';
+import Image from 'next/image';
 const Sidebar = () => {
   return (
     <aside className="w-full md:w-1/5 bg-white p-4 shadow-lg ">
     <div className="flex flex-col items-center border-b-2 border-blue-700 pb-4 text-blue-800">
-      <img
+      <Image
         src="https://placehold.co/100x100"
         alt="Doctor's profile picture"
-        className="rounded-full mb-4"
+     i   className="rounded-full mb-4"
       />
       <h2 className="text-lg font-bold">Dr. Marttin Deo</h2>
       <p className="text-sm ">MBBS, FCPS - MD (Medicine), MCPS</p>

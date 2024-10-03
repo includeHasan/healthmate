@@ -1,4 +1,5 @@
 import Sidebar from "@/components/DashboardComponents/Sidebar";
+import Image from "next/image";
 
 const PatientDashBoard = () => {
   return (
@@ -181,7 +182,7 @@ const PatientDashBoard = () => {
           <div className="bg-white p-6 rounded-lg shadow-md col-span-1">
             <h2 className="text-lg font-semibold mb-4">Latest results</h2>
             <div className="flex justify-center items-center h-40">
-              <img
+              <Image
                 src="https://placehold.co/200x100"
                 alt="Graph showing latest results"
               />

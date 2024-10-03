@@ -15,7 +15,7 @@ const LoginForm = () => {
 
     try {
       const response = await api.post("/user/loginUser", loginState, {
-       
+        withCredentials: true,
         headers: {
           "Access-Control-Expose-Headers":
             "Authorization, Content-Type, Date, ETag, Vary",
