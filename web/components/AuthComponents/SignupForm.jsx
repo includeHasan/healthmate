@@ -1,11 +1,9 @@
 "use client";
-import axios from "axios";
+import { api } from "@/utils/api";
+
 import { useSearchParams,useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const api = axios.create({
-  baseURL: "https://healthmate-backend.vercel.app",
-});
 
 export const SignupForm = () => {
   const router = useRouter();
