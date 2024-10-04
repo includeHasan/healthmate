@@ -16,8 +16,8 @@ const decodeToken = (token) => {
 const sendTokenAsCookie = (res, token) => {
   res.cookie('token', token, {
     httpOnly: true, // More secure; prevents JavaScript access to the token
-    secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-    sameSite: 'Strict', // Helps prevent CSRF attacks
+    // secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+    // sameSite: 'Strict', // Helps prevent CSRF attacks
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
   });
 };
