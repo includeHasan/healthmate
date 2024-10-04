@@ -78,6 +78,7 @@ const NavBar = () => {
                 <Link href={"/signup?userType=patient"}>Sign up as Patient</Link>
                 </li>
               </ul>
+              <Link href={"/doctor/verify"}>Verify</Link>
             </div>
           </div>) : <div> Hello User  <Link href={"/doctor/verify"}>Verify</Link> </div>}
           <button
