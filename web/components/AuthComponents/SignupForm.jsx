@@ -1,9 +1,10 @@
 "use client";
 import { api } from "@/utils/api";
 
-import { useSearchParams,useRouter } from "next/navigation";
-import React, { useState } from "react";
-
+import { useSearchParams, useRouter } from "next/navigation";
+import React, { useRef, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const SignupForm = () => {
   const router = useRouter();
@@ -15,6 +16,7 @@ export const SignupForm = () => {
     phoneNo: "",
     isError: false,
   });
+  const toastId = useRef(null);
 
   const validatePhoneNumber = (number) => {
     const phoneRegex =
@@ -24,31 +26,52 @@ export const SignupForm = () => {
 
   const SubmitFormHandler = async (e) => {
     e.preventDefault();
+    toastId.current = toast.info("Please wait!! Loading...");
     if (!validatePhoneNumber(formData.phoneNo)) {
       setFormData((prevFormData) => ({ ...prevFormData, isError: true }));
+      toast.dismiss(toastId.current);
+      toast.warn("Invalid Phone Number");
       return;
     }
     try {
-      const response = await api.post("/user/createUser", {
-        email: formData.email,
-        password: formData.password,
-        phoneNo: formData.phoneNo,
-        userType,
-      },{ 
-        withCredentials :true,
-        });
+      const response = await api.post(
+        "/user/createUser",
+        {
+          email: formData.email,
+          password: formData.password,
+          phoneNo: formData.phoneNo,
+          userType,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       if (response.data.response) {
         console.log(response.data);
+        toast.success(`Sign Up Successful as ${userType}`);
         router.replace("/");
       } else {
         console.log("Invalid response");
+        toast.warn("Invalid Credentials");
       }
     } catch (error) {
-      console.error(error);
+      console.error("error yaha h" + error);
     }
   };
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       {FormData.isError && (
         <div className="text-red-500">Enter Valid Input </div>
       )}
