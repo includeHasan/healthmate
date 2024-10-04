@@ -6,17 +6,18 @@ const {
   getPatientDetails,
   getPatientHistory
 } = require('../controllers/patient.controller');
+const { verifyToken, isPatient } = require('../middlewares/verify.middleware');
 
-router.post('/', createPatient);
-
-
-router.delete('/:id', removePatient);
+router.post('/', verifyToken,isPatient,createPatient);
 
 
-router.get('/:id', getPatientDetails);
+router.delete('/:id', verifyToken,isPatient,removePatient);
 
 
-router.get('/:id/history', getPatientHistory);
+router.get('/:id', verifyToken,isPatient,getPatientDetails);
+
+
+router.get('/:id/history', verifyToken,isPatient,getPatientHistory);
 
 module.exports = router;
 
