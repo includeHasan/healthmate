@@ -123,5 +123,14 @@ let verifyOtpAndChangePassword = async (req, res) => {
   }
 };
 
+const allUsers=(req,res)=>{
+  try {
+    const data=prisma.User.findAll();
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    res.status(500).json({success:false,error})
+  }
+}
 
-module.exports = { allUsers, createUser, loginUser, getUser, forgetPassword, verifyOtpAndChangePassword, logout };
+
+module.exports = { allUsers, createUser, loginUser, getUser, verifyOtpAndChangePassword, logout };
