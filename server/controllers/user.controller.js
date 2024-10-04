@@ -37,7 +37,7 @@ let loginUser = async (req, res) => {
 };
 
 let createUser = async (req, res) => {
-  const { email, password, phoneNo } = req.body;
+  const { email, password, phoneNo,userType } = req.body;
   try {
     // Check if the user already exists by email or phoneNo
     const existingUser = await prisma.user.findFirst({
@@ -58,7 +58,7 @@ let createUser = async (req, res) => {
 
     // Create the user
     const newUser = await prisma.user.create({
-      data: { email, phoneNo, password: hashedPassword }
+      data: { email, phoneNo, password: hashedPassword ,userType }
     });
 
     res.status(200).json({ success: true, user: newUser });
