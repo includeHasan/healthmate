@@ -1,5 +1,4 @@
 "use client";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
@@ -16,10 +15,6 @@ const LoginForm = () => {
     try {
       const response = await api.post("/user/loginUser", loginState, {
         withCredentials: true,
-        headers: {
-          "Access-Control-Expose-Headers":
-            "Authorization, Content-Type, Date, ETag, Vary",
-        },
       });
       if (response.data) {
         loginState.email = "";
