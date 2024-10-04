@@ -31,8 +31,6 @@ app.use(cors({
 }));
 
 
-// Allow preflight requests for all routes
-app.options('*', cors());
 //https://supreme-waffle-wr79766qx69vcg4vr-3000.app.github.dev/
 app.use(session({
   secret: process.env.JWT_SECRET,
