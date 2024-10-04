@@ -7,9 +7,9 @@ import SideImg from "@/components/AuthComponents/SideImg";
 
 const SignUp = () => {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen flex-col md:flex-row">
       <SideImg />
-      <div className="w-1/2 bg-white flex flex-col justify-center items-center p-8">
+      <div className="w-full bg-white flex flex-col justify-center items-center p-8">
         <div className="w-full max-w-md">
           <h2 className="text-2xl font-semibold mb-4">
             Signup for a Patient Account

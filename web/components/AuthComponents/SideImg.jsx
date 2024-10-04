@@ -27,7 +27,7 @@ const SideImg = () => {
   }, [slides.length]);
 
   return (
-    <div className="w-1/2 bg-blue-600 text-white flex flex-col justify-center items-center p-8">
+    <div className="w-full bg-blue-600 text-white flex flex-col justify-center items-center p-8">
       <div className="text-3xl font-bold mb-4">HealthHub</div>
       <Image
         src={slides[currentIndex].src}
@@ -35,6 +35,7 @@ const SideImg = () => {
         className="w-64 h-64 rounded-full object-cover"
         width={256} 
         height={256}
+        priority
       />
       <h2 className="text-2xl font-semibold mb-2">
         {slides[currentIndex].title}

@@ -7,8 +7,8 @@ import Link from "next/link";
 
 export default function Login() {
   return (
-    <div className="flex min-h-screen">
-      <div className="w-1/2 bg-white flex flex-col justify-center items-center p-8">
+    <div className="flex min-h-screen flex-col md:flex-row">
+      <div className="w-full bg-white flex flex-col justify-center items-center p-8 md:p-12">
         <div className="w-full max-w-md">
           <h2 className="text-2xl font-semibold mb-4">Login to your account</h2>
           <p className="mb-6 text-gray-600">

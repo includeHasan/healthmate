@@ -1,6 +1,7 @@
 
 import Image from "next/image";
 import Footer from "./Footer";
+import ImageSlider from "./ImageSlider";
 
 
   
@@ -23,7 +24,7 @@ import Footer from "./Footer";
       </div>
     </main>
       <section className="bg-blue-500 text-white py-16 mt-16">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center">
+        <div className="max-w-6xl mx-auto px-4 lg:max-h-48 sm:max-h-full flex flex-col md:flex-row items-center">
           <div className="flex-1 text-center md:text-left">
             <h2 className="text-3xl font-semibold">Book Appointment</h2>
             <p className="text-xl mt-2">With 100+ Trusted Doctors</p>
@@ -34,12 +35,8 @@ import Footer from "./Footer";
               Login
             </button>
           </div>
-          <div className="flex-1 mt-8 md:mt-0">
-            <Image
-              src="https://placehold.co/300x300"
-              alt="Doctor pointing"
-              className="w-full h-auto"
-            />
+          <div className="flex place-items-baseline sm:inline content-end">
+          <Image src={'/doctor_b.png'} width={100} height={100} unoptimized className="w-fit h-full lg:relative md:relative sm:inline  lg:pb-32"/>
           </div>
         </div>
       </section>
