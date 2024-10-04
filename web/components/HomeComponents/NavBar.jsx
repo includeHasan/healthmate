@@ -18,7 +18,8 @@ const NavBar = () => {
 
   useEffect(() => {
     
-   
+    if(document.cookie)
+      setLoggedin(!loggedin);
   },[loggedin])
 
   return (
