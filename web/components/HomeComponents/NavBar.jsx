@@ -18,8 +18,7 @@ const NavBar = () => {
 
   useEffect(() => {
     
-    if(document.cookie.match(/token=([^;]*)/))
-      setLoggedin(!loggedin);
+   
   },[loggedin])
 
   return (
