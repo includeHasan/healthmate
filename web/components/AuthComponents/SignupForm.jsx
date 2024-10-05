@@ -14,9 +14,9 @@ export const SignupForm = () => {
     email: "",
     password: "",
     phoneNo: "",
-    isError: false,
   });
   const toastId = useRef(null);
+  const ref = useRef({emailRef: null ,passwordRef: null , phoneNoRef: null});
 
   const validatePhoneNumber = (number) => {
     const phoneRegex =
@@ -28,7 +28,6 @@ export const SignupForm = () => {
     e.preventDefault();
     toastId.current = toast.info("Please wait!! Loading...");
     if (!validatePhoneNumber(formData.phoneNo)) {
-      setFormData((prevFormData) => ({ ...prevFormData, isError: true }));
       toast.dismiss(toastId.current);
       toast.warn("Invalid Phone Number");
       return;
@@ -46,15 +45,23 @@ export const SignupForm = () => {
           withCredentials: true,
         }
       );
-      if (response.data.response) {
+      setFormData.email('');
+      if (response.data.success) {
         console.log(response.data);
         toast.success(`Sign Up Successful as ${userType}`);
         router.replace("/");
-      } else {
+      } else{
         console.log("Invalid response");
-        toast.warn("Invalid Credentials");
       }
     } catch (error) {
+      if(error.response && error.response.status === 400){
+        toast.dismiss(toastId.current);
+        toast.error(`${error.response.data.message}`)
+      }
+      else{
+        toast.dismiss(toastId.current);
+        toast.error(`An Error Occured. Please try again.`)
+      } 
       console.error("error yaha h" + error);
     }
   };
@@ -72,9 +79,6 @@ export const SignupForm = () => {
         pauseOnHover
         theme="light"
       />
-      {FormData.isError && (
-        <div className="text-red-500">Enter Valid Input </div>
-      )}
       <div>
         <div className="mb-4">
           <label className="block text-gray-700 mb-2" htmlFor="email">
@@ -90,6 +94,12 @@ export const SignupForm = () => {
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, email: e.target.value }))
               }
+              onKeyDown = {(e) => {
+                if(e.key === "Enter"){
+                  ref.passwordRef.current.focus();
+                }
+              }}
+              ref={ref.emailRef}
             />
           </div>
         </div>
@@ -103,10 +113,16 @@ export const SignupForm = () => {
               type="password"
               id="password"
               placeholder="Enter your password"
+              ref={passwordRef}
               value={formData.password}
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, password: e.target.value }))
               }
+              onKeyDown = {(e) => {
+                if(e.key === "Enter"){
+                  ref.phoneNoRef.current.focus();
+                }
+              }}
             />
           </div>
         </div>
@@ -120,10 +136,16 @@ export const SignupForm = () => {
               type="tel"
               id="phone"
               placeholder="Enter your phone number"
+              ref={ref.phoneNoRef}
               value={formData.phoneNo}
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, phoneNo: e.target.value }))
               }
+              onKeyDown = {(e) => {
+                if(e.key === "Enter"){
+                  SubmitFormHandler(new Event('submit'));
+                }
+              }}
             />
             <i className="fas fa-phone absolute right-3 top-3 text-gray-400"></i>
           </div>
