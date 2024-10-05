@@ -20,8 +20,10 @@ const LoginForm = () => {
         withCredentials: true,
       });
       if (response.data) {
-        loginState.email = "";
-        loginState.password = "";
+        setLoginState({email:'',password:''});
+        const cookie=response.headers.get('Set-Cookie');
+        console.log(cookie);
+        
         router.replace("/");
       } else {
         console.log("Invalid credentials");
@@ -33,7 +35,7 @@ const LoginForm = () => {
 
   return (
     <div className="space-y-4">
-      {/* <ToastContainer
+      <ToastContainer
         position="top-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -44,7 +46,7 @@ const LoginForm = () => {
         draggable
         pauseOnHover
         theme="light"
-      /> */}
+      />
       <div>
         <label className="block text-gray-700" htmlFor="email">
           Email

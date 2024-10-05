@@ -3,10 +3,10 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 
-const NavBar = () => {
+const NavBar = ({loggedIn}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
-  const [loggedin ,setLoggedin] =useState(false);
+  const [loggedin ,setLoggedin] =useState(loggedIn);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -78,9 +78,8 @@ const NavBar = () => {
                 <Link href={"/signup?userType=patient"}>Sign up as Patient</Link>
                 </li>
               </ul>
-              <Link href={"/doctor/verify"}>Verify</Link>
             </div>
-          </div>) : <div> Hello User  <Link href={"/doctor/verify"}>Verify</Link> </div>}
+          </div>) : (<div> Hello User  <Link href={"/doctor/verify"}>Verify</Link> </div>)}
           <button
             className="md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 place-items-center py-2.5 text-center inline-flex "
             onClick={handleToggle}
@@ -116,16 +115,6 @@ const NavBar = () => {
             </Link>
           </li>
         </ul>
-        {!loggedin ? (<div className="py-2">
-          <ul>
-            <li className="block px-4 py-2 hover:bg-gray-100">
-                Login
-            </li>
-            <li className="block px-4 py-2 hover:bg-gray-100">
-                Create Account
-            </li>
-          </ul>
-        </div>) : <div>profile </div>}
       </div>
     </div>
   );
