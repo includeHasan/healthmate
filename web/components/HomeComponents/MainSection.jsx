@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const MainSection = () => {
   return (
-    <section className="bg-blue-600 text-white py-20 px-10">
+    <section className="bg-blue-600 text-white py-8 px-10 shadow-md">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
         <div className="md:w-1/2 relative">
           <h1 className="text-4xl font-bold mb-4">

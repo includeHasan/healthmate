@@ -79,7 +79,8 @@ const NavBar = ({loggedIn}) => {
                 </li>
               </ul>
             </div>
-          </div>) : (<div> Hello User  <Link href={"/doctor/verify"}>Verify</Link> </div>)}
+          </div>) : (<div> Hello User  <Link href={"/doctor/verify"}>Verify</Link> </div>)
+          }
           <button
             className="md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 place-items-center py-2.5 text-center inline-flex "
             onClick={handleToggle}
