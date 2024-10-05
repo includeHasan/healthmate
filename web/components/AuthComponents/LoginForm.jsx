@@ -10,7 +10,8 @@ const LoginForm = () => {
   const router = useRouter();
   const [loginState, setLoginState] = useState({ email: "", password: "" });
   const toastId = useRef(null);
-  const ref = useRef({ emailRef: null, passwordRef: null });
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const submitLogin = async (e) => {
     e.preventDefault();
 
@@ -32,7 +33,7 @@ const LoginForm = () => {
 
   return (
     <div className="space-y-4">
-      <ToastContainer
+      {/* <ToastContainer
         position="top-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -43,7 +44,7 @@ const LoginForm = () => {
         draggable
         pauseOnHover
         theme="light"
-      />
+      /> */}
       <div>
         <label className="block text-gray-700" htmlFor="email">
           Email
@@ -59,10 +60,10 @@ const LoginForm = () => {
             onChange={(e) =>
               setLoginState((prev) => ({ ...prev, email: e.target.value }))
             }
-            ref={ref.emailRef}
+            ref={emailRef}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                ref.passwordRef.current.focus();
+                passwordRef.current.focus();
               }
             }}
           />
@@ -83,7 +84,7 @@ const LoginForm = () => {
             onChange={(e) =>
               setLoginState((prev) => ({ ...prev, password: e.target.value }))
             }
-            ref={ref.passwordRef}
+            ref={passwordRef}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 submitLogin(new Event("submit"));

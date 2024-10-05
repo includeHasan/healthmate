@@ -16,7 +16,9 @@ export const SignupForm = () => {
     phoneNo: "",
   });
   const toastId = useRef(null);
-  const ref = useRef({emailRef: null ,passwordRef: null , phoneNoRef: null});
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const phoneNoRef = useRef(null);
 
   const validatePhoneNumber = (number) => {
     const phoneRegex =
@@ -45,7 +47,7 @@ export const SignupForm = () => {
           withCredentials: true,
         }
       );
-      setFormData.email('');
+      setFormData({email:'', password: '', phoneNo: ''});
       if (response.data.success) {
         console.log(response.data);
         toast.success(`Sign Up Successful as ${userType}`);
@@ -96,10 +98,10 @@ export const SignupForm = () => {
               }
               onKeyDown = {(e) => {
                 if(e.key === "Enter"){
-                  ref.passwordRef.current.focus();
+                  passwordRef.current.focus();
                 }
               }}
-              ref={ref.emailRef}
+              ref={emailRef}
             />
           </div>
         </div>
@@ -120,7 +122,7 @@ export const SignupForm = () => {
               }
               onKeyDown = {(e) => {
                 if(e.key === "Enter"){
-                  ref.phoneNoRef.current.focus();
+                  phoneNoRef.current.focus();
                 }
               }}
             />
@@ -136,7 +138,7 @@ export const SignupForm = () => {
               type="tel"
               id="phone"
               placeholder="Enter your phone number"
-              ref={ref.phoneNoRef}
+              ref={phoneNoRef}
               value={formData.phoneNo}
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, phoneNo: e.target.value }))

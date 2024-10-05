@@ -19,8 +19,8 @@ export default function Login() {
           <ExternalLogin/>
           <div className="mt-6 text-center text-gray-600">
             Dont have an account yet?{" "}
-            <Link href="/doctor/signup" className="text-blue-600">
-              Signup
+            <Link href="/signup?userType=patient" className="text-blue-600">
+              Signup as Patient
             </Link>
           </div>
         </div>

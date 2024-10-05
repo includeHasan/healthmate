@@ -23,7 +23,7 @@ const SignUp = () => {
           <ExternalLogin />
           <div className="mt-6 text-center">
             <span className="text-gray-700">Already have an account? </span>
-            <a href="/patient/login" className="text-blue-600">
+            <a href="/login" className="text-blue-600">
               Login
             </a>
           </div>
