@@ -40,7 +40,6 @@ import ImageSlider from "./ImageSlider";
           </div>
         </div>
       </section>
-      <Footer/>
     </div>
   );
 };

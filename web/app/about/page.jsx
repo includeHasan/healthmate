@@ -1,20 +1,24 @@
+import Footer from '@/components/HomeComponents/Footer';
 import NavBar from '@/components/HomeComponents/NavBar';
+import Image from 'next/image';
 import React from 'react';
 
 const AboutUs = () => {
   return (
     <>
-    <NavBar/>
     <div className="px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
       {/* About Us Section */}
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-between lg:space-x-8">
           {/* Image */}
           <div className="lg:w-1/2 w-full mb-8 lg:mb-0">
-            <img
-              src="/doctors-image.jpg" // Replace with the correct path
+            <Image
+              src="/group_doctor3.png" // Replace with the correct path
               alt="Doctors"
-              className="w-full h-auto rounded-lg shadow-lg object-cover"
+              height={10}
+              width={10}
+              className="w-full h-auto rounded-lg shadow-lg object-cover p-4"
+              unoptimized
               />
           </div>
 

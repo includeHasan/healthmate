@@ -49,7 +49,7 @@ const NavBar = ({loggedIn}) => {
               ABOUT
             </Link>
             <Link
-              href="#"
+              href="/contact"
               className="text-gray-700 hover:text-blue-600 nav-link"
             >
               CONTACT
