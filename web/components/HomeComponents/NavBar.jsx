@@ -77,6 +77,7 @@ const NavBar = ({loggedIn}) => {
                 <li className={`block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 ${isSignUpOptionOpen? 'cursor-pointer' : "cursor-default"}` }>
                 <Link href={"/signup?userType=patient"}>Sign up as Patient</Link>
                 </li>
+                <Link href={"/doctor/verify"}>Verify</Link>
               </ul>
             </div>
           </div>) : (<div> Hello User  <Link href={"/doctor/verify"}>Verify</Link> </div>)
@@ -96,22 +97,22 @@ const NavBar = ({loggedIn}) => {
       >
         <ul className="py-2 text-sm text-gray-700">
           <li>
-            <Link href="#" className="block px-4 py-2 hover:bg-gray-100">
+            <Link href="/" className="block px-4 py-2 hover:bg-gray-100">
               HOME
             </Link>
           </li>
           <li>
-            <Link href="#" className="block px-4 py-2 hover:bg-gray-100">
+            <Link href="/allDoctors" className="block px-4 py-2 hover:bg-gray-100">
               ALL DOCTORS
             </Link>
           </li>
           <li>
-            <Link href="#" className="block px-4 py-2 hover:bg-gray-100">
+            <Link href="/about" className="block px-4 py-2 hover:bg-gray-100">
               ABOUT
             </Link>
           </li>
           <li>
-            <Link href="#" className="block px-4 py-2 hover:bg-gray-100">
+            <Link href="/contact" className="block px-4 py-2 hover:bg-gray-100">
               CONTACT
             </Link>
           </li>

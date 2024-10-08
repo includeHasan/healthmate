@@ -5,6 +5,7 @@ import { useState, useRef } from "react";
 
 import { api } from "@/utils/api";
 import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = () => {
   const router = useRouter();
