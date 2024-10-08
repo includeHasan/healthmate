@@ -31,19 +31,19 @@ const NavBar = ({loggedIn}) => {
           </div>
           <nav className="hidden md:flex lg:flex md:space-x-6 lg:space-x-6">
             <Link
-              href="#"
+              href="/"
               className="text-gray-700 hover:text-blue-600 nav-link active"
             >
               HOME
             </Link>
             <Link
-              href="#"
+              href="/allDoctors"
               className="text-gray-700 hover:text-blue-600 nav-link"
             >
               ALL DOCTORS
             </Link>
             <Link
-              href="#"
+              href="/about"
               className="text-gray-700 hover:text-blue-600 nav-link"
             >
               ABOUT
