@@ -7,7 +7,7 @@ const SpecialityHome = () => {
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-4">Find by Speciality</h2>
             <p className="text-gray-600 mb-10"> Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.</p>
-            <div className="flex justify-center space-x-6">
+            <div className="lg:flex justify-center space-x-6 md:grid md:grid-cols-3">
               <div className="text-center">
                 <Image src={'/generalPhyisian.png'} alt="General physician" className="w-20 h-20 mx-auto mb-2" width={10} height={10} unoptimized />
                 <p>General physician</p>
