@@ -9,9 +9,10 @@ const DoctorCard = ({ doctor }) => {
         className="w-full h-40 object-cover rounded-md mb-4"
         width={4}
         height={4}
+        unoptimized
       />
       <div className="text-green-500 text-sm font-semibold mb-2">
-        {doctor.available ? "Available" : "Not Available"}
+        {doctor.availability ? "Available" : "Not Available"}
       </div>
       <h2 className="text-lg font-semibold">{doctor.name}</h2>
       <p className="text-gray-500">{doctor.speciality}</p>

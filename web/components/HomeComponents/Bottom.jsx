@@ -1,7 +1,5 @@
 
 import Image from "next/image";
-import Footer from "./Footer";
-import ImageSlider from "./ImageSlider";
 
 
   
@@ -36,7 +34,7 @@ import ImageSlider from "./ImageSlider";
             </button>
           </div>
           <div className="flex place-items-baseline sm:inline content-end">
-          <Image src={'/doctor_b.png'} width={100} height={100} unoptimized className="w-fit h-full lg:relative md:relative sm:inline  lg:pb-32"/>
+          <Image src={'/doctor_b.png'} alt="doctor" width={100} height={100} unoptimized className="w-fit h-full lg:relative md:relative sm:inline  lg:pb-32"/>
           </div>
         </div>
       </section>
