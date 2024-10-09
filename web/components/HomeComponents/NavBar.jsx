@@ -3,10 +3,10 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 
-const NavBar = ({loggedIn}) => {
+const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
-  const [loggedin ,setLoggedin] =useState(loggedIn);
+  const [loggedin ,setLoggedin] =useState(false);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
