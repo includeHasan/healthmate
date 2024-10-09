@@ -9,7 +9,7 @@ const generateToken = (id) => {
 
 const sendTokenAsCookie = (res, token) => {
   res.cookie('token', token, {
-    httpOnly: true,
+   
     secure: process.env.NODE_ENV === 'production',
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Important for cross-origin
     maxAge: 30 * 24 * 60 * 60 * 1000,
