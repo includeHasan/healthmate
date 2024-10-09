@@ -8,15 +8,16 @@ const generateToken = (id) => {
 };
 
 const sendTokenAsCookie = (res, token) => {
-  res.cookie('token', token, {
-   
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Important for cross-origin
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-   domain: process.env.NODE_ENV === 'production' ? 'healthhmate.vercel.app' : 'localhost',
-    path: '/'
-  });
-};
+  const sendTokenAsCookie = (res, token) => {
+    res.cookie('token', token, {
+      httpOnly: false,  
+      secure: false,    
+      sameSite: 'lax',  // Controls cross-origin cookie sharing
+      maxAge: 30 * 24 * 60 * 60 * 1000,  // 30 days
+      domain: process.env.NODE_ENV === 'production' ? 'healthhmate.vercel.app' : 'localhost',
+      path: '/'
+    });
+  };
 
 const decodeToken = (token) => {
   return jwt.verify(token, process.env.JWT_SECRET);
