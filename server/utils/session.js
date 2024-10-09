@@ -22,7 +22,7 @@ const sessionConfig = {
     httpOnly: true,
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     maxAge: 24 * 60 * 60 * 1000, // 1 day
-    domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : 'localhost'
+    domain: process.env.NODE_ENV === 'production' ? 'healthhmate.vercel.app' : 'localhost'
   },
   name: 'sessionId'
 };
