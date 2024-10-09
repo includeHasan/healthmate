@@ -255,6 +255,9 @@ const CreateDoctor = () => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        withCredentials: true
+        ,
+
       });
       console.log(response.data); // Handle success response
       alert('Doctor created successfully!');
