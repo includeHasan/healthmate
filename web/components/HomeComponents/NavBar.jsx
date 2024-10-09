@@ -53,7 +53,7 @@ const NavBar = ({loggedIn}) => {
               CONTACT
             </Link>
           </nav>
-          (<div className="flex space-x-4">
+          <div className="flex space-x-4">
             <button className="bg-blue-600 text-white px-4 py-2 rounded-full sm:hidden md:inline-block lg:inline-block">
               <Link href={"/login"}>Login</Link>
             </button>
@@ -78,7 +78,7 @@ const NavBar = ({loggedIn}) => {
                 <Link href={"/doctor/verify"}>Verify</Link>
               </ul>
             </div>
-          </div>)
+          </div>
           <button
             className="md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 place-items-center py-2.5 text-center inline-flex "
             onClick={handleToggle}
