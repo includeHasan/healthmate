@@ -10,6 +10,7 @@ var dotenv = require('dotenv');
 var patientRouter = require('./routes/patient.route');
 var doctersRouter = require('./routes/docters.route');
 var session = require('express-session');
+const sessionConfig = require('./utils/session');
 
 
 
@@ -32,12 +33,7 @@ app.use(cors({
 
 
 //https://supreme-waffle-wr79766qx69vcg4vr-3000.app.github.dev/
-app.use(session({
-  secret: process.env.JWT_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false } // Set secure to true if using HTTPS
-}));
+app.use(session(sessionConfig));
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes

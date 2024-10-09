@@ -7,25 +7,23 @@ const generateToken = (id) => {
   });
 };
 
-// Decode JWT token (verify signature)
+const sendTokenAsCookie = (res, token) => {
+  res.cookie('token', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Important for cross-origin
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+   domain: process.env.NODE_ENV === 'production' ? 'healthhmate.vercel.app' : 'localhost',
+    path: '/'
+  });
+};
+
 const decodeToken = (token) => {
   return jwt.verify(token, process.env.JWT_SECRET);
 };
 
-// Send token as a cookie instead of header
-const sendTokenAsCookie = (res, token) => {
-  res.cookie('token', token, {
-    httpOnly: true, // More secure; prevents JavaScript access to the token
-    secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-    sameSite: 'Strict', // Helps prevent CSRF attacks
-    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-  });
-};
-
-// Extract token from cookies
 const fetchTokenFromCookies = (req, res) => {
   const token = req.cookies.token;
-  
   if (!token) {
     return res.status(401).json({ success: false, error: "No token provided" });
   }
