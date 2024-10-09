@@ -20,7 +20,7 @@ const NavBar = ({loggedIn}) => {
     
     if(document.cookie)
       setLoggedin(!loggedin);
-  },[loggedin])
+  },[])
 
   return (
     <div>
