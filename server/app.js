@@ -31,7 +31,10 @@ app.use(cors({
   credentials: true
 }));
 
-
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 //https://supreme-waffle-wr79766qx69vcg4vr-3000.app.github.dev/
 app.use(session(sessionConfig));
 
