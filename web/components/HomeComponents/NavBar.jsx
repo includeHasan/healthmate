@@ -3,10 +3,10 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 
-const NavBar = ({loggedIn}) => {
+const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
-  const [loggedin ,setLoggedin] =useState(loggedIn);
+  const [loggedin ,setLoggedin] =useState(false);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -17,10 +17,8 @@ const NavBar = ({loggedIn}) => {
   };
 
   useEffect(() => {
-    
-    if(document.cookie)
-      setLoggedin(!loggedin);
-  },[loggedin])
+  
+  },[])
 
   return (
     <div>
@@ -55,7 +53,7 @@ const NavBar = ({loggedIn}) => {
               CONTACT
             </Link>
           </nav>
-          {!loggedin ? (<div className="flex space-x-4">
+          <div className="flex space-x-4">
             <button className="bg-blue-600 text-white px-4 py-2 rounded-full sm:hidden md:inline-block lg:inline-block">
               <Link href={"/login"}>Login</Link>
             </button>
@@ -80,8 +78,7 @@ const NavBar = ({loggedIn}) => {
                 <Link href={"/doctor/verify"}>Verify</Link>
               </ul>
             </div>
-          </div>) : (<div> Hello User  <Link href={"/doctor/verify"}>Verify</Link> </div>)
-          }
+          </div>
           <button
             className="md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 place-items-center py-2.5 text-center inline-flex "
             onClick={handleToggle}

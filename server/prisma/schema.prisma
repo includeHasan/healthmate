@@ -192,7 +192,16 @@ model SurgicalHistory {
   description String  @map("surgical_history_description") @db.Text
   patient     Patient @relation(fields: [patientId], references: [id])
 }
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
+  @@map("sessions") 
+}
 
 enum Status {
   pending

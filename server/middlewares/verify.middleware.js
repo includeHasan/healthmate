@@ -3,26 +3,27 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const { decodeToken, fetchTokenFromCookies } = require('../utils/auth');
 
-// Verifies the token from cookies and attaches the user details to req.user
 const verifyToken = async (req, res, next) => {
   try {
-    // Fetch token from cookies
-    const token = fetchTokenFromCookies(req, res);
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ success: false, error: "Token not found" }); // Return to stop execution
+    }
+
     const decoded = decodeToken(token);
 
-    // Fetch user details based on the decoded ID
     const user = await prisma.user.findUnique({
       where: { id: decoded.id }
     });
 
     if (!user) {
-      return res.status(401).json({ success: false, error: "Invalid token, user not found" });
+      return res.status(401).json({ success: false, error: "Invalid token, user not found" }); // Return to stop execution
     }
 
     req.user = user; // Attach user to request
-    next();
+    next(); // Call next middleware or route handler
   } catch (error) {
-    return res.status(401).json({ success: false, error: "Invalid token" });
+    return res.status(401).json({ success: false, error: "Invalid token" }); // Return to stop execution
   }
 };
 
