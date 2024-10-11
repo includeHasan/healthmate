@@ -26,16 +26,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({
-  origin: 'https://healthhmate.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: 'https://healthhmate.vercel.app',  // Allow your frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allowed HTTP methods
+  credentials: true,  // Allow cookies to be sent
+  allowedHeaders: ['Content-Type', 'Authorization'],  // Allow these headers
 }));
 app.options('*', cors());
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  next();
-});
+
 //https://supreme-waffle-wr79766qx69vcg4vr-3000.app.github.dev/
 app.use(session(sessionConfig));
 
