@@ -7,7 +7,6 @@ const generateToken = (id) => {
   });
 };
 
-
   const sendTokenAsCookie = (res, token) => {
     return res.cookie('token', token);
   };

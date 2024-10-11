@@ -5,9 +5,9 @@ const Footer = () => {
   return (
     <footer className="bg-white py-10 mt-16">
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="w-80">
+        <div >
           <h3 className="text-xl font-semibold">HealthMate</h3>
-          <p className="text-gray-600 mt-4 text-justify">
+          <p className="text-gray-600 mt-4 ">
           Connecting patients and doctors for a seamless healthcare experience. Empowering patients to manage their health while enabling healthcare professionals to deliver quality care.
           </p>
         </div>

@@ -19,6 +19,7 @@ const MainSection = () => {
               width={3}
               height={3}
               className="w-10 h-10 rounded-full border-2 border-white -ml-2"
+              unoptimized
             />
             <Image
               src="/doctor2.jpg"
@@ -26,6 +27,7 @@ const MainSection = () => {
               width={3}
               height={3}
               className="w-10 h-10 rounded-full border-2 border-white -ml-2"
+              unoptimized
             />
             <Image
               src="/doctor3.jpg"
@@ -33,6 +35,7 @@ const MainSection = () => {
                width={3}
               height={3}
               className="w-10 h-10 rounded-full border-2 border-white -ml-2"
+              unoptimized
             />
             <p className="ml-4">
               Simply browse through our extensive list of trusted doctors,

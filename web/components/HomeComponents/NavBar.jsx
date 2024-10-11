@@ -63,10 +63,8 @@ const NavBar = () => {
             >
               Create account
             </button>
-            <div
-              className={`fixed z-10 w-44 text-base top-16 mt-1 right-6 bg-white rounded divide-y divide-gray-800 shadow-md shadow-gray-700  ${
-                isSignUpOptionOpen ? "opacity-100" : "opacity-0"
-              }`}
+            {isSignUpOptionOpen && <div
+              className={`fixed z-10 w-44 text-base top-16 mt-1 right-6 bg-white rounded divide-y divide-gray-800 shadow-md shadow-gray-700 opacity-100`}
             >
               <ul className="py-2">
                 <li className={`block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 ${isSignUpOptionOpen? 'cursor-pointer' : "cursor-default" } `} >
@@ -77,7 +75,7 @@ const NavBar = () => {
                 </li>
                 <Link href={"/doctor/verify"}>Verify</Link>
               </ul>
-            </div>
+            </div>}
           </div>
           <button
             className="md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 place-items-center py-2.5 text-center inline-flex "
@@ -87,10 +85,8 @@ const NavBar = () => {
           </button>
         </div>
       </header>
-      <div
-        className={`md:hidden lg:hidden absolute w-full bg-white z-10 divide-y divide-gray-500 shadow-md overflow-y-auto ${
-          isOpen ? "opacity-100" : "opacity-0"
-        }`}
+      {isOpen && <div
+        className={`md:hidden lg:hidden absolute w-full bg-white z-10 divide-y divide-gray-500 shadow-md overflow-y-auto opacity-100`}
       >
         <ul className="py-2 text-sm text-gray-700">
           <li>
@@ -114,7 +110,7 @@ const NavBar = () => {
             </Link>
           </li>
         </ul>
-      </div>
+      </div>}
     </div>
   );
 };
