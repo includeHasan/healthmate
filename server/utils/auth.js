@@ -7,16 +7,9 @@ const generateToken = (id) => {
   });
 };
 
-const sendTokenAsCookie = (res, token) => {
+
   const sendTokenAsCookie = (res, token) => {
-    res.cookie('token', token, {
-      httpOnly: false,  
-      secure: false,    
-      sameSite: 'lax',  // Controls cross-origin cookie sharing
-      maxAge: 30 * 24 * 60 * 60 * 1000,  // 30 days
-      domain: process.env.NODE_ENV === 'production' ? 'healthhmate.vercel.app' : 'localhost',
-      path: '/'
-    });
+    return res.cookie('token', token);
   };
 
 const decodeToken = (token) => {
