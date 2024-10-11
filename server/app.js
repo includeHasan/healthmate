@@ -29,7 +29,7 @@ app.use(cors({
   origin: 'https://healthhmate.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
-  allowedHeaders: 'Content-Type,Authorization',
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.options('*', cors());
 app.use((req, res, next) => {
