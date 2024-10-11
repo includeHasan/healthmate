@@ -123,12 +123,15 @@ let verifyOtpAndChangePassword = async (req, res) => {
   }
 };
 
-const allUsers=(req,res)=>{
+const allUsers=async(req,res)=>{
   try {
-    const data=prisma.User.findAll();
+   
+    const data=await prisma.User.findMany();
+
     res.status(200).json({ success: true, data });
   } catch (error) {
     res.status(500).json({success:false,error})
+    
   }
 }
 
