@@ -29,7 +29,7 @@ app.use(cors({
   origin: ['https://healthhmate.vercel.app',"http://localhost:3000"],  // Allow your frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allowed HTTP methods
   credentials: true,  // Allow cookies to be sent
-  allowedHeaders: ['Content-Type', 'Authorization'],  // Allow these headers
+  allowedHeaders: ['Content-Type', 'Authorization','Access-Control-Allow-Origin'],  // Allow these headers
 }));
 app.options('*', cors());
 

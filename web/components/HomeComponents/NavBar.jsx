@@ -6,8 +6,7 @@ import { FaBars } from "react-icons/fa";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
-  const [loggedin ,setLoggedin] =useState(false);
-
+  
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
