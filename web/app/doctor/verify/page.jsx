@@ -146,8 +146,7 @@ const CreateDoctor = () => {
             className="block w-full p-2 pl-6 text-md font-semibold text-gray-700 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
             onChange={(e) => {
               const specialities = e.target.value
-                .split(",")
-                .map((s) => s.trim());
+                .split(",");
               setSpeciality(specialities);
             }}
             required
