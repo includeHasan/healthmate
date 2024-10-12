@@ -1,22 +1,14 @@
-import { Stack } from 'expo-router';
-
 import { Container } from 'components/Container';
-import {View,Text,TextInput}
+import { View, TextInput } from 'react-native';
 
-
-const explore=()=> {
+const Explore = () => {
   return (
-    <>
-    
-      <Container>
-       <View>
-          <TextInput
-          
-          />
-       </View>
-      
-      </Container>
-    </>
+    <Container>
+      <View>
+        <TextInput />
+      </View>
+    </Container>
   );
-}
-export default explore
+};
+
+export default Explore;
