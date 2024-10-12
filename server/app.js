@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({
-  origin: 'https://healthhmate.vercel.app',  // Allow your frontend
+  origin: ['https://healthhmate.vercel.app',"http://localhost:3000"],  // Allow your frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allowed HTTP methods
   credentials: true,  // Allow cookies to be sent
   allowedHeaders: ['Content-Type', 'Authorization'],  // Allow these headers
