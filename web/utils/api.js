@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://healthmate-backend.vercel.app",
+  baseURL: "http://localhost:5000",
   withCredentials: true,  
 });
+// "https://healthmate-backend.vercel.app"

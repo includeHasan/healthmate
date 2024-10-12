@@ -13,6 +13,7 @@ const LoginForm = () => {
   const toastId = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  
   const submitLogin = async (e) => {
     e.preventDefault();
     toastId.current = toast.info("Loading...");
