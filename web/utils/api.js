@@ -1,14 +1,13 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://healthmate-backend.vercel.app',
+  baseURL:'https://healthmate-backend.vercel.app',
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin':true,
   },
   withCredentials: true,
 });
-
+//  'https://healthmate-backend.vercel.app'
 // Request interceptor
 api.interceptors.request.use(
   (config) => {

@@ -27,19 +27,27 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 const AllowedOrigins = ["https://healthhmate.vercel.app", "http://localhost:3000"];
 
-app.use((req, res, next) => {
+app.all('*',(req, res, next) => {
   const origin = req.headers.origin;
-  if (AllowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
+  const theOrigin = (AllowedOrigins.indexOf(origin) >= 0)? origin : AllowedOrigins[0];
+  res.header("Access-Control-Allow-Origin",theOrigin);
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
   res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+  console.log("hit middle ware");
+  
   next();
-});
+})
 
 app.use(cors({
-  origin: 'https://healthhmate.vercel.app',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, Postman)
+    if (!origin || AllowedOrigins.indexOf(origin) !== -1) {
+      callback(null, origin);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
