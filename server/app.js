@@ -10,7 +10,7 @@ var dotenv = require('dotenv');
 var patientRouter = require('./routes/patient.route');
 var doctersRouter = require('./routes/docters.route');
 var session = require('express-session');
-
+const sessionConfig = require('./utils/session');
 
 
 
@@ -57,18 +57,6 @@ app.use(cors({
 app.options('*', cors());
 
 
-// Session configuration
-const sessionConfig = {
-  secret: 'your-secret-key', // Replace with any string for prototype
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: false, // Set to true if using https
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000, // 1 day
-  },
-  name: 'sessionId'
-};
 
 app.use(session(sessionConfig));
 // const limiter = rateLimit({

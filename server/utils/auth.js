@@ -34,10 +34,16 @@ const fetchTokenFromCookies = (req) => {
   return req.cookies.token;
 };
 
+const fetchAndDecodeToken = (req) => {
+  const token = fetchTokenFromCookies(req);
+  return token ? decodeToken(token) : null;
+};  
+
 
 module.exports = {
   generateToken,
   decodeToken,
   sendTokenAsCookie,
-  fetchTokenFromCookies
+  fetchTokenFromCookies,
+  fetchAndDecodeToken
 };

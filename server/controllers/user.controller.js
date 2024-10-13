@@ -9,11 +9,12 @@ var prisma = new PrismaClient();
 
 let loginUser = async (req, res) => {
   const { email, password } = req.body;
+  const user={}
   try {
     // Find user by email
     const user = await prisma.user.findFirst({
       where: { email }
-    });
+      });
 
     if (!user) {
       return res.status(400).json({ success: false, error: "User not found" });

@@ -19,7 +19,8 @@ const s3Client = new S3Client({
 
 const uploadToS3 = async (file, doctorId, fileType) => {
     try {
-        const key = `doctors/${doctorId}/${fileType}/${file.originalname}`;
+        baseUrl="https://jacgmamtcipvliqalaiz.supabase.co/storage/v1/object/public/documents/"
+        const key = `${doctorId}/${fileType}/${file.originalname}`;
         const params = {
             Bucket: process.env.AWS_BUCKET_NAME,
             Key: key,
@@ -28,7 +29,8 @@ const uploadToS3 = async (file, doctorId, fileType) => {
         };
         const command = new PutObjectCommand(params);
         await s3Client.send(command);
-        return key;
+        const wholeUrl=baseUrl+key
+        return wholeUrl;
     } catch (error) {
         console.error('Error uploading to S3:', error);
         throw new Error('Failed to upload file to storage');

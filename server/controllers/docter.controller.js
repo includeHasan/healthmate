@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const { uploadProfilePicture, uploadDocument } = require('../middlewares/multer.middleware');
 
-// Create a new doctor profile
+
 const createDoctor = async (req, res) => {
     try {
         const { firstName, lastName, licenseNo, speciality, experienceYrs } = req.body;
@@ -12,16 +12,32 @@ const createDoctor = async (req, res) => {
         let documentUrls = [];
 
         // Upload profile picture if present
-        if (req.files && req.files.profilePic) {
-            profilePicUrl = await uploadProfilePicture(req.files.profilePic[0], userId);
+        if (req.files && req.files.profilePic && req.files.profilePic.length > 0) {
+            try {
+                profilePicUrl = await uploadProfilePicture(req.files.profilePic[0], userId);
+            } catch (error) {
+                console.error('Error uploading profile picture:', error.message);
+                return res.status(500).json({ success: false, error: 'Error uploading profile picture' });
+            }
         }
 
         // Upload documents if present
-        if (req.files && req.files.document) {
-            for (let i = 0; i < req.files.document.length; i++) {
-                const documentUrl = await uploadDocument(req.files.document[i], userId);
-                documentUrls.push(documentUrl);
+        if (req.files && req.files.document && req.files.document.length > 0) {
+            try {
+                for (let i = 0; i < req.files.document.length; i++) {
+                    const documentUrl = await uploadDocument(req.files.document[i], userId);
+                    documentUrls.push(documentUrl);
+                }
+            } catch (error) {
+                console.error('Error uploading documents:', error.message);
+                return res.status(500).json({ success: false, error: 'Error uploading documents' });
             }
+        }
+
+        // Validate and parse experience years
+        const parsedExperienceYrs = parseInt(experienceYrs, 10);
+        if (isNaN(parsedExperienceYrs)) {
+            return res.status(400).json({ success: false, error: 'Invalid experience years' });
         }
 
         // Create doctor profile
@@ -32,19 +48,20 @@ const createDoctor = async (req, res) => {
                 lastName,
                 licenseNo,
                 speciality,
-                experienceYrs: parseInt(experienceYrs),
+                experienceYrs: parsedExperienceYrs,
                 profilePic: profilePicUrl,
-                documentUrl: documentUrls
+                documentUrl: documentUrls // Ensure this is correctly typed in your Prisma schema as an array
             }
         });
 
         console.log("Doctor created successfully:", doctor);
         res.status(200).json({ success: true, message: "Doctor created successfully", doctor });
     } catch (error) {
-        console.error("Error creating doctor:", error);
+        console.error("Error creating doctor:", error.message);
         res.status(400).json({ success: false, error: error.message });
     }
 };
+
 
 // Fetch doctor details for logged-in user
 const getDoctorDetails = async (req, res) => {
