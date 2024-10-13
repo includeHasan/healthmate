@@ -2,8 +2,7 @@
 import { useRouter } from "next/navigation";
 
 import { useState, useRef } from "react";
-
-import { api } from "@/utils/api";
+import api from "@/utils/api";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
