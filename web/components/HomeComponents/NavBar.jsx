@@ -7,8 +7,8 @@ import { FaBars } from "react-icons/fa";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
-  const [userType,setUserType] = useState('');
-  const {isLoggedIn , logout} = useAuth();
+  const [userType, setUserType] = useState("");
+  const { isLoggedIn, logout } = useAuth();
   const dropdownRef = useRef(null);
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -19,8 +19,11 @@ const NavBar = () => {
   };
   useEffect(() => {
     const data = localStorage.getItem("userData");
-    const userType = data ? JSON.parse(data)?.userType : "patient"; // default value
-    setUserType(userType);
+    if (data === null) setUserType("patient");
+    else {
+      const type = data ? JSON.parse(data)?.userType : "patient"; // default value
+      setUserType(type);
+    }
   }, []);
 
   // Close signup dropdown if clicked outside
@@ -98,15 +101,17 @@ const NavBar = () => {
                     Create account
                   </button>
                   {isSignUpOptionOpen && (
-                    <div
-                      className="absolute z-10 w-44 text-base mt-1 right-0 bg-white rounded divide-y divide-gray-300 shadow-md"
-                    >
+                    <div className="absolute z-10 w-44 text-base mt-1 right-0 bg-white rounded divide-y divide-gray-300 shadow-md">
                       <ul className="py-2">
                         <li className="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 cursor-pointer">
-                          <Link href={"/signup?userType=doctor"}>Sign up as Doctor</Link>
+                          <Link href={"/signup?userType=doctor"}>
+                            Sign up as Doctor
+                          </Link>
                         </li>
                         <li className="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 cursor-pointer">
-                          <Link href={"/signup?userType=patient"}>Sign up as Patient</Link>
+                          <Link href={"/signup?userType=patient"}>
+                            Sign up as Patient
+                          </Link>
                         </li>
                         <li className="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 cursor-pointer">
                           <Link href={"/doctor/verify"}>Verify</Link>
@@ -130,9 +135,7 @@ const NavBar = () => {
         </div>
       </header>
       {isOpen && (
-        <div
-          className="md:hidden lg:hidden absolute w-full bg-white z-10 divide-y divide-gray-500 shadow-md overflow-y-auto"
-        >
+        <div className="md:hidden lg:hidden absolute w-full bg-white z-10 divide-y divide-gray-500 shadow-md overflow-y-auto">
           <ul className="py-2 text-sm text-gray-700">
             <li>
               <Link href="/" className="block px-4 py-2 hover:bg-gray-100">
@@ -140,7 +143,10 @@ const NavBar = () => {
               </Link>
             </li>
             <li>
-              <Link href="/allDoctors" className="block px-4 py-2 hover:bg-gray-100">
+              <Link
+                href="/allDoctors"
+                className="block px-4 py-2 hover:bg-gray-100"
+              >
                 ALL DOCTORS
               </Link>
             </li>
@@ -150,19 +156,28 @@ const NavBar = () => {
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="block px-4 py-2 hover:bg-gray-100">
+              <Link
+                href="/contact"
+                className="block px-4 py-2 hover:bg-gray-100"
+              >
                 CONTACT
               </Link>
             </li>
             {isLoggedIn ? (
               <>
                 <li>
-                  <Link href={`/${userType}/dashboard`} className="block px-4 py-2 hover:bg-gray-100">
+                  <Link
+                    href={`/${userType}/dashboard`}
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
                     Dashboard
                   </Link>
                 </li>
                 <li>
-                  <Link href="/patient/addMember" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link
+                    href="/patient/addMember"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
                     Add Member
                   </Link>
                 </li>
@@ -170,17 +185,26 @@ const NavBar = () => {
             ) : (
               <>
                 <li>
-                  <Link href="/login" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link
+                    href="/login"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
                     Login
                   </Link>
                 </li>
                 <li>
-                  <Link href="/signup?userType=doctor" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link
+                    href="/signup?userType=doctor"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
                     Sign up as Doctor
                   </Link>
                 </li>
                 <li>
-                  <Link href="/signup?userType=patient" className="block px-4 py-2 hover:bg-gray-100">
+                  <Link
+                    href="/signup?userType=patient"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
                     Sign up as Patient
                   </Link>
                 </li>
