@@ -33,7 +33,12 @@ app.use(cors({
 }));
 
 // Handle preflight requests
-app.options('*', cors());
+app.options('*', cors({
+  origin: ['https://healthhmate.vercel.app',`http://localhost:3000`],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}));
 
 
 // Session configuration
