@@ -10,7 +10,7 @@ var dotenv = require('dotenv');
 var patientRouter = require('./routes/patient.route');
 var doctersRouter = require('./routes/docters.route');
 var session = require('express-session');
-const sessionConfig = require('./utils/session');
+
 
 
 
