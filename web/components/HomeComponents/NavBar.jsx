@@ -7,7 +7,8 @@ import { FaBars } from "react-icons/fa";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
-  const {isLoggedIn , logout,userType} = useAuth();
+  const [userType,setUserType] = useState('');
+  const {isLoggedIn , logout} = useAuth();
   const dropdownRef = useRef(null);
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -16,7 +17,15 @@ const NavBar = () => {
   const handleSignupOptionToggle = () => {
     setIsSignUpOptionOpen(!isSignUpOptionOpen);
   };
-
+  useEffect(() => {
+    // This code will only run on the client side
+    const data = localStorage.getItem("userData");
+    if (data) {
+      const parsedData = JSON.parse(data).userType;
+      setUserType(parsedData); // Set the user type state
+    }
+    
+  }, []);
 
   // Close signup dropdown if clicked outside
   useEffect(() => {
