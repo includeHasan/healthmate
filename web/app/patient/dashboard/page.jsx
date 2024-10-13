@@ -184,8 +184,10 @@ const PatientDashBoard = () => {
             <h2 className="text-lg font-semibold mb-4">Latest results</h2>
             <div className="flex justify-center items-center h-40">
               <Image
-                src="https://placehold.co/200x100"
+                src=""
                 alt="Graph showing latest results"
+                width={10}
+                height={10}
               />
             </div>
           </div>

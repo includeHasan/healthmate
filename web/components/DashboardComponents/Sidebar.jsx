@@ -11,15 +11,20 @@ const Sidebar = () => {
     <aside className="w-full md:w-1/5 bg-white p-4 shadow-lg ">
     <div className="flex flex-col items-center border-b-2 border-blue-700 pb-4 text-blue-800">
       <Image
-        src="https://placehold.co/100x100"
+        src=""
         alt="Doctor's profile picture"
-     i   className="rounded-full mb-4"
+        className="rounded-full mb-4"
+        width={10}
+        height={10}
       />
       <h2 className="text-lg font-bold">Dr. Marttin Deo</h2>
       <p className="text-sm ">MBBS, FCPS - MD (Medicine), MCPS</p>
     </div>
     <nav className="mt-8 text-lg font-semibold">
       <ul>
+        <li  className="flex items-center p-2 text-gray-700">
+          Add Family Member
+        </li>
         <li className="flex items-center p-2 text-gray-700">
           <BiSolidDashboard className="text-2xl mr-2" /> Dashboard
         </li>

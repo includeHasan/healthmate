@@ -1,12 +1,13 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FaBars } from "react-icons/fa";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
-  
+  const dropdownRef = useRef(null);
+
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -15,9 +16,18 @@ const NavBar = () => {
     setIsSignUpOptionOpen(!isSignUpOptionOpen);
   };
 
+  // Close signup dropdown if clicked outside
   useEffect(() => {
-  
-  },[])
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsSignUpOptionOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div>
@@ -52,64 +62,102 @@ const NavBar = () => {
               CONTACT
             </Link>
           </nav>
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 items-center">
             <button className="bg-blue-600 text-white px-4 py-2 rounded-full sm:hidden md:inline-block lg:inline-block">
               <Link href={"/login"}>Login</Link>
             </button>
+            <div className="relative" ref={dropdownRef}>
+              <button
+                className="bg-blue-600 text-white px-4 py-2 rounded-full sm:hidden lg:inline-block md:inline-block"
+                onClick={handleSignupOptionToggle}
+              >
+                Create account
+              </button>
+              {isSignUpOptionOpen && (
+                <div
+                  className="absolute z-10 w-44 text-base mt-1 right-0 bg-white rounded divide-y divide-gray-300 shadow-md"
+                >
+                  <ul className="py-2">
+                    <li className="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 cursor-pointer">
+                      <Link href={"/signup?userType=doctor"}>Sign up as Doctor</Link>
+                    </li>
+                    <li className="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 cursor-pointer">
+                      <Link href={"/signup?userType=patient"}>Sign up as Patient</Link>
+                    </li>
+                    <li className="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 cursor-pointer">
+                      <Link href={"/doctor/verify"}>Verify</Link>
+                    </li>
+                    <li className="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 cursor-pointer">
+                      <Link href={"/patient/addMember"}>Add Patient</Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
             <button
-              className="bg-blue-600 text-white px-4 py-2 rounded-full sm:hidden lg:inline-block md:inline-block"
-              onClick={handleSignupOptionToggle}
+              className="md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 place-items-center py-2.5 text-center inline-flex"
+              onClick={handleToggle}
             >
-              Create account
+              <FaBars className="ms-3 text-white" />
             </button>
-            {isSignUpOptionOpen && <div
-              className={`fixed z-10 w-44 text-base top-16 mt-1 right-6 bg-white rounded divide-y divide-gray-800 shadow-md shadow-gray-700 opacity-100`}
-            >
-              <ul className="py-2">
-                <li className={`block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 ${isSignUpOptionOpen? 'cursor-pointer' : "cursor-default" } `} >
-                  <Link href={"/signup?userType=doctor"}>Sign up as Doctor</Link>
-                </li>
-                <li className={`block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100 ${isSignUpOptionOpen? 'cursor-pointer' : "cursor-default"}` }>
-                <Link href={"/signup?userType=patient"}>Sign up as Patient</Link>
-                </li>
-                <Link href={"/doctor/verify"}>Verify</Link>
-              </ul>
-            </div>}
           </div>
-          <button
-            className="md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 place-items-center py-2.5 text-center inline-flex "
-            onClick={handleToggle}
-          >
-            <FaBars className=" ms-3 text-white" />
-          </button>
         </div>
       </header>
-      {isOpen && <div
-        className={`md:hidden lg:hidden absolute w-full bg-white z-10 divide-y divide-gray-500 shadow-md overflow-y-auto opacity-100`}
-      >
-        <ul className="py-2 text-sm text-gray-700">
-          <li>
-            <Link href="/" className="block px-4 py-2 hover:bg-gray-100">
-              HOME
-            </Link>
-          </li>
-          <li>
-            <Link href="/allDoctors" className="block px-4 py-2 hover:bg-gray-100">
-              ALL DOCTORS
-            </Link>
-          </li>
-          <li>
-            <Link href="/about" className="block px-4 py-2 hover:bg-gray-100">
-              ABOUT
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact" className="block px-4 py-2 hover:bg-gray-100">
-              CONTACT
-            </Link>
-          </li>
-        </ul>
-      </div>}
+      {isOpen && (
+        <div
+          className="md:hidden lg:hidden absolute w-full bg-white z-10 divide-y divide-gray-500 shadow-md overflow-y-auto"
+        >
+          <ul className="py-2 text-sm text-gray-700">
+            <li>
+              <Link href="/" className="block px-4 py-2 hover:bg-gray-100">
+                HOME
+              </Link>
+            </li>
+            <li>
+              <Link href="/allDoctors" className="block px-4 py-2 hover:bg-gray-100">
+                ALL DOCTORS
+              </Link>
+            </li>
+            <li>
+              <Link href="/about" className="block px-4 py-2 hover:bg-gray-100">
+                ABOUT
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="block px-4 py-2 hover:bg-gray-100">
+                CONTACT
+              </Link>
+            </li>
+            <hr/>
+            <li>
+              <Link href="/login" className="block px-4 py-2 hover:bg-gray-100">
+                Login
+              </Link>
+            </li>
+            <hr />
+            <li>
+              <Link href="/signup?userType=doctor" className="block px-4 py-2 hover:bg-gray-100">
+                Sign up as Doctor
+              </Link>
+            </li>
+            <li>
+              <Link href="/signup?userType=patient" className="block px-4 py-2 hover:bg-gray-100">
+                Sign up as Patient
+              </Link>
+            </li>
+            <li>
+              <Link href="/doctor/verify" className="block px-4 py-2 hover:bg-gray-100">
+                Verify
+              </Link>
+            </li>
+            <li>
+              <Link href="/patient/addMember" className="block px-4 py-2 hover:bg-gray-100">
+                Add Patient
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
