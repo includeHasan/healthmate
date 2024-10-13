@@ -26,24 +26,33 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({
-  origin: ['https://healthhmate.vercel.app',"http://localhost:3000"],  // Allow your frontend
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allowed HTTP methods
-  credentials: true,  // Allow cookies to be sent
-  preflightContinue:true,
-  allowedHeaders: ['Content-Type', 'Authorization','Access-Control-Allow-Origin'],  // Allow these headers
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
-app.options('*', cors());
 
-//https://supreme-waffle-wr79766qx69vcg4vr-3000.app.github.dev/
+// Session configuration
+const sessionConfig = {
+  secret: 'your-secret-key', // Replace with any string for prototype
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // Set to true if using https
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+  },
+  name: 'sessionId'
+};
+
 app.use(session(sessionConfig));
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 100, // limit each IP to 100 requests per windowMs
+//   message: "Too many requests from this IP, please try again in an hour!"
+// });
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-  message: "Too many requests from this IP, please try again in an hour!"
-});
-
-app.use(limiter);
+// app.use(limiter);
 
 app.use('/user', userRouter);
 app.use('/docter', doctorRouter);
