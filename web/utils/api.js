@@ -4,6 +4,7 @@ const api = axios.create({
   baseURL: 'https://healthmate-backend.vercel.app',
   headers: {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin':true,
   },
   withCredentials: true,
 });
