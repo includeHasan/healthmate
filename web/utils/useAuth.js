@@ -6,7 +6,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userType,setUserType] = useState('');
+
 
   // Check if the user is logged in when the component mounts
   useEffect(() => {
@@ -15,20 +15,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
 
-  useEffect(() => {
-    // This code will only run on the client side
-    const data = localStorage.getItem("userData");
-    if (data) {
-      const parsedData = JSON.parse(data).userType;
-      setUserType(parsedData); // Set the user type state
-    }
-    
-  }, []);
-  // Function to log in
-  const login = (userData) => {
-    localStorage.setItem('userData', JSON.stringify(userData));
-    setIsLoggedIn(true);
-  };
+  
 
   // Function to log out
   const logout = () => {
@@ -37,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout , userType }}>
+    <AuthContext.Provider value={{ isLoggedIn, logout  }}>
       {children}
     </AuthContext.Provider>
   );
