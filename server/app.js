@@ -25,6 +25,19 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+const AllowedOrigins = ["https://healthhmate.vercel.app", "http://localhost:3000"];
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (AllowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+  next();
+});
+
 app.use(cors({
   origin: ['https://healthhmate.vercel.app',`http://localhost:3000`],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
