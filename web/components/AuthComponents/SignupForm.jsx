@@ -1,6 +1,7 @@
 "use client";
-import { api } from "@/utils/api";
 
+
+import api from "@/utils/api";
 import { useSearchParams, useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
@@ -43,10 +44,9 @@ export const SignupForm = () => {
           phoneNo: formData.phoneNo,
           userType,
         },
-        {
-          withCredentials: true,
-        }
       );
+      console.log(formData,userType);
+      
       setFormData({email:'', password: '', phoneNo: ''});
       if (response.data.success) {
         console.log(response.data);

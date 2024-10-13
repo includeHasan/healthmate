@@ -7,31 +7,30 @@ const api = axios.create({
   },
   withCredentials: true,
 });
+export default api;
 //  'https://healthmate-backend.vercel.app'
 // Request interceptor
-api.interceptors.request.use(
-  (config) => {
-    // You can add logic here to include tokens in the header if needed
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   config.headers['Authorization'] = `Bearer ${token}`;
-    // }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+// api.interceptors.request.use(
+//   (config) => {
+//     // You can add logic here to include tokens in the header if needed
+//     // const token = localStorage.getItem('token');
+//     // if (token) {
+//     //   config.headers['Authorization'] = `Bearer ${token}`;
+//     // }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 
-// Response interceptor
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    // Global error handling
-    console.error('API Error:', error);
-    // You can add more sophisticated error handling here
-    return Promise.reject(error);
-  }
-);
-
-export default api;
+// // Response interceptor
+// api.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     // Global error handling
+//     console.error('API Error:', error);
+//     // You can add more sophisticated error handling here
+//     return Promise.reject(error);
+//   }
+// );

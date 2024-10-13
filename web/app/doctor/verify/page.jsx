@@ -1,5 +1,6 @@
 "use client";
-import { api } from "@/utils/api";
+
+import api from "@/utils/api";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
@@ -39,7 +40,6 @@ const CreateDoctor = () => {
     documents.forEach((doc) => {
       formData.append("document", doc);
     });
-    console.log(documents);
 
     try {
       // making the request to backend to create doctor
@@ -53,7 +53,7 @@ const CreateDoctor = () => {
       alert("Doctor created successfully!");
       router.replace("/doctor/dashboard");
     } catch (error) {
-      console.log("Error creating doctor:", error.response?.data.error);
+      console.log("Error creating doctor:", error.response?.data?.error);
       alert("Error creating doctor: " + error.response?.data?.error);
     }
   };
