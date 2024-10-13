@@ -18,9 +18,7 @@ const LoginForm = () => {
     e.preventDefault();
     toastId.current = toast.info("Loading...");
     try {
-      const response = await api.post("/user/loginUser", loginState, {
-        withCredentials: true,
-      });
+      const response = await api.post("/user/loginUser", loginState);
       setLoginState({ email: "", password: "" });
       if (response.data) {
         toast.dismiss(toastId);
