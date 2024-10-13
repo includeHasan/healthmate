@@ -18,13 +18,9 @@ const NavBar = () => {
     setIsSignUpOptionOpen(!isSignUpOptionOpen);
   };
   useEffect(() => {
-    // This code will only run on the client side
     const data = localStorage.getItem("userData");
-    if (data) {
-      const parsedData = JSON.parse(data).userType || "patient";
-      setUserType(parsedData); // Set the user type state
-    }
-    
+    const userType = data ? JSON.parse(data)?.userType : "patient"; // default value
+    setUserType(userType);
   }, []);
 
   // Close signup dropdown if clicked outside
