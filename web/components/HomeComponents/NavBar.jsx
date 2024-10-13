@@ -21,7 +21,7 @@ const NavBar = () => {
     // This code will only run on the client side
     const data = localStorage.getItem("userData");
     if (data) {
-      const parsedData = JSON.parse(data).userType;
+      const parsedData = JSON.parse(data).userType || "patient";
       setUserType(parsedData); // Set the user type state
     }
     
