@@ -1,6 +1,5 @@
 "use client";
 import api from "@/utils/api";
-import { useAuth } from "@/utils/useAuth";
 import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
 import { toast, ToastContainer } from "react-toastify";
@@ -8,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = () => {
   const router = useRouter();
-  const {login} = useAuth();
   const [loginState, setLoginState] = useState({ email: "", password: "" });
   const toastId = useRef(null);
   const emailRef = useRef(null);
@@ -26,7 +24,7 @@ const LoginForm = () => {
           `Login Successfully with ${response.data.user.email} Email`
         );
          // Update authentication state by calling the login function
-         login(response.data.user);     
+         localStorage.setItem('userData', JSON.stringify(data.user));    
 
         router.replace("/");
       } else {

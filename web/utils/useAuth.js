@@ -16,11 +16,6 @@ export const AuthProvider = ({ children }) => {
 
 
   
-  // Function to log in
-  const login = (userData) => {
-    localStorage.setItem('userData', JSON.stringify(userData));
-    setIsLoggedIn(true);
-  };
 
   // Function to log out
   const logout = () => {
@@ -29,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout  }}>
+    <AuthContext.Provider value={{ isLoggedIn, logout  }}>
       {children}
     </AuthContext.Provider>
   );

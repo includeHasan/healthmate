@@ -1,5 +1,5 @@
 "use client";
-import { useAuth } from "@/utils/useAuth";
+
 import Link from "next/link";
 import React, { useEffect, useState, useRef } from "react";
 import { FaBars } from "react-icons/fa";
@@ -7,8 +7,8 @@ import { FaBars } from "react-icons/fa";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
-  const { isLoggedIn, logout } = useAuth();
   const dropdownRef = useRef(null);
+  const [isLoggedIn,setIsLoggedIn] = useState(false);
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -158,7 +158,7 @@ const NavBar = () => {
               <>
                 <li>
                   <Link
-                    href={`/${userType}/dashboard`}
+                    href={`/patient/dashboard`}
                     className="block px-4 py-2 hover:bg-gray-100"
                   >
                     Dashboard
