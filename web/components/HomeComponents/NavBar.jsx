@@ -7,7 +7,6 @@ import { FaBars } from "react-icons/fa";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
-  const [userType, setUserType] = useState("");
   const { isLoggedIn, logout } = useAuth();
   const dropdownRef = useRef(null);
   const handleToggle = () => {
@@ -17,14 +16,6 @@ const NavBar = () => {
   const handleSignupOptionToggle = () => {
     setIsSignUpOptionOpen(!isSignUpOptionOpen);
   };
-  useEffect(() => {
-    const data = localStorage.getItem("userData");
-    if (data === null) setUserType("patient");
-    else {
-      const type = data ? JSON.parse(data)?.userType : "patient"; // default value
-      setUserType(type);
-    }
-  }, []);
 
   // Close signup dropdown if clicked outside
   useEffect(() => {
@@ -76,10 +67,10 @@ const NavBar = () => {
             {isLoggedIn ? (
               <>
                 <Link
-                  href={`/${userType}/dashboard`}
+                  href={`/patient/dashboard`}
                   className="bg-blue-600 text-white px-4 py-2 rounded-full hidden md:inline-block lg:inline-block"
                 >
-                  Dashboard
+                  patient Dashboard
                 </Link>
                 <Link
                   href="/patient/addMember"
