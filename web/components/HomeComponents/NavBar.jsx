@@ -1,14 +1,15 @@
 "use client";
-
 import Link from "next/link";
-import React, { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState, useRef, use } from "react";
 import { FaBars } from "react-icons/fa";
 
 const NavBar = () => {
+  const router=useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const [isLoggedIn,setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -16,8 +17,21 @@ const NavBar = () => {
   const handleSignupOptionToggle = () => {
     setIsSignUpOptionOpen(!isSignUpOptionOpen);
   };
-
   // Close signup dropdown if clicked outside
+
+useEffect(() => {
+  const user = localStorage.getItem("user");
+  if(user){
+    setIsLoggedIn(true);
+    console.log("dekha");
+    
+  }
+
+  return ( ) => {
+    setIsLoggedIn(false);
+  }
+},[]);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
