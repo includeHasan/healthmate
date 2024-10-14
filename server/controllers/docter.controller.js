@@ -4,8 +4,10 @@ const { uploadProfilePicture, uploadDocument } = require('../middlewares/multer.
 
 
 const createDoctor = async (req, res) => {
+   
     try {
         const { firstName, lastName, licenseNo, speciality, experienceYrs } = req.body;
+       
         const userId = req.user.id;  // Access the decoded user id from the middleware
 
         let profilePicUrl = '';
@@ -47,7 +49,7 @@ const createDoctor = async (req, res) => {
                 firstName,
                 lastName,
                 licenseNo,
-                speciality,
+                speciality: Array.isArray(speciality) ? speciality : [speciality],
                 experienceYrs: parsedExperienceYrs,
                 profilePic: profilePicUrl,
                 documentUrl: documentUrls // Ensure this is correctly typed in your Prisma schema as an array

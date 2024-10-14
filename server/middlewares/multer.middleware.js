@@ -12,8 +12,8 @@ const s3Client = new S3Client({
     region: process.env.AWS_REGION,
     endpoint: process.env.AWS_ENDPOINT,
     credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        accessKeyId:"ede7298afe033cd3585c22c2fef093e8",
+        secretAccessKey: "1b9f2932995f8c77667150d5d551c318abb535788608c0151300d527f964d3d3",
     }
 });
 
