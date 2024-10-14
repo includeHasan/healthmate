@@ -103,17 +103,6 @@ exports.bookAppointment = async (req, res) => {
   }
 };
 
-    // Update slot availability to 'no'
-    await prisma.doctorAvailability.update({
-      where: { id: doctorAvailabilityId },
-      data: { isAvailable: 'no' },
-    });
-
-    res.status(201).json({ success: true, data: appointment });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-};
 
 // Update appointment status (cancel or complete)
 exports.updateAppointmentStatus = async (req, res) => {
