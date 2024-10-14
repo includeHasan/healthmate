@@ -27,7 +27,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-const AllowedOrigins = ["https://healthhmate.vercel.app", "http://localhost:5500"];
+const AllowedOrigins = ["https://healthhmate.vercel.app", "http://localhost:3000"];
 
 app.all('*',(req, res, next) => {
   const origin = req.headers.origin;
