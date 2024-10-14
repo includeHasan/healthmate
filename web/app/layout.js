@@ -3,8 +3,6 @@ import "./globals.css";
 import NavBar from "@/components/HomeComponents/NavBar";
 import Footer from "@/components/HomeComponents/Footer";
 import ChatBox from "@/components/ChatBox";
-import AuthContext from "@/utils/AuthContext";
-import useAuth from "@/utils/useAuth";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,18 +21,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const { user, loading, error, logout } = useAuth();
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthContext.Provider value={{user,logout}}>
           <NavBar />
           {children}
           <ChatBox/>
           <Footer />
-        </AuthContext.Provider>
       </body>
     </html>
   );
