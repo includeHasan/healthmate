@@ -1,34 +1,44 @@
-'use client';
-import { createContext, useContext, useEffect, useState } from 'react';
+'use client'
+// hooks/useAuth.js
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-// Create a context to manage the authentication state
-const AuthContext = createContext();
+const useAuth = () => {
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await axios.get('/user/getUser'); // Adjust the API route as needed
+                if (res.success) {
+                  setUser(res.data.user);
+                }
+                else{
+                  setError("Some Thing went wrong !!");
+                }
+            } catch (err) {
+                console.error(err);
+                setError(err.response?.data?.message);
+            } finally {
+                setLoading(false);
+            }
+        };
 
+        fetchUser();
+    }, []);
 
-  // Check if the user is logged in when the component mounts
-  useEffect(() => {
-    const userData = localStorage.getItem('userData');
-    setIsLoggedIn(!!userData); // Set to true if userData is not null or undefined
-  }, []);
+    const logout = async () => {
+        try {
+            await axios.get('/user/logout');
+            setUser(null);
+        } catch (err) {
+            console.error("Logout error:", err);
+        }
+    };
 
-
-  
-
-  // Function to log out
-  const logout = () => {
-    localStorage.removeItem('userData');
-    setIsLoggedIn(false);
-  };
-
-  return (
-    <AuthContext.Provider value={{ isLoggedIn, logout  }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    return { user, loading, error, logout };
 };
 
-// Custom hook to use the authentication context
-export const useAuth = () => useContext(AuthContext);
+export default useAuth;

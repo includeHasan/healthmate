@@ -1,14 +1,16 @@
 "use client";
 
+import { useAuthContext } from "@/utils/AuthContext";
 import Link from "next/link";
 import React, { useEffect, useState, useRef } from "react";
 import { FaBars } from "react-icons/fa";
 
 const NavBar = () => {
+  const {user} =useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
   const [isSignUpOptionOpen, setIsSignUpOptionOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const [isLoggedIn,setIsLoggedIn] = useState(false);
+  const isLoggedIn = !!user;
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
