@@ -1,4 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
+
 const prisma = new PrismaClient();
 
 // Create a new patient profile
@@ -74,4 +75,22 @@ const getPatientHistory = async (req, res) => {
     }
 };
 
-module.exports = { createPatient, removePatient, getPatientDetails, getPatientHistory };
+const allPatients = async (req, res) => {
+    console.log("hello")
+    try{
+        const userId = req.user.id;
+        console.log(userId)
+         const patients=await prisma.patient.findMany({
+              where:{
+                userId:userId
+              }
+         });
+
+            res.status(200).json({ success: true, message: "Patients fetch successfully", patients });
+    }
+    catch(error){
+        res.status(500).json({ success: false, error: error.message });
+}
+}
+
+module.exports = { createPatient, removePatient, getPatientDetails, getPatientHistory, allPatients }
