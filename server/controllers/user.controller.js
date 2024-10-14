@@ -11,7 +11,7 @@ let loginUser = async (req, res) => {
   const { email, password } = req.body;
   const user={}
   try {
-    // Find user by email
+    
     const user = await prisma.user.findFirst({
       where: { email }
       });

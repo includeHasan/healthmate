@@ -6,9 +6,11 @@ var logger = require('morgan');
 var rateLimit = require('express-rate-limit');
 var userRouter = require('./routes/user.route');
 var doctorRouter = require('./routes/docter.route');
-var dotenv = require('dotenv');
 var patientRouter = require('./routes/patient.route');
 var doctersRouter = require('./routes/docters.route');
+var appointmentRouter=require('./routes/appointment.route')
+var dotenv = require('dotenv');
+
 var session = require('express-session');
 const sessionConfig = require('./utils/session');
 
@@ -59,18 +61,19 @@ app.options('*', cors());
 
 
 app.use(session(sessionConfig));
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000, // 15 minutes
-//   max: 100, // limit each IP to 100 requests per windowMs
-//   message: "Too many requests from this IP, please try again in an hour!"
-// });
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: "Too many requests from this IP, please try again in an hour!"
+});
 
-// app.use(limiter);
+app.use(limiter);
 
 app.use('/user', userRouter);
 app.use('/docter', doctorRouter);
 app.use('/patient', patientRouter);
 app.use('/docters', doctersRouter);
+app.use('/appointment',appointmentRouter)
 
 app.get('/', (req, res) => {
   res.send('server is running');

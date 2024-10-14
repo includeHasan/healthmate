@@ -69,6 +69,8 @@ model AppointmentSchedule {
   endTime               DateTime           @map("end_time")
   mode                  Mode
   workLocationId        String             @map("work_location_id")
+   maxAppointments   Int                 @default(10)  // Maximum number of appointments
+  currentAppointments Int               @default(0) 
   status                Status
   doctorAvailability    DoctorAvailability @relation(fields: [doctorAvailabilityId], references: [id])
   patient               Patient            @relation(fields: [patientId], references: [id])
