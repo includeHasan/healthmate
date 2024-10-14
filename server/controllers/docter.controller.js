@@ -4,8 +4,10 @@ const { uploadProfilePicture, uploadDocument } = require('../middlewares/multer.
 
 
 const createDoctor = async (req, res) => {
+    console.log("chaljaaa")
     try {
         const { firstName, lastName, licenseNo, speciality, experienceYrs } = req.body;
+        console.log(req.body);
         const userId = req.user.id;  // Access the decoded user id from the middleware
 
         let profilePicUrl = '';
