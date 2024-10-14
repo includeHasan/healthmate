@@ -23,9 +23,6 @@ const LoginForm = () => {
         toast.success(
           `Login Successfully with ${response.data.user.email} Email`
         );
-         // Update authentication state by calling the login function
-         localStorage.setItem('userData', JSON.stringify(data.user));    
-
         router.replace("/");
       } else {
         console.log("Invalid credentials");
