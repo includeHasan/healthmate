@@ -26,10 +26,8 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-          <NavBar />
           {children}
           <ChatBox/>
-          <Footer />
       </body>
     </html>
   );

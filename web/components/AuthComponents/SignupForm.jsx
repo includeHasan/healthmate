@@ -51,7 +51,7 @@ export const SignupForm = () => {
       if (response.data.success) {
         console.log(response.data);
         toast.success(`Sign Up Successful as ${userType}`);
-        router.replace("/");
+        router.push(`/${response.data.user.userType}/dashboard`);
       } else{
         console.log("Invalid response");
       }

@@ -4,9 +4,13 @@ import LoginForm from "@/components/AuthComponents/LoginForm";
 
 import ExternalLogin from "@/components/AuthComponents/ExternalLogin";
 import Link from "next/link";
+import NavBar from "@/components/HomeComponents/NavBar";
+import Footer from "@/components/HomeComponents/Footer";
 
 export default function Login() {
   return (
+    <>
+    <NavBar/>
     <div className="flex min-h-screen flex-col md:flex-row">
       <div className="w-full bg-white flex flex-col justify-center items-center p-8 md:p-12">
         <div className="w-full max-w-md">
@@ -27,5 +31,7 @@ export default function Login() {
       </div>
       <SideImg/>
     </div>
+    <Footer/>
+    </>
   );
 }

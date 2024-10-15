@@ -1,7 +1,11 @@
+import Footer from '@/components/HomeComponents/Footer';
+import NavBar from '@/components/HomeComponents/NavBar';
 import React from 'react';
 
 const ContactUs = () => {
   return (
+    <>
+    <NavBar/>
     <div className="px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto ">
         <h2 className="text-3xl font-bold text-gray-800 mb-4">CONTACT <span className="text-blue-600">US</span></h2>
@@ -74,6 +78,8 @@ const ContactUs = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 
