@@ -73,40 +73,7 @@ const getPatientHistory = async (req, res) => {
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
-};
-const allPatients = async (req, res) => {
-    console.log("Entering allPatients function");
-    try {
-        const userId = await req.user.id;
-        console.log("User ID:", userId);
 
-        const user = await prisma.user.findUnique({
-            where: { id: userId },
-            include: { patients: true },
-        });
-
-        if (!user) {
-            console.log("User not found");
-            return res.status(404).json({ success: false, message: "User not found" });
-        }
-
-        console.log("User found:", user);
-
-        const patients = user.patients.length > 0 ? user.patients : [];
-        console.log("Patients:", patients);
-
-        return res.status(200).json({
-            success: true,
-            message: "Patients fetched successfulliii",
-            patients
-        });
-    } catch (error) {
-        console.error("Error fetching patients:", error);
-        return res.status(500).json({ success: false, message: "Error fetching patients", error: error.message });
-    } finally {
-        console.log("Exiting allPatients function");
-    }
-};
 
 const allPatientsRelatedToUser = async (req, res) => 
     {
@@ -135,4 +102,4 @@ const allPatientsRelatedToUser = async (req, res) =>
     }
 
 
-module.exports = { createPatient, removePatient, getPatientDetails, getPatientHistory, allPatients,allPatientsRelatedToUser }
+module.exports = { createPatient, removePatient, getPatientDetails, getPatientHistory, allPatients,allPatientsRelatedToUser,getPatients }
