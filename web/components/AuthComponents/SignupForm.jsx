@@ -58,7 +58,7 @@ export const SignupForm = () => {
     } catch (error) {
       if(error.response && error.response.status === 400){
         toast.dismiss(toastId.current);
-        toast.error(`${error.response.data.message}`)
+        toast.error(`${error.response.data.error}`)
       }
       else{
         toast.dismiss(toastId.current);

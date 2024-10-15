@@ -26,11 +26,13 @@ const LoginForm = () => {
         await router.push(`/${response.data.user.userType}/dashboard`);
         localStorage.setItem("user",JSON.stringify(response.data.user));
       } else {
+        toast.dismiss(toastId);
         toast.warn("Invalid credentials")
       }
     } catch (error) {
       console.error(error);
-      toast.error(`${error.response?.data?.message}`)
+      toast.dismiss(toastId);
+      toast.error(`${error.response?.data}`)
     }
   };
 
