@@ -30,8 +30,8 @@ const s3UploadMiddlewareForGemeni = (req, res, next) => {
         }
 
         const timestamp = new Date().getTime(); // Get current timestamp in milliseconds
-        const randomString = crypto.randomBytes(8).toString('hex'); // Generate a random string
-        const fileName = `${timestamp}-${randomString}-${req.file.originalname}`;
+        
+        const fileName = `${timestamp}-${req.file.originalname}`;
 
         const params = {
             Bucket: process.env.AWS_BUCKET_NAME,
