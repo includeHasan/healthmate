@@ -75,25 +75,64 @@ const getPatientHistory = async (req, res) => {
     }
 };
 const allPatients = async (req, res) => {
-    
+    console.log("Entering allPatients function");
     try {
-        const userId = req.user.id;
-        console.log(userId)
-        
+        const userId = await req.user.id;
+        console.log("User ID:", userId);
+
         const user = await prisma.user.findUnique({
             where: { id: userId },
-            include: { patients: true }
+            include: { patients: true },
         });
-        
+
         if (!user) {
+            console.log("User not found");
             return res.status(404).json({ success: false, message: "User not found" });
         }
-        
-        res.status(200).json({ success: true, message: "Patients fetched successfully", patients: user.patients });
-    } catch(error) {
-        console.error("Error fetching patients:", error);
-        res.status(500).json({ success: false, error: error.message });
-    }
-}
 
-module.exports = { createPatient, removePatient, getPatientDetails, getPatientHistory, allPatients }
+        console.log("User found:", user);
+
+        const patients = user.patients.length > 0 ? user.patients : [];
+        console.log("Patients:", patients);
+
+        return res.status(200).json({
+            success: true,
+            message: "Patients fetched successfulliii",
+            patients
+        });
+    } catch (error) {
+        console.error("Error fetching patients:", error);
+        return res.status(500).json({ success: false, message: "Error fetching patients", error: error.message });
+    } finally {
+        console.log("Exiting allPatients function");
+    }
+};
+
+const allPatientsRelatedToUser = async (req, res) => 
+    {
+        console.log("Entering allPatientsRelatedToUser function");
+        try {
+            const userId = req.user.id;
+            const user = await prisma.user.findUnique({
+                where: { id: userId },
+                include: { patients: true },
+            });
+
+            if (!user) {
+                return res.status(404).json({ success: false, message: "User not found" });
+            }
+
+            const patients = user.patients.length > 0 ? user.patients : [];
+
+            return res.status(200).json({
+                success: true,
+                message: "Patients fetched successfully",
+                patients
+            });
+        } catch (error) {
+            return res.status(500).json({ success: false, message: "Error fetching patients", error: error.message });
+        }
+    }
+
+
+module.exports = { createPatient, removePatient, getPatientDetails, getPatientHistory, allPatients,allPatientsRelatedToUser }
