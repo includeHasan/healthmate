@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Doctor</title>
+</head>
+<body>
+    <h1>Create Doctor Profile</h1>
+    <form id="doctorForm">
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+        </div>
+        <div>
+            <label for="licenseNo">License Number:</label>
+            <input type="text" id="licenseNo" name="licenseNo" required>
+        </div>
+        <div>
+            <label for="speciality">Speciality:</label>
+            <input type="text" id="speciality" name="speciality" required>
+        </div>
+        <div>
+            <label for="experienceYrs">Years of Experience:</label>
+            <input type="number" id="experienceYrs" name="experienceYrs" required>
+        </div>
+        <div>
+            <label for="profilePic">Profile Picture:</label>
+            <input type="file" id="profilePic" name="profilePic">
+        </div>
+        <div>
+            <label for="document">Documents (multiple allowed):</label>
+            <input type="file" id="document" name="document" multiple>
+        </div>
+        <div>
+            <button type="submit">Create Doctor</button>
+        </div>
+    </form>
+
+    <script>
+        // Set the JWT token as a cookie
+        document.cookie = "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNjZDcyNzUzLTgzM2EtNDRmZi1iNjMyLWNmMGY1YTM2MmM5NyIsImlhdCI6MTcyODkyMzc5MCwiZXhwIjoxNzMxNTE1NzkwfQ.HNp_LwOyVmvSBF67s9PrKP65kxnZOjFB6VwiZ34L2ao; path=/;";
+
+        document.getElementById('doctorForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Create FormData object to capture form fields and files
+            const formData = new FormData();
+            formData.append('firstName', document.getElementById('firstName').value);
+            formData.append('lastName', document.getElementById('lastName').value);
+            formData.append('licenseNo', document.getElementById('licenseNo').value);
+            formData.append('speciality', document.getElementById('speciality').value);
+            formData.append('experienceYrs', document.getElementById('experienceYrs').value);
+
+            // Append profile picture if it exists
+            const profilePicInput = document.getElementById('profilePic');
+            if (profilePicInput.files.length > 0) {
+                formData.append('profilePic', profilePicInput.files[0]);
+            }
+
+            // Append documents if they exist
+            const documentsInput = document.getElementById('document');
+            for (let i = 0; i < documentsInput.files.length; i++) {
+                formData.append('document', documentsInput.files[i]);
+            }
+
+            try {
+                console.log("formData", formData);
+                const response = await fetch('http://localhost:5000/doctor/createDoctor', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Authorization': `Bearer ${getCookie('token')}`
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert('Doctor created successfully!');
+                    console.log(result);
+                } else {
+                    alert(`Error: ${result.error}`);
+                    console.error(result);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert(`An error occurred while creating the doctor.${error}`);
+            }
+        });
+
+        // Helper function to get the value of a cookie
+        function getCookie(name) {
+            let cookieArr = document.cookie.split(';');
+            for (let i = 0; i < cookieArr.length; i++) {
+                let cookiePair = cookieArr[i].split('=');
+                if (name === cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            return null;
+        }
+    </script>
+</body>
+</html>
