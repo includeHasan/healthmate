@@ -22,9 +22,6 @@ const Sidebar = () => {
     </div>
     <nav className="mt-8 text-lg font-semibold">
       <ul>
-        <li  className="flex items-center p-2 text-gray-700">
-          Add Family Member
-        </li>
         <li className="flex items-center p-2 text-gray-700">
           <BiSolidDashboard className="text-2xl mr-2" /> Dashboard
         </li>
