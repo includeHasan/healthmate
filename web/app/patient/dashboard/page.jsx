@@ -22,6 +22,8 @@ const PatientDashBoard = () => {
       try {
         const response = await api.get("/patient/patients");
         if (response.data.success) {
+          console.log(response.data);
+          
           const patientList = response.data.patient;
           if (patientList && patientList.length > 0) {
             setPatients(patientList);

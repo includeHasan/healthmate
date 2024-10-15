@@ -15,7 +15,7 @@ router.post('/', verifyToken,isPatient,createPatient);
 router.delete('/:id', verifyToken,isPatient,removePatient);
 
 
-router.get('/:id', verifyToken,isPatient,getPatientDetails);
+router.get('/patientId/:id', verifyToken,isPatient,getPatientDetails);
 
 router.get('/patients', verifyToken,isPatient,allPatients);
 

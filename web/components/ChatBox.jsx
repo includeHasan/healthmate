@@ -26,7 +26,7 @@ const ChatBox = () => {
 
     try {
       // Replace with your API endpoint
-      const response = await axios.post('https://your-api-url.com/chat', {
+      const response = await axios.post('/chat', {
         message: inputMessage,
       });
 
