@@ -24,6 +24,7 @@ const LoginForm = () => {
           `Login Successfully with ${response.data.user.email} Email`
         );
         router.replace("/");
+        localStorage.setItem("user",JSON.stringify(response.data.user));
       } else {
         console.log("Invalid credentials");
       }
