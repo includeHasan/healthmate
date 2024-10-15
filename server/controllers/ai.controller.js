@@ -1,7 +1,7 @@
 const { generateResponse, analyzeImage } = require("../utils/ai");
 
 
-export const handleHealthInquiry = async (req, res) => {
+ const handleHealthInquiry = async (req, res) => {
   try {
     const { symptoms, message } = req.body;
     let response = {};
@@ -36,4 +36,8 @@ export const handleHealthInquiry = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Error handling health inquiry" });
   }
+};
+
+module.exports = {
+  handleHealthInquiry,
 };
