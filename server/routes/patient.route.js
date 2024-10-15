@@ -5,7 +5,9 @@ const {
   removePatient,
   getPatientDetails,
   getPatientHistory,
-  allPatients
+  allPatients,
+  allPatientsRelatedToUser,
+  getPatients
 } = require('../controllers/patient.controller');
 const { verifyToken, isPatient } = require('../middlewares/verify.middleware');
 
@@ -17,7 +19,8 @@ router.delete('/:id', verifyToken,isPatient,removePatient);
 
 router.get('/patientId/:id', verifyToken,isPatient,getPatientDetails);
 
-router.get('/patients', verifyToken,isPatient,allPatients);
+router.get('/patients', verifyToken,allPatientsRelatedToUser);
+
 
 router.get('/:id/history', verifyToken,isPatient,getPatientHistory);
 

@@ -78,6 +78,7 @@ app.use('/appointment',appointmentRouter)
 app.use('/ai', aiRouter);
 
 app.get('/', (req, res) => {
+  
   res.send('server is running');
 })
 

@@ -6,6 +6,8 @@ const { decodeToken } = require('../utils/auth');
 const verifyToken = async (req, res, next) => {
   try {
     const token = req.cookies.token;
+    
+      
     if (!token) {
       return res.status(401).json({ success: false, error: "Token not found" }); // Return to stop execution
     }
@@ -38,6 +40,7 @@ const isDoctor = (req, res, next) => {
 
 // Middleware to check if user is a patient
 const isPatient = (req, res, next) => {
+  
   if (req.user.userType === 'patient') {
     next();
   } else {

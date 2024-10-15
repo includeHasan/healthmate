@@ -102,4 +102,4 @@ const allPatients = async (req, res) => {
 };
 
 
-module.exports = { createPatient, removePatient, getPatientDetails, getPatientHistory, allPatients }
+module.exports = { createPatient, removePatient, getPatientDetails, getPatientHistory, allPatients,allPatientsRelatedToUser,getPatients }
