@@ -1,5 +1,6 @@
-
+'use client';
 import Image from "next/image";
+import Link from "next/link";
 
 
   
@@ -27,10 +28,14 @@ import Image from "next/image";
             <h2 className="text-3xl font-semibold">Book Appointment</h2>
             <p className="text-xl mt-2">With 100+ Trusted Doctors</p>
             <button className="bg-white text-blue-500 py-2 px-6 rounded-full mt-6 mr-4">
-              Create account
+              <Link href={'/signup?userType=patient'}>
+              Create account as Patient
+              </Link>
             </button>
             <button className="bg-white text-blue-500 py-2 px-6 rounded-full mt-6">
+              <Link href={'/login'}>
               Login
+              </Link>
             </button>
           </div>
           <div className="flex place-items-baseline sm:inline content-end">

@@ -4,9 +4,13 @@ import { Suspense } from "react"; // Import Suspense
 import { SignupForm } from "@/components/AuthComponents/SignupForm"; 
 import ExternalLogin from "@/components/AuthComponents/ExternalLogin";
 import SideImg from "@/components/AuthComponents/SideImg";
+import NavBar from "@/components/HomeComponents/NavBar";
+import Footer from "@/components/HomeComponents/Footer";
 
 const SignUp = () => {
   return (
+    <>
+    <NavBar/>
     <div className="flex min-h-screen flex-col md:flex-row">
       <SideImg />
       <div className="w-full bg-white flex flex-col justify-center items-center p-8">
@@ -30,6 +34,8 @@ const SignUp = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

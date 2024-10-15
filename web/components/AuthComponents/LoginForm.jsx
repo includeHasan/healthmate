@@ -23,13 +23,14 @@ const LoginForm = () => {
         toast.success(
           `Login Successfully with ${response.data.user.email} Email`
         );
-        router.replace("/");
+        await router.push(`/${response.data.user.userType}/dashboard`);
         localStorage.setItem("user",JSON.stringify(response.data.user));
       } else {
-        console.log("Invalid credentials");
+        toast.warn("Invalid credentials")
       }
     } catch (error) {
       console.error(error);
+      toast.error(`${error.response?.data?.message}`)
     }
   };
 

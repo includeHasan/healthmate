@@ -6,6 +6,7 @@ import React from 'react';
 const AboutUs = () => {
   return (
     <>
+    <NavBar/>
     <div className="px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
       {/* About Us Section */}
       <div className="max-w-7xl mx-auto">
@@ -71,6 +72,7 @@ const AboutUs = () => {
         </div>
       </div>
     </div>
+    <Footer/>
               </>
   );
 };
