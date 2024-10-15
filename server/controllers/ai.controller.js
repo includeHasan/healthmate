@@ -1,6 +1,6 @@
 const { generateResponse, analyzeImage } = require("../utils/ai");
 
-// Combined API for chatbot, symptom detection, and health report analysis
+
 export const handleHealthInquiry = async (req, res) => {
   try {
     const { symptoms, message } = req.body;
