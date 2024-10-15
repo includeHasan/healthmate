@@ -17,6 +17,41 @@ const s3Client = new S3Client({
     }
 });
 
+const s3Upload = upload.single('report');
+
+const s3UploadMiddlewareForGemeni = (req, res, next) => {
+    s3Upload(req, res, async (err) => {
+        if (err) {
+            return res.status(400).json({ error: err.message });
+        }
+
+        if (!req.file) {
+            return next();
+        }
+
+        const timestamp = new Date().getTime(); // Get current timestamp in milliseconds
+        const randomString = crypto.randomBytes(8).toString('hex'); // Generate a random string
+        const fileName = `${timestamp}-${randomString}-${req.file.originalname}`;
+
+        const params = {
+            Bucket: process.env.AWS_BUCKET_NAME,
+            Key: fileName,
+            Body: req.file.buffer,
+            ContentType: req.file.mimetype
+        };
+
+        try {
+            const command = new PutObjectCommand(params);
+            await s3Client.send(command);
+            req.file.location = `https://jacgmamtcipvliqalaiz.supabase.co/storage/v1/object/public/documents/${fileName}`;
+            next();
+        } catch (error) {
+            console.error('Error uploading to S3:', error);
+            return res.status(500).json({ error: 'Error uploading file' });
+        }
+    });
+};
+
 const uploadToS3 = async (file, doctorId, fileType) => {
     try {
         baseUrl="https://jacgmamtcipvliqalaiz.supabase.co/storage/v1/object/public/documents/"
@@ -49,5 +84,6 @@ const uploadDocument = async (file, doctorId) => {
 module.exports = {
     upload,
     uploadProfilePicture,
-    uploadDocument
+    uploadDocument,
+    s3UploadMiddlewareForGemeni,
 };
