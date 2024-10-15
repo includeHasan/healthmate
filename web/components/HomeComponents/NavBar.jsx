@@ -51,7 +51,7 @@ useEffect(() => {
           <div className="flex items-center">
             <div className="text-2xl font-bold text-blue-600">HealthMate</div>
           </div>
-          <nav className="hidden md:flex lg:flex md:space-x-6 lg:space-x-6">
+          <nav className=" md:hidden lg:flex sm:hidden md:space-x-6 lg:space-x-6">
             <Link
               href="/"
               className="text-gray-700 hover:text-blue-600 nav-link active"
@@ -77,7 +77,7 @@ useEffect(() => {
               CONTACT
             </Link>
           </nav>
-          <div className="flex space-x-4 items-center">
+          <div className="lg:flex md:hidden space-x-4 items-center">
             {isLoggedIn ? (
               <>
                 <Link
@@ -95,7 +95,7 @@ useEffect(() => {
               </>
             ) : (
               <>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-full sm:hidden md:inline-block lg:inline-block">
+                <button className="bg-blue-600 text-white px-4 py-2 rounded-full sm:hidden md:hidden lg:inline-block">
                   <Link href={"/login"}>Login</Link>
                 </button>
                 <div className="relative" ref={dropdownRef}>
@@ -131,7 +131,7 @@ useEffect(() => {
               </>
             )}
             <button
-              className="md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 place-items-center py-2.5 text-center inline-flex"
+              className="lg:hidden md:inline-block inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 place-items-center py-2.5 text-center"
               onClick={handleToggle}
             >
               <FaBars className="ms-3 text-white" />
@@ -140,7 +140,7 @@ useEffect(() => {
         </div>
       </header>
       {isOpen && (
-        <div className="md:hidden lg:hidden absolute w-full bg-white z-10 divide-y divide-gray-500 shadow-md overflow-y-auto">
+        <div className="md:absolute lg:hidden absolute w-full bg-white z-10 divide-y divide-gray-500 shadow-md overflow-y-auto">
           <ul className="py-2 text-sm text-gray-700">
             <li>
               <Link href="/" className="block px-4 py-2 hover:bg-gray-100">
