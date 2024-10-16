@@ -12,28 +12,32 @@ const PatientDashBoard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [patients, setPatients] = useState([]); // State for storing the list of patients
   const [selectedPatientIndex, setSelectedPatientIndex] = useState(0); // Index of the selected patient
+  const [alreadyPatient,setAlreadyPatient] =useState(false);
+  const [loading,setLoading] =useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
   useEffect(() => {
-    const checkPatient = async () => {
+     (async () => {
+      setLoading(true);
       try {
         const response = await api.get("/patient/patients");
         if (response.data.success) {
           console.log(response.data);
           
-          const patientList = response.data.patient;
+          const patientList = response.data.patients;
           if (patientList && patientList.length > 0) {
             setPatients(patientList);
+            setAlreadyPatient(true);
+            setLoading(false)
           }
         }
       } catch (error) {
         console.log(error);
       }
-    };
-    checkPatient();
+    })();
   }, []);
 
   // Handler for changing the selected patient
@@ -58,12 +62,12 @@ const PatientDashBoard = () => {
       </div>
 
       {/* Main Content */}
-      <div
+      {!loading ? (<div
         className={`flex-1 p-6 overflow-x-auto transition-all duration-300 ${
           isSidebarOpen ? "ml-0" : "ml-0 md:ml-1/5"
         }`}
       >
-        {patients.length > 0 ? (
+        {alreadyPatient ? (
           <>
             <div className="flex justify-between items-center mb-4">
               <div>
@@ -75,7 +79,7 @@ const PatientDashBoard = () => {
                 >
                   {patients.map((patient, index) => (
                     <option key={index} value={index}>
-                      {patient.name}
+                      {patient.firstName}
                     </option>
                   ))}
                 </select>
@@ -88,9 +92,6 @@ const PatientDashBoard = () => {
                 <div className="text-gray-500">
                   <i className="fas fa-envelope"></i>
                 </div>
-                <div className="text-gray-500">
-                  <i className="fas fa-user-md"></i> {selectedPatient.doctor}
-                </div>
               </div>
             </div>
 
@@ -101,15 +102,15 @@ const PatientDashBoard = () => {
                 <div className="grid grid-cols-3 gap-4 text-gray-950">
                   <div className="text-center bg-cyan-50 rounded-lg py-1">
                     <p>Date of birth:</p>
-                    <p>{selectedPatient.dob}</p>
+                    <p>{new Date(selectedPatient.dateOfBirth).toLocaleDateString('en-GB').replace(/-/g, '/')}</p>
                   </div>
                   <div className="text-center bg-blue-50 rounded-lg py-1">
                     <p>Age:</p>
-                    <p>{selectedPatient.age}</p>
+                    <p>{ new Date().getFullYear() - new Date(selectedPatient.dateOfBirth).getFullYear()}</p>
                   </div>
                   <div className="text-center bg-indigo-50 rounded-lg py-1">
-                    <p>Sex:</p>
-                    <p>{selectedPatient.sex}</p>
+                    <p>Gender:</p>
+                    <p>{selectedPatient.gender}</p>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4 mt-4">
@@ -275,7 +276,9 @@ const PatientDashBoard = () => {
             </Link>
           </div>
         )}
-      </div>
+      </div>) : (
+        <div>Loading ...</div>
+      )}
     </div>
   );
 };

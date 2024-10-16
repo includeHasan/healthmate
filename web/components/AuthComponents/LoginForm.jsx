@@ -3,7 +3,7 @@ import api from "@/utils/api";
 import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const LoginForm = () => {
   const toastId = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  
+
   const submitLogin = async (e) => {
     e.preventDefault();
     toastId.current = toast.info("Loading...");
@@ -23,16 +23,16 @@ const LoginForm = () => {
         toast.success(
           `Login Successfully with ${response.data.user.email} Email`
         );
-        await router.push(`/${response.data.user.userType}/dashboard`);
-        localStorage.setItem("user",JSON.stringify(response.data.user));
+        router.push(`/${response.data.user.userType}/dashboard`);
+        // localStorage.setItem("user",JSON.stringify(response.data.user));
       } else {
         toast.dismiss(toastId);
-        toast.warn("Invalid credentials")
+        toast.warn("Invalid credentials");
       }
     } catch (error) {
       console.error(error);
       toast.dismiss(toastId);
-      toast.error(`${error.response?.data}`)
+      toast.error(`${error.response?.data?.error}`);
     }
   };
 

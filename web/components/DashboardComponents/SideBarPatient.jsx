@@ -17,30 +17,25 @@ const SidebarPatient = ({isSidebarOpen,toggleSidebar}) => {
         </button>
         </div>
         <FaUserCircle className='text-9xl my-6' />
-          <h2 className="text-lg font-bold">Dr. Marttin Deo</h2>
-          <p className="text-sm ">MBBS, FCPS - MD (Medicine), MCPS</p>
+          <h2 className="text-lg font-bold"> Hello User !!</h2>
         </div>
         <nav className="mt-8 text-lg font-semibold">
           <ul>
-            <li className="flex items-center p-2 text-gray-700">
-              <Link href={'/patient/addMember'}>
-                <FaUserPlus className="text-2xl mr-2 inline" />Add Family Member
+            <li className=" p-2 text-gray-700">
+              <Link href={'/patient/addMember'} className='flex items-center'>
+                <FaUserPlus className="text-2xl mr-2" />Add Family Member
               </Link>
             </li>
-            <li className="flex items-center p-2 text-gray-700">
-              <BiSolidDashboard className="text-2xl mr-2" /> Dashboard
+            <li className=" p-2 text-gray-700">
+                <Link href={'/patient/dashboard'} className='flex items-center'>
+              <BiSolidDashboard className="text-2xl mr-2 " /> Dashboard
+                </Link>
             </li>
             <li className="flex items-center p-2 text-gray-700">
               <FaRegCalendarDays className="text-2xl mr-2" /> Appointment
             </li>
             <li className="flex items-center p-2 text-gray-700">
               <FaFileMedicalAlt className="text-2xl mr-2" /> Appointment Page
-            </li>
-            <li className="flex items-center p-2 text-gray-700">
-              <RiSecurePaymentFill className="text-2xl mr-2" /> Payment
-            </li>
-            <li className="flex items-center p-2 text-gray-700">
-              <FaUserAlt className="text-2xl mr-2" /> Profile
             </li>
             <li className="flex items-center p-2 text-gray-700">
               <MdLogout className="text-2xl mr-2" /> Logout
