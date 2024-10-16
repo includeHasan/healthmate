@@ -1,12 +1,13 @@
 'use client'
 
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { generateToken04 } from '../../zegoServerAssistant';
 
 const Room = ({params}) => {
 
-    const roomId = params.roomId; // will set in session, roomid will be the appointment_sechedule_id from the db 
+    const roomId = "122"; // will set in session, roomid will be the appointment_sechedule_id from the db 
+console.log(roomId);
 
     const userId = "jadd";   // userid from the db will be the userid coming from the backend
     const appId = 938543039;
@@ -23,6 +24,8 @@ const Room = ({params}) => {
       //   }
       // });
       const token = generateToken04(appId,userId,serverSecret,36000,"")
+      console.log(userId,appId,serverSecret,userName,roomId);
+      
       const kitToken = ZegoUIKitPrebuilt.generateKitTokenForProduction(appId,token, roomId , userId,userName);
       const zp = ZegoUIKitPrebuilt.create(kitToken);
 
