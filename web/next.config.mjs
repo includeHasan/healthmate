@@ -4,10 +4,13 @@ const nextConfig = {
         return [
             {
                 source: '/:path*',
-                destination: 'https://healthmate-backend.vercel.app/:path*' // Proxy to external API
-            }
+                destination: 'https://healthmate-backend.vercel.app/:path*', // Proxy to external API
+            },
         ];
-    }
+    },
+    images: {
+        domains: ['jacgmamtcipvliqalaiz.supabase.co'], // Allow loading images from this domain
+    },
 };
 
 export default nextConfig;
