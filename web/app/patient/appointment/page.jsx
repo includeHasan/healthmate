@@ -2,6 +2,8 @@
 // components/Appointments.js
 import React, { useEffect, useState } from 'react';
 import api from '@/utils/api';
+import SidebarPatient from '@/components/DashboardComponents/SideBarPatient';
+import { BiSolidDashboard } from 'react-icons/bi';
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
