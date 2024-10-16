@@ -32,10 +32,15 @@ const PatientDashBoard = () => {
             setPatients(patientList);
             setAlreadyPatient(true);
             setLoading(false)
+          }else{
+            setLoading(false);
           }
         }
       } catch (error) {
         console.log(error);
+        if (error.status === 404) {
+          setLoading(false);
+        }
       }
     })();
   }, []);

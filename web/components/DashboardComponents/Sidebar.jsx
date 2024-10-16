@@ -1,7 +1,5 @@
 import React from 'react'
 import { BiSolidDashboard } from "react-icons/bi";
-import { RiSecurePaymentFill } from "react-icons/ri";
-import { IoSettingsSharp } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { FaCalendarDays } from 'react-icons/fa6';
 import { FaFileMedicalAlt, FaUserAlt } from 'react-icons/fa';
@@ -11,14 +9,14 @@ const Sidebar = () => {
     <aside className="w-full md:w-1/5 bg-white p-4 shadow-lg ">
     <div className="flex flex-col items-center border-b-2 border-blue-700 pb-4 text-blue-800">
       <Image
-        src="/doctor1.jpg"
+        src="/vivek.png"
         alt="Doctor's profile picture"
         width={75}
         height={100}
         className="rounded-full mb-4 h-28 w-28 object-cover"
        unoptimized
       />
-      <h2 className="text-lg font-bold">Dr. Marttin Deo</h2>
+      <h2 className="text-lg font-bold">Dr. Vivek Yadav</h2>
       <p className="text-sm ">MBBS, FCPS - MD (Medicine), MCPS</p>
     </div>
     <nav className="mt-8 text-lg font-semibold">
