@@ -1,10 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL:'https://healthmate-backend.vercel.app',
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  baseURL:'http://localhost:5000',
   withCredentials: true,
 });
 export default api;

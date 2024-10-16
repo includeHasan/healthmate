@@ -80,7 +80,7 @@ export function PieChartGraph() {
               dataKey="visitors"
               nameKey="browser"
               innerRadius={60}
-              strokeWidth={5}
+              strokeWidth={30}
             >
               <Label
                 content={({ viewBox }) => {

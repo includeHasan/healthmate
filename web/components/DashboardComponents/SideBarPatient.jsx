@@ -6,9 +6,9 @@ import {  FaRegCalendarDays } from 'react-icons/fa6';
 import { FaFileMedicalAlt, FaUserAlt, FaUserCircle } from 'react-icons/fa';
 import { FaUserPlus } from "react-icons/fa";
 import Link from 'next/link';
-const SidebarPatient = ({isSidebarOpen,toggleSidebar}) => {
+const SidebarPatient = ({isSidebarOpen,toggleSidebar,className}) => {
   return (
-    <aside className={`fixed md:relative z-10 w-full md:w-1/5 bg-white p-4 shadow-lg transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
+    <aside className={`fixed md:relative z-10 w-full md:w-1/5 bg-white p-4 shadow-lg transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 ${className}`}>
         <div className="flex flex-col items-center border-b-2 border-blue-700 pb-4 text-blue-800">
         <div className="md:hidden p-4">
         <button onClick={toggleSidebar} className="text-gray-700 self-end">

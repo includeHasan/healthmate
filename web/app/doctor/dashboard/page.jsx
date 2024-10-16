@@ -10,6 +10,7 @@ import {
   FaHospitalUser,
   FaPhoneAlt,
   FaSearch,
+  FaUserAlt,
   FaUserInjured,
 } from "react-icons/fa";
 import {  PieChartGraph } from "@/components/pieChart";
@@ -77,11 +78,7 @@ const DoctorDashboard = () => {
             <h2 className="text-lg font-bold mb-4">Today Appointment</h2>
             <div className="space-y-4">
               <div className="flex items-center space-x-4">
-                <Image
-                  src="https://placehold.co/40x40"
-                  alt="Patient profile picture"
-                  className="rounded-full"
-                />
+              <FaUserAlt  className='text-3xl'/>
                 <div>
                   <h3 className="font-bold">M.J. Mical</h3>
                   <p className="text-gray-500">Health Checkup</p>
@@ -89,11 +86,7 @@ const DoctorDashboard = () => {
                 <span className="ml-auto text-blue-500">On Going</span>
               </div>
               <div className="flex items-center space-x-4">
-                <Image
-                  src="https://placehold.co/40x40"
-                  alt="Patient profile picture"
-                  className="rounded-full"
-                />
+              <FaUserAlt  className='text-3xl'/>
                 <div>
                   <h3 className="font-bold">Sanath Deo</h3>
                   <p className="text-gray-500">Health Checkup</p>
@@ -101,11 +94,7 @@ const DoctorDashboard = () => {
                 <span className="ml-auto text-gray-500">12:30 PM</span>
               </div>
               <div className="flex items-center space-x-4">
-                <Image
-                  src="https://placehold.co/40x40"
-                  alt="Patient profile picture"
-                  className="rounded-full"
-                />
+              <FaUserAlt  className='text-3xl'/>
                 <div>
                   <h3 className="font-bold">Loeara Phanj</h3>
                   <p className="text-gray-500">Report</p>
@@ -121,11 +110,7 @@ const DoctorDashboard = () => {
           <div className=" overflow-y-auto max-h-96">
             <h2 className="text-lg font-bold mb-4">Next Patient Details</h2>
             <div className="flex items-center space-x-4 mb-4">
-              <Image
-                src="https://placehold.co/60x60"
-                alt="Patient profile picture"
-                className="rounded-full"
-              />
+            <FaUserAlt  className='text-3xl'/>
               <div>
                 <h3 className="font-bold">Sanath Deo</h3>
                 <p className="text-gray-500">Health Checkup</p>
