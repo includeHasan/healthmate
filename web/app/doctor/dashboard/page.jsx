@@ -25,9 +25,9 @@ const DoctorDashboard = () => {
       try {
         const response = await api.get("/docter/getDoctorDetails");
         if (response.data.success) {
-          localStorage.setItem("docter", response.data.doctor);
+          localStorage.setItem("doctor",JSON.stringify( response.data.doctor));
           setDoctor(response.data.doctor);
-          console.log(doctor);
+          console.log(response.data.doctor);
           setLoading(false);
         }
       } catch (error) {
@@ -71,7 +71,7 @@ const DoctorDashboard = () => {
                   <FaUserInjured className=" text-blue-700 text-7xl  border-4 rounded-full p-2 border-blue-700" />
                   <div>
                     <h2 className="text-lg font-bold">Total Patient</h2>
-                    <p className="text-2xl font-bold text-blue-900">2000+</p>
+                    <p className="text-2xl font-bold text-blue-900">0</p>
                     <p className="text-gray-700">Till Today</p>
                   </div>
                 </div>
@@ -81,8 +81,8 @@ const DoctorDashboard = () => {
                   <FaHospitalUser className=" text-blue-700 text-7xl  border-4 rounded-full p-2 border-blue-700" />
                   <div>
                     <h2 className="text-lg font-bold">Today Patient</h2>
-                    <p className="text-2xl font-bold text-blue-900">068</p>
-                    <p className="text-gray-700">21 Dec-2021</p>
+                    <p className="text-2xl font-bold text-blue-900">0</p>
+                    <p className="text-gray-700">19 Oct-2024</p>
                   </div>
                 </div>
               </div>
@@ -91,8 +91,8 @@ const DoctorDashboard = () => {
                   <FaHeartCircleCheck className=" text-blue-700 text-7xl  border-4 rounded-full p-2 border-blue-700" />
                   <div>
                     <h2 className="text-lg font-bold">Today Appointments</h2>
-                    <p className="text-2xl font-bold text-blue-900">085</p>
-                    <p className="text-gray-700">21 Dec-2021</p>
+                    <p className="text-2xl font-bold text-blue-900">0</p>
+                    <p className="text-gray-700">19 Oct-2024</p>
                   </div>
                 </div>
               </div>
