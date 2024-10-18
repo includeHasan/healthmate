@@ -11,8 +11,8 @@ const model = genAI.getGenerativeModel({
  const generateResponse = async (prompt, systemInstruction = null) => {
   try {
     const modelConfig = systemInstruction
-      ? { model: "gemini-1.5-flash", systemInstruction }
-      : { model: "gemini-1.5-flash" };
+      ? { model: "gemini-1.0-pro-latest", systemInstruction }
+      : { model: "gemini-1.0-pro-latest" };
 
     const result = await model.generateContent({
       contents: [{ role: "user", parts: [{ text: prompt }] }],
@@ -27,7 +27,7 @@ const model = genAI.getGenerativeModel({
 // Analyze health report (image)
 const analyzeImage = async (imageUrl) => {
   try {
-    const prompt = `Analyze the following health report: ${imageUrl}`;
+    const prompt = `Analyze the following health report please read the health report and explain the user about the condition and problems: ${imageUrl}`;
     const result = await model.generateContent({
       contents: [{ role: "user", parts: [{ text: prompt }] }],
     });

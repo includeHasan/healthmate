@@ -9,7 +9,7 @@ const { generateResponse, analyzeImage } = require("../utils/ai");
     // General Chat Mode (message input)
     if (message) {
       const prompt = message;
-      const assistantResponse = await generateResponse(prompt, "You are a helpful doctor assistant named HealthMate.");
+      const assistantResponse = await generateResponse(prompt, "You are a helpful doctor assistant named HealthMate and some one greet you can tell him how you can help him by recommending specialist by symptoms and check health report");
       response.chatbot = assistantResponse;
     }
 
