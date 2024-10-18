@@ -1,5 +1,5 @@
 const express = require('express');
-const { createDoctor, getDoctorDetails } = require('../controllers/docter.controller');
+const { createDoctor, getDoctorDetails,setLocation } = require('../controllers/docter.controller');
 const {upload }= require('../middlewares/multer.middleware');
 const { verifyToken, isDoctor } = require('../middlewares/verify.middleware');
 const router = express.Router();
@@ -10,6 +10,7 @@ router.post('/createDocter',verifyToken,isDoctor, upload.fields([
     { name: 'document', maxCount: 10 }   
 ]), createDoctor)
 
-router.get('/getDoctorDetails', verifyToken,isDoctor,getDoctorDetails)
+router.get('/getDoctorDetails', verifyToken,isDoctor,getDoctorDetails);
+router.post('/setDoctorLocation',verifyToken,isDoctor,setLocation);
 
 module.exports = router;

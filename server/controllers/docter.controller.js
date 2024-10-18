@@ -91,18 +91,29 @@ const getDoctorDetails = async (req, res) => {
 const setLocation = async (req, res) => {
     try {
         const data = req.body;
+        console.log(data);
+        
         const userId = req.user.id;  // Access the decoded user id from the middleware
 
+        const doctor = await prisma.doctor.findUnique({
+            where: { userId:userId }
+        });
+        if (!doctor) {
+            return res.status(404).json({ success: false, message: "Doctor not found" });
+        }
         // Create doctor's work location
         const doctorWorkLocation = await prisma.doctorWorkLocation.create({
             data: {
                 ...data,
-                doctorId: userId
+                locationType: data.locationType,
+                doctorId: doctor.id
             }
         });
 
         res.status(200).json({ success: true, message: "Location set successfully", doctorWorkLocation });
     } catch (error) {
+        console.log(error);
+        
         res.status(500).json({ success: false, error: error.message });
     }
 };

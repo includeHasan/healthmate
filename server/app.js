@@ -10,6 +10,8 @@ var patientRouter = require('./routes/patient.route');
 var doctersRouter = require('./routes/docters.route');
 var appointmentRouter=require('./routes/appointment.route')
 var aiRouter = require('./routes/ai.route');
+var timetable = require('./routes/timetable.router');
+
 var dotenv = require('dotenv');
 
 var session = require('express-session');
@@ -84,7 +86,7 @@ app.use('/patient', patientRouter);
 app.use('/docters', doctersRouter);
 app.use('/appointment',appointmentRouter)
 app.use('/ai', aiRouter);
-
+app.use('/timetable',timetable);
 app.get('/', (req, res) => {
   
   res.send('server is running');
