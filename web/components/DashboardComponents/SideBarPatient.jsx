@@ -5,7 +5,10 @@ import {  FaRegCalendarDays, FaUserDoctor } from 'react-icons/fa6';
 import { FaFileMedicalAlt, FaUserCircle } from 'react-icons/fa';
 import { FaUserPlus } from "react-icons/fa";
 import Link from 'next/link';
+import { handleLogout } from '@/utils/logout';
+import { useRouter } from 'next/navigation';
 const SidebarPatient = ({isSidebarOpen,toggleSidebar}) => {
+  const router = useRouter();
   return (
     <aside className={`fixed md:relative z-10 w-full md:w-1/5 bg-white p-4 shadow-lg transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
         <div className="flex flex-col items-center border-b-2 border-blue-700 pb-4 text-blue-800">
@@ -41,8 +44,10 @@ const SidebarPatient = ({isSidebarOpen,toggleSidebar}) => {
               <FaUserDoctor className="text-2xl mr-2" /> All Doctors
               </Link>
             </li>
-            <li className="flex items-center p-2 text-gray-700">
+            <li className=" p-2 text-gray-700" >
+              <button className='flex items-center' onClick={() => handleLogout(router)}>
               <MdLogout className="text-2xl mr-2" /> Logout
+              </button>
             </li>
           </ul>
         </nav>
