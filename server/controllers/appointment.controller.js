@@ -24,7 +24,9 @@ exports.getAvailableSlots = async (req, res) => {
 
 // Add doctor schedule (time slots)
 exports.addDoctorSchedule = async (req, res) => {
-  const { doctorId, workLocationId, day, startTime, endTime, date,maxAppointments } = req.body;
+  const { doctorId, workLocationId, day, startTime, endTime, date } = req.body;
+  console.log(req.body);
+  
   try {
     const timetable = await prisma.doctorTimeTable.create({
       data: {
@@ -34,7 +36,6 @@ exports.addDoctorSchedule = async (req, res) => {
         startTime: new Date(startTime),
         endTime: new Date(endTime),
         date: new Date(date),
-        maxAppointments:maxAppointments
       }
     });
 

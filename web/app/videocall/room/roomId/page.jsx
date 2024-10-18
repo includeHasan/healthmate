@@ -7,7 +7,7 @@ import { generateToken04 } from '../../zegoServerAssistant';
 const Room = ({params}) => {
 
   const roomId = "122"; // You can set this dynamically, e.g., from session or DB
-  const userId = "jadd"; // Dynamically fetched from DB or backend
+  const userId = JSON.parse(localStorage.getItem('doctor')).id; // Dynamically fetched from DB or backend
   const appId = 938543039;
   const serverSecret = "66528b62db26bc4151ab8571f29e479c";
   const userName = "Jayesh"; // Name from patient/doctor table or input field

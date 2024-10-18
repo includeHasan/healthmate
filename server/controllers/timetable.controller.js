@@ -9,14 +9,18 @@ const createTimeSlot = async (req, res) => {
             data: {
                 doctorId,
                 workLocationId,
-                day,
+                day:day,
                 startTime,
                 endTime,
                 date,
             },
         });
-        res.status(201).json(newTimeSlot);
+        if (newTimeSlot) {
+            res.status(201).json(newTimeSlot);
+        }
     } catch (error) {
+        console.log(error);
+        
         res.status(500).json({ error: 'Failed to create time slot' });
     }
 };

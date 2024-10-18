@@ -70,6 +70,7 @@ const DoctorWorkLocationForm = () => {
       });
       if (response.data.success) {
         alert("Work location added successfully");
+        localStorage.setItem("doctorWorkLocation",JSON.stringify(response.data.doctorWorkLocation));
         router.push('/doctor/dashboard');
       }
     } catch (error) {

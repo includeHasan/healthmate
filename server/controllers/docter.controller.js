@@ -143,12 +143,17 @@ const setAvailability = async (req, res) => {
     try {
         const data = req.body;
         const userId = req.user.id;  // Access the decoded user id from the middleware
-
+        const doctor = await prisma.doctor.findUnique({
+            where: { userId:userId }
+        });
+        if (!doctor) {
+            return res.status(404).json({ success: false, message: "Doctor not found" });
+        }
         // Create doctor's availability
         const availability = await prisma.doctorAvailability.create({
             data: {
                 ...data,
-                doctorId: userId
+                doctorId: doctor
             }
         });
 

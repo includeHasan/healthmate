@@ -47,8 +47,15 @@ const Sidebar = () => {
           </Link>
         </li>
         
-        <li className="flex items-center p-2 text-gray-700">
+        <li className=" p-2 text-gray-700">
+          <Link href={'/doctor/addTimetable'} className='flex items-center'>
           <FaCalendarDays className="text-2xl mr-2" /> Upload Timetable
+          </Link>
+        </li>
+        <li className=" p-2 text-gray-700">
+          <Link href={'/doctor/attendMeet'} className='flex items-center'>
+          <FaCalendarDays className="text-2xl mr-2" /> Attend Meet
+          </Link>
         </li>
         <li className=" p-2 text-gray-700" >
               <button className='flex items-center' onClick={() => handleLogout(router)}>
