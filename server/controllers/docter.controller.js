@@ -72,7 +72,7 @@ const getDoctorDetails = async (req, res) => {
 
         // Fetch doctor details using userId
         const doctor = await prisma.doctor.findUnique({
-            where: { userId }
+            where: { userId:userId }
         });
 
         if (!doctor) {
@@ -81,6 +81,8 @@ const getDoctorDetails = async (req, res) => {
 
         res.status(200).json({ success: true, message: "Doctor details fetched successfully", doctor });
     } catch (error) {
+        console.log(error);
+        
         res.status(500).json({ success: false, error: error.message });
     }
 };

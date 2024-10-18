@@ -260,7 +260,7 @@ const PatientDashBoard = () => {
                 <h2 className="text-lg font-semibold mb-4">Latest results</h2>
                 <div className="flex justify-center items-center h-40">
                   <Image
-                    src="/path/to/image" // Specify the correct image path
+                    src="/doctor1.jpg" // Specify the correct image path
                     alt="Graph showing latest results"
                     width={300} // Set a reasonable width
                     height={200} // Set a reasonable height

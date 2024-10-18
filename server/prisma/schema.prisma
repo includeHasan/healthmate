@@ -20,7 +20,7 @@ model User {
 
 model Doctor {
   id                 String                @id @default(uuid())
-  userId             String                @map("user_id")
+  userId             String                @map("user_id")@unique
   speciality         String[]                
   experienceYrs      Int                   @map("experience_yrs")
   verified           Boolean               @default(false)
