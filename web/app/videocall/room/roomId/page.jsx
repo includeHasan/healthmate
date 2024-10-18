@@ -1,46 +1,42 @@
 'use client'
 
+import { useEffect, useRef } from 'react';
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
-// import { useEffect } from 'react';
 import { generateToken04 } from '../../zegoServerAssistant';
 
 const Room = ({params}) => {
 
-    const roomId = "122"; // will set in session, roomid will be the appointment_sechedule_id from the db 
-console.log(roomId);
+  const roomId = "122"; // You can set this dynamically, e.g., from session or DB
+  const userId = "jadd"; // Dynamically fetched from DB or backend
+  const appId = 938543039;
+  const serverSecret = "66528b62db26bc4151ab8571f29e479c";
+  const userName = "Jayesh"; // Name from patient/doctor table or input field
 
-    const userId = "jadd";   // userid from the db will be the userid coming from the backend
-    const appId = 938543039;
-    const serverSecret = "66528b62db26bc4151ab8571f29e479c";
-    const userName = "Jayesh"; // it will be the patient or doctor name from the patient and doctor table or can be empty to user to input form the text field to join the call 
-    // function to genrate the temperory token from our server and then verify from the zegocloud server 
-    const Meeting = async (element) => {
-      // const appId // genrated from zegocloud
-      // const serverSecret // genrated from zegocloud
-      // const token = await fetch('/api/generatetoken', {
-      //   method: "post",
-      //   body: {
-      //     userId:userId
-      //   }
-      // });
-      const token = generateToken04(appId,userId,serverSecret,36000,"")
-      console.log(userId,appId,serverSecret,userName,roomId);
-      
-      const kitToken = ZegoUIKitPrebuilt.generateKitTokenForProduction(appId,token, roomId , userId,userName);
+  const meetingRef = useRef(null); // Using useRef to reference the div
+
+  useEffect(() => {
+    const setupMeeting = async () => {
+      const token = generateToken04(appId, userId, serverSecret, 36000, "");
+
+      // Generate kit token
+      const kitToken = ZegoUIKitPrebuilt.generateKitTokenForProduction(appId, token, roomId, userId, userName);
       const zp = ZegoUIKitPrebuilt.create(kitToken);
 
-      // to join the call / room 
+      // Join the video call room
       zp.joinRoom({
-        container:element,
-        scenario:{
-          mode:ZegoUIKitPrebuilt.VideoConference
+        container: meetingRef.current, // Set the meeting container to the div
+        scenario: {
+          mode: ZegoUIKitPrebuilt.VideoConference
         }
-      })
+      });
+    };
 
-    }
+    setupMeeting(); // Call the setup function inside useEffect
+  }, [appId, userId, roomId, userName, serverSecret]); // Dependencies to ensure re-execution if any changes
+
   return (
-    <div ref={Meeting} style={{height:"100vh" , width: '100vw'}}>
-        
+    <div ref={meetingRef} style={{ height: "100vh", width: '100vw' }}>
+      {/* Zego UIKit Video Call will be rendered in this div */}
     </div>
   );
 }
