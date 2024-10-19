@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/utils/api";
 import SidebarPatient from "@/components/DashboardComponents/SideBarPatient";
+import Image from "next/image";
 
 const DoctorsList = () => {
   const [doctors, setDoctors] = useState([]);
@@ -48,7 +49,9 @@ const DoctorsList = () => {
         const bookedSlots = response.data.data; // Assume booked slots are returned
         const allSlots = generateSlots(); // Generate all possible slots for the day
         // Filter out booked slots from all available slots
-        const available = allSlots.filter(slot => !bookedSlots.some(booked => booked.time === slot.time));
+        const available = allSlots.filter(
+          (slot) => !bookedSlots.some((booked) => booked.time === slot.time)
+        );
         setAvailableSlots(available);
       } else {
         setError("No available slots found.");
@@ -69,7 +72,10 @@ const DoctorsList = () => {
 
     // Create slots in 30-minute intervals
     while (startTime <= endTime) {
-      const time = startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const time = startTime.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
       slots.push({ time, booked: false }); // booked flag is initially false
       startTime.setMinutes(startTime.getMinutes() + 30); // Increment by 30 minutes
     }
@@ -152,9 +158,12 @@ const DoctorsList = () => {
               key={doctor.id}
               className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
             >
-              <img
+              <Image
                 src={doctor.profilePic || "/doctor_default.jpeg"}
                 alt={doctor.name}
+                width={30}
+                height={30}
+                unoptimized
                 className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-blue-500 object-cover"
               />
               <h3 className="text-xl font-semibold text-center mb-2">
@@ -179,53 +188,50 @@ const DoctorsList = () => {
         </div>
       </div>
       {showBookingModal && (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-        <button
-          onClick={handleCloseModal}
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
-        >
-          X
-        </button>
-        <h3 className="text-2xl font-bold mb-4">Book Appointment</h3>
-        <p className="mb-4">Select a date and time slot:</p>
-        <input
-          type="date"
-          className="mb-4 w-full border border-gray-300 rounded-lg p-2"
-          onChange={handleDateChange}
-        />
-        <div className="flex flex-wrap justify-between mb-6">
-          {availableSlots.length > 0 ? (
-            availableSlots.map((slot) => (
-              <button
-                key={slot.time} // Assuming each slot has a unique time
-                onClick={() => handleSlotSelect(slot)}
-                className={`flex-1 m-2 py-4 text-lg text-center rounded-lg ${
-                  selectedSlot && selectedSlot.time === slot.time
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 hover:bg-blue-200"
-                }`}
-              >
-                {slot.time}
-              </button>
-            ))
-          ) : (
-            <p className="text-center text-gray-500">No available slots.</p>
-          )}
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+            <button
+              onClick={handleCloseModal}
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+            >
+              X
+            </button>
+            <h3 className="text-2xl font-bold mb-4">Book Appointment</h3>
+            <p className="mb-4">Select a date and time slot:</p>
+            <input
+              type="date"
+              className="mb-4 w-full border border-gray-300 rounded-lg p-2"
+              onChange={handleDateChange}
+            />
+            <div className="flex flex-wrap justify-between mb-6">
+              {availableSlots.length > 0 ? (
+                availableSlots.map((slot) => (
+                  <button
+                    key={slot.time} // Assuming each slot has a unique time
+                    onClick={() => handleSlotSelect(slot)}
+                    className={`flex-1 m-2 py-4 text-lg text-center rounded-lg ${
+                      selectedSlot && selectedSlot.time === slot.time
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-100 hover:bg-blue-200"
+                    }`}
+                  >
+                    {slot.time}
+                  </button>
+                ))
+              ) : (
+                <p className="text-center text-gray-500">No available slots.</p>
+              )}
+            </div>
+            <button
+              onClick={handleConfirmBooking}
+              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+              disabled={!selectedSlot || !selectedDate || bookingLoading}
+            >
+              {bookingLoading ? "Booking..." : "Book Meeting"}
+            </button>
+          </div>
         </div>
-        <button
-          onClick={handleConfirmBooking}
-          className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-          disabled={!selectedSlot || !selectedDate || bookingLoading}
-        >
-          {bookingLoading ? "Booking..." : "Book Meeting"}
-        </button>
-      </div>
-    </div>
-)}
-
-
-
+      )}
     </div>
   );
 };

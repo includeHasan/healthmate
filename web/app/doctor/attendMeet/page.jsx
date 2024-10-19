@@ -1,21 +1,19 @@
 'use client'
 import Sidebar from '@/components/DashboardComponents/Sidebar';
+import Link from 'next/link';
 import React from 'react';
 
 const AttendAppointmentButton = ({ roomId }) => {
 
-  const handleAttendClick = () => {
-    // Use Next.js router to build the URL and open it in a new tab
-    const url = `/videocall/room/roomId`;
-    window.open(url, '_blank'); // Opens the URL in a new browser tab
-  };
 
   return (
     <div className="flex flex-col md:flex-row ">
     <Sidebar />
     <main className="flex-1 p-6">
-    <button onClick={handleAttendClick}>
+    <button>
+      <Link href={'/videocall/room/roomId'} target='_blank'className="text-blue-500 hover:underline mr-4" >
       Attend Next Appointment
+      </Link>
     </button>
     </main>
     </div>

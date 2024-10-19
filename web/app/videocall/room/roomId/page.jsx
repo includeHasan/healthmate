@@ -4,13 +4,13 @@ import { useEffect, useRef } from 'react';
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 import { generateToken04 } from '../../zegoServerAssistant';
 
-const Room = ({params}) => {
+const Room = () => {
 
   const roomId = "122"; // You can set this dynamically, e.g., from session or DB
   const userId = JSON.parse(localStorage.getItem('doctor')).id; // Dynamically fetched from DB or backend
   const appId = 938543039;
   const serverSecret = "66528b62db26bc4151ab8571f29e479c";
-  const userName = "Jayesh"; // Name from patient/doctor table or input field
+  const userName = ""; // Name from patient/doctor table or input field
 
   const meetingRef = useRef(null); // Using useRef to reference the div
 
