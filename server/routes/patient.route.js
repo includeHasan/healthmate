@@ -9,6 +9,7 @@ const {
  
 } = require('../controllers/patient.controller');
 const { verifyToken, isPatient } = require('../middlewares/verify.middleware');
+const { vcDoc } = require('../controllers/communication.controller');
 
 router.post('/', verifyToken,isPatient,createPatient);
 
@@ -22,6 +23,7 @@ router.get('/patients', verifyToken,allPatients);
 
 
 router.get('/:id/history', verifyToken,isPatient,getPatientHistory);
+router.get('/videocall/:docterId', verifyToken,vcDoc);
 
 module.exports = router;
 
