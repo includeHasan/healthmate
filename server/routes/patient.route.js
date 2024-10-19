@@ -6,10 +6,11 @@ const {
   getPatientDetails,
   getPatientHistory,
   allPatients,
+  getAllPatient
  
 } = require('../controllers/patient.controller');
 const { verifyToken, isPatient } = require('../middlewares/verify.middleware');
-
+router.get('/',getAllPatient);
 router.post('/', verifyToken,isPatient,createPatient);
 
 

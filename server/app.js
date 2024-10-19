@@ -11,6 +11,7 @@ var doctersRouter = require('./routes/docters.route');
 var appointmentRouter=require('./routes/appointment.route')
 var aiRouter = require('./routes/ai.route');
 var timetable = require('./routes/timetable.router');
+var admin = require('./routes/admin.route');
 
 var dotenv = require('dotenv');
 
@@ -87,6 +88,7 @@ app.use('/docters', doctersRouter);
 app.use('/appointment',appointmentRouter)
 app.use('/ai', aiRouter);
 app.use('/timetable',timetable);
+app.use('/admin',admin);
 app.get('/', (req, res) => {
   
   res.send('server is running');

@@ -102,4 +102,17 @@ const allPatients = async (req, res) => {
 };
 
 
-module.exports = { createPatient, removePatient, getPatientDetails, getPatientHistory, allPatients}
+const getAllPatient=async(req,res)=>{
+    try {
+     
+      const data=await prisma.patient.findMany();
+  
+      res.status(200).json({ success: true, data });
+    } catch (error) {
+      res.status(500).json({success:false,error})
+      
+    }
+  }
+
+
+module.exports = { createPatient, removePatient, getPatientDetails, getPatientHistory, allPatients,getAllPatient}
