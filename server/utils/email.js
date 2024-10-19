@@ -31,4 +31,27 @@ const sendOtp = async (email, otp) => {
     return true;
 }
 
-module.exports = {sendOtp,generateOtp}
+const sendEmail = async ( email, subject,message) => {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PASSWORD
+        }
+    });
+
+    const mailOptions = {
+        from: process.env.EMAIL,
+        to: email,
+        subject: subject,
+        text: message
+    };
+
+    await transporter.sendMail(mailOptions);
+    return true;
+}
+
+module.exports = {sendOtp,generateOtp,sendEmail}

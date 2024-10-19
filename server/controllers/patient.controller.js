@@ -102,6 +102,8 @@ const allPatients = async (req, res) => {
 };
 
 
+
+
 const getAllPatient=async(req,res)=>{
     try {
      
