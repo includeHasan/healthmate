@@ -14,6 +14,8 @@ const Sidebar = () => {
     const drStr = localStorage.getItem("doctor");
     if (drStr) {
       setDoctor(JSON.parse(drStr));
+      console.log(doctor);
+      
     }
   }, []);
 

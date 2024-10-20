@@ -102,7 +102,7 @@ const DoctorDashboard = () => {
                 <PieChartGraph />
               </div>
               <div className="bg-indigo-50 p-4 rounded-lg shadow">
-                <h2 className="text-lg font-bold mb-4">Today Appointment</h2>
+                <h2 className="text-lg font-bold mb-4">Today Appointment (Demo)</h2>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-4">
                     <FaUserAlt className="text-3xl" />
@@ -134,7 +134,8 @@ const DoctorDashboard = () => {
                 </a>
               </div>
               <div className="bg-indigo-50 p-4 rounded-lg shadow">
-                <div className=" overflow-y-auto max-h-96">
+                Next patients...
+                {/* <div className=" overflow-y-auto max-h-96">
                   <h2 className="text-lg font-bold mb-4">
                     Next Patient Details
                   </h2>
@@ -207,7 +208,7 @@ const DoctorDashboard = () => {
                       </button>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </section>
             <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">

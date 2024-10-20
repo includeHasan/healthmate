@@ -134,7 +134,7 @@ const PatientDashBoard = () => {
                 </div>
               </div>
               {/* Tests */}
-              <div className="bg-white p-6 pt-3 rounded-lg shadow-md col-span-2">
+              {/* <div className="bg-white p-6 pt-3 rounded-lg shadow-md col-span-2">
                 <h2 className="text-lg font-semibold mb-4">Tests</h2>
                 <div className="grid grid-cols-4 gap-4 grid-rows-1 h-auto">
                   <div>
@@ -182,7 +182,7 @@ const PatientDashBoard = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Conditions */}
               <div className="bg-white p-6 rounded-lg shadow-md col-span-1 mt-6 md:mt-0">
@@ -190,8 +190,8 @@ const PatientDashBoard = () => {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <div>
-                      <p className="font-semibold">COVID-19 infection</p>
-                      <p className="text-gray-500">diagnosed 03/2022</p>
+                      <p className="font-semibold">COVID-19 Vacination</p>
+                      <p className="text-gray-500">diagnosed 11/2024</p>
                     </div>
                     <span className="bg-purple-200 text-purple-700 px-2 py-1 rounded-full">
                       Viral
@@ -200,7 +200,7 @@ const PatientDashBoard = () => {
                   <div className="flex justify-between items-center">
                     <div>
                       <p className="font-semibold">Atopic dermatitis</p>
-                      <p className="text-gray-500">diagnosed 01/2012</p>
+                      <p className="text-gray-500">diagnosed 10/2024</p>
                     </div>
                     <span className="bg-blue-200 text-blue-700 px-2 py-1 rounded-full">
                       Chronic
@@ -209,7 +209,7 @@ const PatientDashBoard = () => {
                   <div className="flex justify-between items-center">
                     <div>
                       <p className="font-semibold">Asthma</p>
-                      <p className="text-gray-500">diagnosed 11/2019</p>
+                      <p className="text-gray-500">check diagnosed 11/2024</p>
                     </div>
                     <span className="bg-blue-200 text-blue-700 px-2 py-1 rounded-full">
                       Chronic
@@ -239,7 +239,7 @@ const PatientDashBoard = () => {
                   <div className="flex justify-between items-center">
                     <div>
                       <p className="font-semibold">Pholcodine</p>
-                      <p className="text-gray-500">10ml up to 6 times a day</p>
+                      <p className="text-gray-500">10ml up to 6 times a day(for cough)</p>
                     </div>
                     <span className="text-gray-500">5mg/5ml</span>
                   </div>
@@ -248,6 +248,7 @@ const PatientDashBoard = () => {
                       <p className="font-semibold">Paracetamol</p>
                       <p className="text-gray-500">
                         2 pills / 3 times a day if needed
+                        for Fever 
                       </p>
                     </div>
                     <span className="text-gray-500">500mg</span>
@@ -256,7 +257,7 @@ const PatientDashBoard = () => {
               </div>
 
               {/* Latest Results */}
-              <div className="bg-white p-6 rounded-lg shadow-md col-span-1">
+              {/* <div className="bg-white p-6 rounded-lg shadow-md col-span-1">
                 <h2 className="text-lg font-semibold mb-4">Latest results</h2>
                 <div className="flex justify-center items-center h-40">
                   <Image
@@ -267,7 +268,7 @@ const PatientDashBoard = () => {
                     className="object-cover"
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
           </>
         ) : (

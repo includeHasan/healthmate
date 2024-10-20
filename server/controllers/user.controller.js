@@ -1,8 +1,8 @@
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
 const { generateToken, decodeToken, sendTokenAsCookie, fetchTokenFromCookies } = require('../utils/auth');
-const { validateUser } = require('../utils/inputValidator');
-const { generateOtp, sendOtp } = require('../utils/otp');
+// const { validateUser } = require('../utils/inputValidator');
+// const { generateOtp, sendOtp } = require('../utils/otp');
 
 var prisma = new PrismaClient();
 

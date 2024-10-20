@@ -5,6 +5,7 @@ export const handleLogout = async (router) =>{
     try {
         const response = await api.get('/user/logout');
         if (response.data.success) {
+            localStorage.clear();
             alert(response.data.message);
             router.push("/");
         }

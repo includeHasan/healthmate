@@ -1,4 +1,5 @@
 'use client';
+import api from '@/utils/api';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 
@@ -11,8 +12,8 @@ const ViewVerifiedDoctors = () => {
 
   const fetchVerifiedDoctors = async () => {
     try {
-      const response = await axios.get('/api/doctors/verified');
-      setDoctors(response.data);
+      const response = await api.get('/admin/verified');
+      setDoctors(response.data.doctors);
     } catch (error) {
       console.error('Error fetching verified doctors:', error);
     }
@@ -25,7 +26,7 @@ const ViewVerifiedDoctors = () => {
         {doctors.map((doctor) => (
           <div key={doctor.id} className="bg-white shadow-md rounded-lg p-6">
             <Image
-              src={doctor.imageUrl || '/default-doctor.jpg'}
+              src={doctor.profilePic || '/default-doctor.jpg'}
               alt={`${doctor.firstName} ${doctor.lastName}`}
               width={32}
               height={32}
@@ -35,7 +36,8 @@ const ViewVerifiedDoctors = () => {
             <h3 className="text-xl font-bold mt-4 text-center">
               {doctor.firstName} {doctor.lastName}
             </h3>
-            <p className="text-gray-600 text-center">{doctor.speciality}</p>
+            <p className="text-gray-600 text-center">Speciality: {doctor.speciality}</p>
+            <p className="text-gray-600 text-center">Experience:{doctor.experienceYrs} Years</p>
           </div>
         ))}
       </div>

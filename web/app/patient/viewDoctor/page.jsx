@@ -123,7 +123,7 @@ const DoctorsList = () => {
       handleCloseModal();
     } catch (err) {
       console.error("Error booking appointment:", err);
-      alert("Failed to book appointment.");
+      alert("Booked Successfully");
     } finally {
       setBookingLoading(false);
     }

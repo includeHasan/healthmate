@@ -1,8 +1,8 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Link from 'next/link';
 import Image from 'next/image';
+import api from '@/utils/api';
 
 const ViewAllDoctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -13,7 +13,7 @@ const ViewAllDoctors = () => {
 
   const fetchDoctors = async () => {
     try {
-      const response = await axios.get('/docters');
+      const response = await api.get('/docters');
       if (response.data.success) {
         
         setDoctors(response.data.doctors);
